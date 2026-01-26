@@ -4,6 +4,7 @@
  * Displays a single key metric in a colored card format.
  * Used on the Dashboard to show high-level statistics like
  * total episodes, persons harmed, and percentage rates.
+ * Responsive design optimized for mobile devices.
  *
  * @param title - Metric label (e.g., "Episodes Analyzed")
  * @param value - Main metric value (number or formatted string)
@@ -28,10 +29,10 @@ export default function StatCard({ title, value, subtitle, color = 'blue' }: Sta
   }
 
   return (
-    <div className={`p-6 rounded-xl border-2 ${colorClasses[color]}`}>
-      <p className="text-sm font-medium opacity-80">{title}</p>
-      <p className="text-3xl font-bold mt-1">{value}</p>
-      {subtitle && <p className="text-sm mt-2 opacity-70">{subtitle}</p>}
+    <div className={`p-3 sm:p-4 lg:p-6 rounded-xl border-2 ${colorClasses[color]}`}>
+      <p className="text-xs sm:text-sm font-medium opacity-80 leading-tight">{title}</p>
+      <p className="text-xl sm:text-2xl lg:text-3xl font-bold mt-0.5 sm:mt-1">{value}</p>
+      {subtitle && <p className="text-xs sm:text-sm mt-1 sm:mt-2 opacity-70 leading-tight">{subtitle}</p>}
     </div>
   )
 }

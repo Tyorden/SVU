@@ -388,21 +388,21 @@ export default function Analysis() {
 
   return (
     <div>
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-slate-900">Analysis</h1>
-        <p className="text-slate-600 mt-2">
+      <div className="mb-6 sm:mb-8">
+        <h1 className="text-2xl sm:text-3xl font-bold text-slate-900">Analysis</h1>
+        <p className="text-sm sm:text-base text-slate-600 mt-2">
           Explore correlations and patterns in the false accusation data.
         </p>
       </div>
 
       {/* Terminology Reference */}
-      <section className="mb-8">
+      <section className="mb-6 sm:mb-8">
         <details className="bg-white rounded-xl shadow-sm border border-slate-200">
-          <summary className="p-4 cursor-pointer font-semibold text-slate-800 hover:bg-slate-50">
-            Terminology Reference (click to expand)
+          <summary className="p-3 sm:p-4 cursor-pointer font-semibold text-slate-800 hover:bg-slate-50 text-sm sm:text-base">
+            Terminology Reference (tap to expand)
           </summary>
-          <div className="p-4 pt-0 border-t border-slate-100">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 text-sm">
+          <div className="p-3 sm:p-4 pt-0 border-t border-slate-100">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 text-xs sm:text-sm">
               <div>
                 <h4 className="font-semibold text-slate-700 mb-2">Police Conduct</h4>
                 <ul className="space-y-1 text-slate-600">
@@ -440,7 +440,7 @@ export default function Analysis() {
                 <ul className="space-y-1 text-slate-600">
                   {Object.entries(CONSEQUENCE_SEVERITY).map(([key, val]) => (
                     <li key={key} className="flex items-start gap-2">
-                      <span className="w-3 h-3 rounded-full mt-1 flex-shrink-0" style={{ backgroundColor: val.color }} />
+                      <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full mt-0.5 sm:mt-1 flex-shrink-0" style={{ backgroundColor: val.color }} />
                       <span><span className="font-medium">{val.label}:</span> {val.description}</span>
                     </li>
                   ))}
@@ -460,13 +460,13 @@ export default function Analysis() {
       </section>
 
       {/* KEY INSIGHTS SECTION - NEW */}
-      <section className="mb-12">
-        <h2 className="text-xl font-bold text-slate-800 mb-4 pb-2 border-b border-slate-200">
+      <section className="mb-8 sm:mb-12">
+        <h2 className="text-lg sm:text-xl font-bold text-slate-800 mb-3 sm:mb-4 pb-2 border-b border-slate-200">
           Key Insights
         </h2>
 
         {/* Severity Trend Over Time */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 mb-4 sm:mb-6">
           <ChartCard
             title="Severity Trend Over Time"
             subtitle="Average consequence severity has increased across 27 seasons"
@@ -596,11 +596,11 @@ export default function Analysis() {
       </section>
 
       {/* Police Conduct Section */}
-      <section className="mb-12">
-        <h2 className="text-xl font-bold text-slate-800 mb-4 pb-2 border-b border-slate-200">
+      <section className="mb-8 sm:mb-12">
+        <h2 className="text-lg sm:text-xl font-bold text-slate-800 mb-3 sm:mb-4 pb-2 border-b border-slate-200">
           Police Conduct Analysis
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mb-4 sm:mb-6">
           <ChartCard title="Threat Types" subtitle="How did police conduct themselves toward the accused?">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={threatData} layout="vertical" margin={{ left: 120 }}>
@@ -646,11 +646,11 @@ export default function Analysis() {
       </section>
 
       {/* Accusation Origin Section */}
-      <section className="mb-12">
-        <h2 className="text-xl font-bold text-slate-800 mb-4 pb-2 border-b border-slate-200">
+      <section className="mb-8 sm:mb-12">
+        <h2 className="text-lg sm:text-xl font-bold text-slate-800 mb-3 sm:mb-4 pb-2 border-b border-slate-200">
           Accusation Origin Analysis
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mb-4 sm:mb-6">
           <ChartCard title="How People Became Suspects" subtitle="Source of the initial accusation">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={originData} layout="vertical" margin={{ left: 140 }}>
@@ -697,11 +697,11 @@ export default function Analysis() {
       </section>
 
       {/* Consequences Section */}
-      <section className="mb-12">
-        <h2 className="text-xl font-bold text-slate-800 mb-4 pb-2 border-b border-slate-200">
+      <section className="mb-8 sm:mb-12">
+        <h2 className="text-lg sm:text-xl font-bold text-slate-800 mb-3 sm:mb-4 pb-2 border-b border-slate-200">
           Consequences Analysis
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
           <ChartCard title="Exposure Channels" subtitle="How were accusations made public?">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={exposureChannelData} layout="vertical" margin={{ left: 100 }}>
@@ -729,27 +729,27 @@ export default function Analysis() {
       </section>
 
       {/* Interactive Correlation Tool */}
-      <section className="mb-12" id="correlation-tool">
-        <h2 className="text-xl font-bold text-slate-800 mb-4 pb-2 border-b border-slate-200">
+      <section className="mb-8 sm:mb-12" id="correlation-tool">
+        <h2 className="text-lg sm:text-xl font-bold text-slate-800 mb-3 sm:mb-4 pb-2 border-b border-slate-200">
           Interactive Correlation Tool
         </h2>
 
         {/* Clickable Questions */}
-        <div className="bg-slate-50 rounded-xl border border-slate-200 p-4 mb-6">
-          <h3 className="text-sm font-semibold text-slate-700 mb-3">
-            Click a question to explore:
+        <div className="bg-slate-50 rounded-xl border border-slate-200 p-3 sm:p-4 mb-4 sm:mb-6">
+          <h3 className="text-xs sm:text-sm font-semibold text-slate-700 mb-2 sm:mb-3">
+            Tap a question to explore:
           </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3">
             {correlationQuestions.map((q, i) => (
               <button
                 key={i}
                 onClick={() => handleQuestionClick(q)}
-                className="text-left p-3 bg-white hover:bg-indigo-50 rounded-lg border border-slate-200 hover:border-indigo-300 transition-colors group"
+                className="text-left p-2.5 sm:p-3 bg-white hover:bg-indigo-50 active:bg-indigo-100 rounded-lg border border-slate-200 hover:border-indigo-300 transition-colors group"
               >
-                <p className="text-sm font-medium text-slate-800 group-hover:text-indigo-700">
+                <p className="text-xs sm:text-sm font-medium text-slate-800 group-hover:text-indigo-700">
                   {q.question}
                 </p>
-                <p className="text-xs text-slate-500 mt-1 line-clamp-2">
+                <p className="text-xs text-slate-500 mt-1 line-clamp-2 hidden sm:block">
                   {q.insight}
                 </p>
               </button>
@@ -757,16 +757,16 @@ export default function Analysis() {
           </div>
         </div>
 
-        <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
-          <div className="flex flex-wrap gap-4 mb-6">
+        <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-4 sm:p-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mb-4 sm:mb-6">
             <div>
-              <label className="block text-sm font-medium text-slate-600 mb-1">
+              <label className="block text-xs sm:text-sm font-medium text-slate-600 mb-1">
                 X-Axis Variable
               </label>
               <select
                 value={xVariable}
                 onChange={e => setXVariable(e.target.value as CorrelationVariable)}
-                className="px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
               >
                 {CORRELATION_VARIABLES.map(v => (
                   <option key={v.value} value={v.value}>
@@ -776,13 +776,13 @@ export default function Analysis() {
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-slate-600 mb-1">
+              <label className="block text-xs sm:text-sm font-medium text-slate-600 mb-1">
                 Y-Axis Variable (Stacked)
               </label>
               <select
                 value={yVariable}
                 onChange={e => setYVariable(e.target.value as CorrelationVariable)}
-                className="px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
               >
                 {CORRELATION_VARIABLES.map(v => (
                   <option key={v.value} value={v.value}>
@@ -792,7 +792,7 @@ export default function Analysis() {
               </select>
             </div>
           </div>
-          <div className="h-96">
+          <div className="h-64 sm:h-80 lg:h-96">
             <CorrelationChart persons={persons} xVariable={xVariable} yVariable={yVariable} />
           </div>
         </div>

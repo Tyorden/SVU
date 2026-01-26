@@ -338,6 +338,59 @@ export const DATA_QUALITY_ISSUES = [
   },
 ]
 
+/** Future analysis opportunities not yet implemented */
+export const FUTURE_ANALYSIS = {
+  title: 'Future Analysis Opportunities',
+  note: 'The following dimensions were not included in the current analysis due to limitations in the source transcripts. Character demographics and detective-specific data would require higher-quality source material or manual review to ensure accuracy.',
+  categories: [
+    {
+      title: 'Detective-Specific Analysis',
+      icon: 'badge',
+      items: [
+        'Which detectives are most prone to false accusations?',
+        'Apology rate by detective (who apologizes least?)',
+        'Threat/coercion patterns by detective',
+        'Severity outcomes by lead detective',
+        'Detective conduct trends across seasons',
+      ],
+    },
+    {
+      title: 'Demographic Analysis',
+      icon: 'users',
+      items: [
+        'Race/ethnicity of falsely accused persons',
+        'Gender distribution and outcome differences',
+        'Age ranges and severity correlation',
+        'Socioeconomic indicators (income level proxies)',
+        'Occupation type and consequence patterns',
+      ],
+    },
+    {
+      title: 'Intersectional Analysis',
+      icon: 'layers',
+      items: [
+        'Race × gender × severity interactions',
+        'Demographics × accusation type patterns',
+        'Demographics × detective conduct',
+        'Demographics × apology rate',
+        'Demographics × exposure channel',
+      ],
+    },
+    {
+      title: 'Additional Dimensions',
+      icon: 'chart',
+      items: [
+        'Victim demographics vs accused demographics',
+        'Time-of-day patterns in accusations',
+        'Location types (home, work, public space)',
+        'Presence of lawyer during accusation',
+        'Media coverage intensity levels',
+      ],
+    },
+  ],
+  dataLimitation: 'The source transcripts used for this analysis did not consistently capture demographic information about characters. While character names and roles are recorded, extracting reliable race, gender, age, and socioeconomic data would require either: (1) manual review of each episode, (2) cross-referencing with episode wikis, or (3) using video/image analysis. This limitation means demographic patterns cannot be reliably analyzed from the current dataset.',
+}
+
 /**
  * Get a formatted label for any coded value
  */
