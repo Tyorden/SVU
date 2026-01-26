@@ -3,24 +3,29 @@
  *
  * Interactive data exploration with multiple chart sections:
  *
- * 1. Police Conduct Analysis
+ * 1. Key Insights Section (new)
+ *    - Severity trend over time
+ *    - Role in plot comparison
+ *    - Physical harm breakdown
+ *
+ * 2. Police Conduct Analysis
  *    - Threat types distribution
  *    - Apology outcomes
  *    - Threats vs apologies correlation
  *
- * 2. Accusation Origin Analysis
+ * 3. Accusation Origin Analysis
  *    - How people became suspects
  *    - Who exposed them
  *    - Origin vs severity correlation
  *
- * 3. Consequences Analysis
+ * 4. Consequences Analysis
  *    - Exposure channels
  *    - Consequence categories
  *
- * 4. Interactive Correlation Tool
+ * 5. Interactive Correlation Tool
+ *    - Clickable questions that auto-set variables
  *    - Select any X and Y variable from dropdowns
  *    - Dynamic stacked bar chart updates
- *    - Suggested correlation buttons for quick exploration
  */
 
 import { useState, useMemo } from 'react'
@@ -33,6 +38,8 @@ import {
   Tooltip,
   ResponsiveContainer,
   Legend,
+  LineChart,
+  Line,
 } from 'recharts'
 import { usePersons } from '../hooks/useData'
 import ChartCard from '../components/ChartCard'
@@ -50,6 +57,7 @@ import {
   formatExposureChannel,
   formatConsequenceCategory,
   formatSeverity,
+  formatRole,
 } from '../utils/formatters'
 import {
   POLICE_CONDUCT_THREAT,
@@ -65,7 +73,160 @@ export default function Analysis() {
   const [xVariable, setXVariable] = useState<CorrelationVariable>('police_conduct_threat')
   const [yVariable, setYVariable] = useState<CorrelationVariable>('severity')
 
-  // Police conduct threat types with formatted labels
+  // === NEW: Key Insights Data ===
+
+  // Average severity by season (trend line)
+  const severityBySeason = useMemo(() => {
+    const seasonData: Record<number, { total: number; sum: number }> = {}
+    persons.forEach(p => {
+      const season = parseInt(p.season)
+      const sev = parseInt(p.consequence_severity)
+      if (!isNaN(season) && !isNaN(sev)) {
+        if (!seasonData[season]) seasonData[season] = { total: 0, sum: 0 }
+        seasonData[season].total++
+        seasonData[season].sum += sev
+      }
+    })
+    return Object.entries(seasonData)
+      .map(([season, data]) => ({
+        season: `S${season}`,
+        avgSeverity: parseFloat((data.sum / data.total).toFixed(2)),
+        count: data.total,
+      }))
+      .sort((a, b) => parseInt(a.season.slice(1)) - parseInt(b.season.slice(1)))
+  }, [persons])
+
+  // Severity by role in plot
+  const severityByRole = useMemo(() => {
+    const roleData: Record<string, { total: number; sum: number }> = {}
+    persons.forEach(p => {
+      const role = p.role_in_plot || 'unknown'
+      const sev = parseInt(p.consequence_severity)
+      if (!isNaN(sev)) {
+        if (!roleData[role]) roleData[role] = { total: 0, sum: 0 }
+        roleData[role].total++
+        roleData[role].sum += sev
+      }
+    })
+    return Object.entries(roleData)
+      .map(([role, data]) => ({
+        role: formatRole(role),
+        avgSeverity: parseFloat((data.sum / data.total).toFixed(2)),
+        count: data.total,
+      }))
+      .sort((a, b) => b.avgSeverity - a.avgSeverity)
+  }, [persons])
+
+  // Apology rate by threat type
+  const apologyByThreat = useMemo(() => {
+    const data: Record<string, { total: number; gotApology: number }> = {}
+    persons.forEach(p => {
+      const threat = p.police_conduct_threat || 'none'
+      const apology = p.police_apology || 'none'
+      if (!data[threat]) data[threat] = { total: 0, gotApology: 0 }
+      data[threat].total++
+      if (apology === 'partial' || apology === 'formal') {
+        data[threat].gotApology++
+      }
+    })
+    return Object.entries(data)
+      .map(([threat, d]) => ({
+        threat: formatThreatType(threat),
+        apologyRate: parseFloat(((d.gotApology / d.total) * 100).toFixed(1)),
+        count: d.total,
+      }))
+      .sort((a, b) => b.apologyRate - a.apologyRate)
+  }, [persons])
+
+  // Physical harm breakdown
+  const physicalHarmData = useMemo(() => {
+    const counts: Record<string, number> = {
+      'Murdered': 0,
+      'Suicide': 0,
+      'Assaulted': 0,
+      'Vigilante Attack': 0,
+      'Other Physical': 0,
+    }
+    persons.forEach(p => {
+      const detail = (p.consequence_detail || '').toLowerCase()
+      const tags = (p.tags || '').toLowerCase()
+      if (detail.includes('murder') || tags.includes('murdered')) counts['Murdered']++
+      else if (detail.includes('suicide') || tags.includes('suicide')) counts['Suicide']++
+      else if (detail.includes('vigilante')) counts['Vigilante Attack']++
+      else if (detail.includes('assault') || tags.includes('assault')) counts['Assaulted']++
+      else if (p.consequence_category === 'physical' || tags.includes('ruined_physically')) counts['Other Physical']++
+    })
+    return Object.entries(counts)
+      .filter(([_, count]) => count > 0)
+      .map(([type, count]) => ({ type, count }))
+      .sort((a, b) => b.count - a.count)
+  }, [persons])
+
+  // Severity by accusation origin
+  const severityByOrigin = useMemo(() => {
+    const originData: Record<string, { total: number; sum: number }> = {}
+    persons.forEach(p => {
+      const origin = p.accusation_origin || 'unknown'
+      const sev = parseInt(p.consequence_severity)
+      if (!isNaN(sev) && origin !== 'unknown') {
+        if (!originData[origin]) originData[origin] = { total: 0, sum: 0 }
+        originData[origin].total++
+        originData[origin].sum += sev
+      }
+    })
+    return Object.entries(originData)
+      .filter(([_, data]) => data.total >= 5) // Only show origins with 5+ cases
+      .map(([origin, data]) => ({
+        origin: formatAccusationOrigin(origin),
+        avgSeverity: parseFloat((data.sum / data.total).toFixed(2)),
+        count: data.total,
+      }))
+      .sort((a, b) => b.avgSeverity - a.avgSeverity)
+  }, [persons])
+
+  // Severity by who exposed
+  const severityByWhoExposed = useMemo(() => {
+    const whoData: Record<string, { total: number; sum: number }> = {}
+    persons.forEach(p => {
+      const who = p.exposure_who_told || 'unknown'
+      const sev = parseInt(p.consequence_severity)
+      if (!isNaN(sev) && who !== 'unknown') {
+        if (!whoData[who]) whoData[who] = { total: 0, sum: 0 }
+        whoData[who].total++
+        whoData[who].sum += sev
+      }
+    })
+    return Object.entries(whoData)
+      .map(([who, data]) => ({
+        who: formatExposureWho(who),
+        avgSeverity: parseFloat((data.sum / data.total).toFixed(2)),
+        count: data.total,
+      }))
+      .sort((a, b) => b.avgSeverity - a.avgSeverity)
+  }, [persons])
+
+  // Most common tags
+  const topTags = useMemo(() => {
+    const tagCounts: Record<string, number> = {}
+    persons.forEach(p => {
+      if (p.tags) {
+        p.tags.split(';').forEach(tag => {
+          const t = tag.trim()
+          if (t) tagCounts[t] = (tagCounts[t] || 0) + 1
+        })
+      }
+    })
+    return Object.entries(tagCounts)
+      .map(([tag, count]) => ({
+        tag: tag.split('_').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' '),
+        count,
+      }))
+      .sort((a, b) => b.count - a.count)
+      .slice(0, 10)
+  }, [persons])
+
+  // === Existing chart data with formatted labels ===
+
   const threatData = useMemo(() => {
     const counts: Record<string, number> = {}
     persons.forEach(p => {
@@ -73,15 +234,10 @@ export default function Analysis() {
       counts[threat] = (counts[threat] || 0) + 1
     })
     return Object.entries(counts)
-      .map(([type, count]) => ({
-        type: formatThreatType(type),
-        count,
-        raw: type,
-      }))
+      .map(([type, count]) => ({ type: formatThreatType(type), count }))
       .sort((a, b) => b.count - a.count)
   }, [persons])
 
-  // Police apology outcomes with formatted labels
   const apologyData = useMemo(() => {
     const counts: Record<string, number> = {}
     persons.forEach(p => {
@@ -89,15 +245,10 @@ export default function Analysis() {
       counts[apology] = (counts[apology] || 0) + 1
     })
     return Object.entries(counts)
-      .map(([type, count]) => ({
-        type: formatApology(type),
-        count,
-        raw: type,
-      }))
+      .map(([type, count]) => ({ type: formatApology(type), count }))
       .sort((a, b) => b.count - a.count)
   }, [persons])
 
-  // Threat vs Apology correlation with formatted labels
   const threatVsApologyData = useMemo(() => {
     const matrix: Record<string, Record<string, number>> = {}
     persons.forEach(p => {
@@ -114,7 +265,6 @@ export default function Analysis() {
     }))
   }, [persons])
 
-  // Accusation origin with formatted labels
   const originData = useMemo(() => {
     const counts: Record<string, number> = {}
     persons.forEach(p => {
@@ -122,15 +272,10 @@ export default function Analysis() {
       counts[origin] = (counts[origin] || 0) + 1
     })
     return Object.entries(counts)
-      .map(([origin, count]) => ({
-        origin: formatAccusationOrigin(origin),
-        count,
-        raw: origin,
-      }))
+      .map(([origin, count]) => ({ origin: formatAccusationOrigin(origin), count }))
       .sort((a, b) => b.count - a.count)
   }, [persons])
 
-  // Who exposed with formatted labels
   const exposureWhoData = useMemo(() => {
     const counts: Record<string, number> = {}
     persons.forEach(p => {
@@ -138,15 +283,10 @@ export default function Analysis() {
       counts[who] = (counts[who] || 0) + 1
     })
     return Object.entries(counts)
-      .map(([who, count]) => ({
-        who: formatExposureWho(who),
-        count,
-        raw: who,
-      }))
+      .map(([who, count]) => ({ who: formatExposureWho(who), count }))
       .sort((a, b) => b.count - a.count)
   }, [persons])
 
-  // Origin vs Severity with formatted labels
   const originSeverityData = useMemo(() => {
     const matrix: Record<string, Record<string, number>> = {}
     persons.forEach(p => {
@@ -164,7 +304,6 @@ export default function Analysis() {
     }))
   }, [persons])
 
-  // Exposure channel with formatted labels
   const exposureChannelData = useMemo(() => {
     const counts: Record<string, number> = {}
     persons.forEach(p => {
@@ -172,15 +311,10 @@ export default function Analysis() {
       counts[channel] = (counts[channel] || 0) + 1
     })
     return Object.entries(counts)
-      .map(([channel, count]) => ({
-        channel: formatExposureChannel(channel),
-        count,
-        raw: channel,
-      }))
+      .map(([channel, count]) => ({ channel: formatExposureChannel(channel), count }))
       .sort((a, b) => b.count - a.count)
   }, [persons])
 
-  // Consequence category with formatted labels
   const consequenceCategoryData = useMemo(() => {
     const counts: Record<string, number> = {}
     persons.forEach(p => {
@@ -188,14 +322,69 @@ export default function Analysis() {
       counts[cat] = (counts[cat] || 0) + 1
     })
     return Object.entries(counts)
-      .map(([category, count]) => ({
-        category: formatConsequenceCategory(category),
-        count,
-        raw: category,
-      }))
+      .map(([category, count]) => ({ category: formatConsequenceCategory(category), count }))
       .sort((a, b) => b.count - a.count)
       .slice(0, 10)
   }, [persons])
+
+  // Questions for the correlation tool
+  const correlationQuestions = [
+    {
+      question: 'Do verbal threats lead to fewer apologies?',
+      x: 'police_conduct_threat' as CorrelationVariable,
+      y: 'police_apology' as CorrelationVariable,
+      insight: 'Verbal threats have the LOWEST apology rate at 2.7%',
+    },
+    {
+      question: 'Are fabricated accusations more severe?',
+      x: 'accusation_origin' as CorrelationVariable,
+      y: 'severity' as CorrelationVariable,
+      insight: 'Fabricated claims average 3.24 severity vs 2.51 for squad inference',
+    },
+    {
+      question: 'Do initial suspects fare worse than red herrings?',
+      x: 'role_in_plot' as CorrelationVariable,
+      y: 'severity' as CorrelationVariable,
+      insight: 'Initial suspects average 2.98 severity vs 2.44 for red herrings',
+    },
+    {
+      question: 'When victims expose, is it more severe?',
+      x: 'exposure_who_told' as CorrelationVariable,
+      y: 'severity' as CorrelationVariable,
+      insight: 'Victim exposure averages 3.31 severity vs 2.67 for squad',
+    },
+    {
+      question: 'Has severity increased over time?',
+      x: 'season' as CorrelationVariable,
+      y: 'severity' as CorrelationVariable,
+      insight: 'Average severity rose from 2.61 (S1-9) to 2.93 (S19-27)',
+    },
+    {
+      question: 'Which crime types get media exposure?',
+      x: 'accused_of' as CorrelationVariable,
+      y: 'exposure_channel' as CorrelationVariable,
+      insight: 'Child-related accusations have higher media exposure rates',
+    },
+    {
+      question: 'Do certain crime types get more police threats?',
+      x: 'accused_of' as CorrelationVariable,
+      y: 'police_conduct_threat' as CorrelationVariable,
+      insight: 'Explore which accusation types face more aggressive police conduct',
+    },
+    {
+      question: 'How does innocence status affect outcomes?',
+      x: 'innocence_status' as CorrelationVariable,
+      y: 'severity' as CorrelationVariable,
+      insight: 'Compare outcomes for proven innocent vs strongly implied',
+    },
+  ]
+
+  const handleQuestionClick = (q: typeof correlationQuestions[0]) => {
+    setXVariable(q.x)
+    setYVariable(q.y)
+    // Scroll to correlation tool
+    document.getElementById('correlation-tool')?.scrollIntoView({ behavior: 'smooth' })
+  }
 
   return (
     <div>
@@ -268,6 +457,142 @@ export default function Analysis() {
             </div>
           </div>
         </details>
+      </section>
+
+      {/* KEY INSIGHTS SECTION - NEW */}
+      <section className="mb-12">
+        <h2 className="text-xl font-bold text-slate-800 mb-4 pb-2 border-b border-slate-200">
+          Key Insights
+        </h2>
+
+        {/* Severity Trend Over Time */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+          <ChartCard
+            title="Severity Trend Over Time"
+            subtitle="Average consequence severity has increased across 27 seasons"
+          >
+            <ResponsiveContainer width="100%" height="100%">
+              <LineChart data={severityBySeason} margin={{ left: 0, right: 20 }}>
+                <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+                <XAxis dataKey="season" tick={{ fontSize: 9 }} />
+                <YAxis domain={[1, 4]} tick={{ fontSize: 11 }} tickCount={4} />
+                <Tooltip
+                  formatter={(value: number) => [value.toFixed(2), 'Avg Severity']}
+                  labelFormatter={(label) => `${label}`}
+                />
+                <Line
+                  type="monotone"
+                  dataKey="avgSeverity"
+                  stroke="#6366f1"
+                  strokeWidth={2}
+                  dot={{ fill: '#6366f1', r: 3 }}
+                />
+              </LineChart>
+            </ResponsiveContainer>
+          </ChartCard>
+
+          <ChartCard
+            title="Severity by Role in Plot"
+            subtitle="Initial suspects face worse outcomes than red herrings"
+          >
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart data={severityByRole} layout="vertical" margin={{ left: 100 }}>
+                <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+                <XAxis type="number" domain={[0, 4]} tick={{ fontSize: 11 }} />
+                <YAxis dataKey="role" type="category" tick={{ fontSize: 11 }} width={95} />
+                <Tooltip
+                  formatter={(value: number) => [`${value.toFixed(2)} avg`, 'Severity']}
+                />
+                <Bar dataKey="avgSeverity" fill="#8b5cf6" radius={[0, 4, 4, 0]} />
+              </BarChart>
+            </ResponsiveContainer>
+          </ChartCard>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+          <ChartCard
+            title="Apology Rate by Police Conduct"
+            subtitle="Ironically, verbal threats have the LOWEST apology rate"
+          >
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart data={apologyByThreat} layout="vertical" margin={{ left: 120 }}>
+                <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+                <XAxis type="number" domain={[0, 20]} tick={{ fontSize: 11 }} unit="%" />
+                <YAxis dataKey="threat" type="category" tick={{ fontSize: 11 }} width={115} />
+                <Tooltip
+                  formatter={(value: number) => [`${value}%`, 'Apology Rate']}
+                />
+                <Bar dataKey="apologyRate" fill="#22c55e" radius={[0, 4, 4, 0]} />
+              </BarChart>
+            </ResponsiveContainer>
+          </ChartCard>
+
+          <ChartCard
+            title="Severity by Who Exposed"
+            subtitle="When victims expose the accused, outcomes are worse"
+          >
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart data={severityByWhoExposed} layout="vertical" margin={{ left: 100 }}>
+                <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+                <XAxis type="number" domain={[0, 4]} tick={{ fontSize: 11 }} />
+                <YAxis dataKey="who" type="category" tick={{ fontSize: 11 }} width={95} />
+                <Tooltip
+                  formatter={(value: number) => [`${value.toFixed(2)} avg`, 'Severity']}
+                />
+                <Bar dataKey="avgSeverity" fill="#f97316" radius={[0, 4, 4, 0]} />
+              </BarChart>
+            </ResponsiveContainer>
+          </ChartCard>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+          <ChartCard
+            title="Severity by Accusation Origin"
+            subtitle="Fabricated claims and coerced interviews lead to worst outcomes"
+          >
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart data={severityByOrigin} layout="vertical" margin={{ left: 140 }}>
+                <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+                <XAxis type="number" domain={[0, 4]} tick={{ fontSize: 11 }} />
+                <YAxis dataKey="origin" type="category" tick={{ fontSize: 10 }} width={135} />
+                <Tooltip
+                  formatter={(value: number) => [`${value.toFixed(2)} avg`, 'Severity']}
+                />
+                <Bar dataKey="avgSeverity" fill="#ef4444" radius={[0, 4, 4, 0]} />
+              </BarChart>
+            </ResponsiveContainer>
+          </ChartCard>
+
+          <ChartCard
+            title="Physical Harm Breakdown"
+            subtitle="94 cases resulted in physical harm, including 14 murders and 6 suicides"
+          >
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart data={physicalHarmData} layout="vertical" margin={{ left: 100 }}>
+                <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+                <XAxis type="number" tick={{ fontSize: 11 }} />
+                <YAxis dataKey="type" type="category" tick={{ fontSize: 11 }} width={95} />
+                <Tooltip />
+                <Bar dataKey="count" fill="#dc2626" radius={[0, 4, 4, 0]} />
+              </BarChart>
+            </ResponsiveContainer>
+          </ChartCard>
+        </div>
+
+        <ChartCard
+          title="Most Common Tags"
+          subtitle="Patterns identified across 541 cases"
+        >
+          <ResponsiveContainer width="100%" height="100%">
+            <BarChart data={topTags} layout="vertical" margin={{ left: 140 }}>
+              <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+              <XAxis type="number" tick={{ fontSize: 11 }} />
+              <YAxis dataKey="tag" type="category" tick={{ fontSize: 10 }} width={135} />
+              <Tooltip />
+              <Bar dataKey="count" fill="#6366f1" radius={[0, 4, 4, 0]} />
+            </BarChart>
+          </ResponsiveContainer>
+        </ChartCard>
       </section>
 
       {/* Police Conduct Section */}
@@ -404,10 +729,34 @@ export default function Analysis() {
       </section>
 
       {/* Interactive Correlation Tool */}
-      <section className="mb-12">
+      <section className="mb-12" id="correlation-tool">
         <h2 className="text-xl font-bold text-slate-800 mb-4 pb-2 border-b border-slate-200">
           Interactive Correlation Tool
         </h2>
+
+        {/* Clickable Questions */}
+        <div className="bg-slate-50 rounded-xl border border-slate-200 p-4 mb-6">
+          <h3 className="text-sm font-semibold text-slate-700 mb-3">
+            Click a question to explore:
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
+            {correlationQuestions.map((q, i) => (
+              <button
+                key={i}
+                onClick={() => handleQuestionClick(q)}
+                className="text-left p-3 bg-white hover:bg-indigo-50 rounded-lg border border-slate-200 hover:border-indigo-300 transition-colors group"
+              >
+                <p className="text-sm font-medium text-slate-800 group-hover:text-indigo-700">
+                  {q.question}
+                </p>
+                <p className="text-xs text-slate-500 mt-1 line-clamp-2">
+                  {q.insight}
+                </p>
+              </button>
+            ))}
+          </div>
+        </div>
+
         <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
           <div className="flex flex-wrap gap-4 mb-6">
             <div>
@@ -446,39 +795,6 @@ export default function Analysis() {
           <div className="h-96">
             <CorrelationChart persons={persons} xVariable={xVariable} yVariable={yVariable} />
           </div>
-        </div>
-      </section>
-
-      {/* Suggested Correlations */}
-      <section className="mb-8">
-        <h2 className="text-xl font-bold text-slate-800 mb-4 pb-2 border-b border-slate-200">
-          Suggested Correlations to Explore
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {[
-            { x: 'police_conduct_threat', y: 'police_apology', insight: 'Did threats lead to more/fewer apologies?' },
-            { x: 'accusation_origin', y: 'severity', insight: 'Which accusation sources led to worse outcomes?' },
-            { x: 'exposure_channel', y: 'severity', insight: 'Which exposure types caused most harm?' },
-            { x: 'accused_of', y: 'police_conduct_threat', insight: 'Were certain crime types met with more threats?' },
-            { x: 'role_in_plot', y: 'severity', insight: 'Did initial suspects fare worse than red herrings?' },
-            { x: 'season', y: 'severity', insight: 'Has severity changed over the show\'s run?' },
-          ].map(({ x, y, insight }) => (
-            <button
-              key={`${x}-${y}`}
-              onClick={() => {
-                setXVariable(x as CorrelationVariable)
-                setYVariable(y as CorrelationVariable)
-                window.scrollTo({ top: document.querySelector('.h-96')?.getBoundingClientRect().top ?? 0, behavior: 'smooth' })
-              }}
-              className="text-left p-4 bg-slate-50 hover:bg-slate-100 rounded-lg border border-slate-200 transition-colors"
-            >
-              <p className="text-sm font-medium text-slate-800">{insight}</p>
-              <p className="text-xs text-slate-500 mt-1">
-                {CORRELATION_VARIABLES.find(v => v.value === x)?.label} vs{' '}
-                {CORRELATION_VARIABLES.find(v => v.value === y)?.label}
-              </p>
-            </button>
-          ))}
         </div>
       </section>
     </div>
