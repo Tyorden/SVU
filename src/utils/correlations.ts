@@ -22,6 +22,7 @@
  */
 
 import type { Person } from '../hooks/useData'
+import { formatValue } from './formatters'
 
 /** Valid variable names for correlation analysis */
 export type CorrelationVariable =
@@ -159,4 +160,63 @@ export function getUniqueYValues(data: CorrelationData[]): string[] {
     })
   })
   return Array.from(yValues).sort()
+}
+
+/**
+ * Compute a cross-tabulation with formatted labels
+ *
+ * Same as computeCorrelation but uses human-readable labels
+ * for both X and Y values instead of raw codes.
+ *
+ * @param persons - Array of person records
+ * @param xVariable - Variable for X-axis (categories)
+ * @param yVariable - Variable for stacked bars (colors)
+ * @returns Array of data points for Recharts with formatted labels
+ */
+export function computeCorrelationFormatted(
+  persons: Person[],
+  xVariable: CorrelationVariable,
+  yVariable: CorrelationVariable
+): CorrelationData[] {
+  // Build count matrix with formatted labels
+  const matrix: Record<string, Record<string, number>> = {}
+  const yValues = new Set<string>()
+
+  persons.forEach(person => {
+    const xValRaw = getPersonValue(person, xVariable)
+    const yValRaw = getPersonValue(person, yVariable)
+
+    // Format the values for display
+    const xVal = xVariable === 'season' ? `Season ${xValRaw}` : formatValue(xValRaw)
+    const yVal = yVariable === 'season' ? `Season ${yValRaw}` : formatValue(yValRaw)
+
+    if (!matrix[xVal]) {
+      matrix[xVal] = {}
+    }
+    matrix[xVal][yVal] = (matrix[xVal][yVal] || 0) + 1
+    yValues.add(yVal)
+  })
+
+  // Convert matrix to Recharts format
+  const result: CorrelationData[] = []
+  const sortedYValues = Array.from(yValues).sort()
+
+  // Sort X values - special handling for seasons
+  const sortedXValues = Object.keys(matrix).sort((a, b) => {
+    // If both are seasons, sort numerically
+    if (a.startsWith('Season ') && b.startsWith('Season ')) {
+      return parseInt(a.replace('Season ', '')) - parseInt(b.replace('Season ', ''))
+    }
+    return a.localeCompare(b)
+  })
+
+  sortedXValues.forEach(xVal => {
+    const entry: CorrelationData = { xValue: xVal }
+    sortedYValues.forEach(yVal => {
+      entry[yVal] = matrix[xVal][yVal] || 0
+    })
+    result.push(entry)
+  })
+
+  return result
 }

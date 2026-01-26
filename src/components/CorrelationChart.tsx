@@ -26,11 +26,11 @@ import {
 } from 'recharts'
 import type { Person } from '../hooks/useData'
 import {
-  computeCorrelation,
+  computeCorrelationFormatted,
   getUniqueYValues,
   type CorrelationVariable,
 } from '../utils/correlations'
-import { getSeverityColor } from '../utils/formatters'
+import { getSeverityColor, formatSeverity } from '../utils/formatters'
 
 interface CorrelationChartProps {
   persons: Person[]
@@ -55,30 +55,34 @@ export default function CorrelationChart({
   yVariable,
 }: CorrelationChartProps) {
   const data = useMemo(
-    () => computeCorrelation(persons, xVariable, yVariable),
+    () => computeCorrelationFormatted(persons, xVariable, yVariable),
     [persons, xVariable, yVariable]
   )
 
   const yValues = useMemo(() => getUniqueYValues(data), [data])
 
   const getBarColor = (yValue: string, index: number): string => {
-    // Special handling for severity values
-    if (yVariable === 'severity' && ['1', '2', '3', '4'].includes(yValue)) {
-      return getSeverityColor(yValue)
+    // Special handling for severity values (formatted labels)
+    if (yVariable === 'severity') {
+      if (yValue === formatSeverity('1')) return getSeverityColor('1')
+      if (yValue === formatSeverity('2')) return getSeverityColor('2')
+      if (yValue === formatSeverity('3')) return getSeverityColor('3')
+      if (yValue === formatSeverity('4')) return getSeverityColor('4')
     }
     return COLORS[index % COLORS.length]
   }
 
   return (
     <ResponsiveContainer width="100%" height="100%">
-      <BarChart data={data} margin={{ top: 20, right: 30, left: 20, bottom: 60 }}>
+      <BarChart data={data} margin={{ top: 20, right: 30, left: 20, bottom: 80 }}>
         <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
         <XAxis
           dataKey="xValue"
-          angle={-45}
+          angle={-35}
           textAnchor="end"
-          height={80}
-          tick={{ fontSize: 11 }}
+          height={100}
+          tick={{ fontSize: 10 }}
+          interval={0}
         />
         <YAxis tick={{ fontSize: 11 }} />
         <Tooltip
