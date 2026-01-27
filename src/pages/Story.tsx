@@ -34,7 +34,8 @@ interface Slide {
   title: string
   subtitle: string
   insight: string
-  chartType: 'bar' | 'pie' | 'line' | 'stat' | 'intro' | 'outro'
+  detail?: string
+  chartType: 'bar' | 'pie' | 'line' | 'stat' | 'intro' | 'outro' | 'legend'
   color?: string
 }
 
@@ -54,24 +55,33 @@ const SLIDES: Slide[] = [
     chartType: 'stat',
   },
   {
+    id: 'severity-explain',
+    title: 'Understanding the Severity Scale',
+    subtitle: 'How we measured harm to the falsely accused',
+    insight: 'Each case was rated 1-4 based on the consequences the innocent person faced:',
+    detail: 'Level 1 (Low): Private questioning, short-term discomfort. Level 2 (Public): Accused in front of colleagues, family, or media. Level 3 (Material): Fired, arrested, divorced, or custody loss. Level 4 (Life-Altering): Suicide, murder, severe injury, or permanent harm.',
+    chartType: 'legend',
+  },
+  {
     id: 'severity',
     title: 'How Severe Are the Consequences?',
     subtitle: 'Most falsely accused suffer serious harm',
-    insight: '62% of cases result in material sanctions (firing, arrest, divorce) or life-altering outcomes (suicide, murder, permanent harm).',
+    insight: '62% of cases result in material sanctions (Level 3: firing, arrest, divorce) or life-altering outcomes (Level 4: suicide, murder, permanent harm).',
     chartType: 'pie',
   },
   {
     id: 'trend',
     title: 'Getting Worse Over Time',
     subtitle: 'Severity has increased across 27 seasons',
-    insight: 'Average severity rose from 2.61 in early seasons (1-9) to 2.93 in later seasons (19-27) — a 12% increase.',
+    insight: 'Average severity rose from 2.61 in early seasons (1-9) to 2.93 in later seasons (19-27) — a 12% increase in harm depicted.',
     chartType: 'line',
   },
   {
     id: 'role',
     title: 'Initial Suspects Fare Worst',
     subtitle: 'Being the first suspect carries higher risk',
-    insight: 'Initial suspects average 2.98 severity vs 2.44 for red herrings — 22% worse outcomes for those first accused.',
+    insight: 'Initial suspects (first person the squad pursues) average 2.98 severity vs 2.44 for red herrings (suspects presented to mislead).',
+    detail: 'This means being first accused leads to 22% worse outcomes than being a secondary suspect.',
     chartType: 'bar',
     color: '#8b5cf6',
   },
@@ -79,15 +89,25 @@ const SLIDES: Slide[] = [
     id: 'origin',
     title: 'Fabricated Claims Are Most Damaging',
     subtitle: 'Knowingly false accusations lead to worst outcomes',
-    insight: 'Fabricated accusations average 3.24 severity vs 2.51 for squad inference — deliberately false claims cause 29% more harm.',
+    insight: 'Fabricated accusations (proven lies with ulterior motives) average 3.24 severity vs 2.51 for squad inference (detective theories).',
+    detail: 'Deliberately false claims cause 29% more harm than when detectives simply make wrong assumptions.',
     chartType: 'bar',
     color: '#ef4444',
+  },
+  {
+    id: 'threats-explain',
+    title: 'What Are "Verbal Threats"?',
+    subtitle: 'Understanding police conduct categories',
+    insight: 'We tracked how detectives treated the accused:',
+    detail: 'Verbal Threats: "We\'ll bury you," "We know you did it," explicit threats of punishment. Coercive Tactics: False evidence claims, promises, deception to get confessions. Insults/Degradation: Name-calling like "scum" or "pervert." None: Professional conduct without threats.',
+    chartType: 'legend',
   },
   {
     id: 'apology',
     title: 'Threats, But No Apologies',
     subtitle: 'Verbal threats correlate with lowest apology rates',
-    insight: 'When police use verbal threats, only 2.7% of falsely accused receive any apology — the lowest rate of all conduct types.',
+    insight: 'When police use verbal threats ("We\'ll bury you," "We know you did it"), only 2.7% of falsely accused receive any apology.',
+    detail: 'This is the lowest apology rate of all conduct types — those threatened most are apologized to least.',
     chartType: 'bar',
     color: '#22c55e',
   },
@@ -96,6 +116,7 @@ const SLIDES: Slide[] = [
     title: 'The Ultimate Price',
     subtitle: 'False accusations can be fatal',
     insight: '94 cases resulted in physical harm. 14 people were murdered. 6 died by suicide. All because of accusations they didn\'t deserve.',
+    detail: 'These are severity level 4 outcomes — lives destroyed or ended due to wrongful suspicion.',
     chartType: 'bar',
     color: '#dc2626',
   },
@@ -314,6 +335,68 @@ export default function Story() {
           </div>
         )
 
+      case 'legend':
+        if (slide.id === 'severity-explain') {
+          return (
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 h-full items-center px-4">
+              <div className="p-4 rounded-xl border-l-4" style={{ borderLeftColor: '#22c55e', backgroundColor: '#22c55e10' }}>
+                <div className="flex items-center gap-2 mb-1">
+                  <span className="w-4 h-4 rounded-full" style={{ backgroundColor: '#22c55e' }} />
+                  <span className="font-bold text-slate-800">Level 1: Low Harm</span>
+                </div>
+                <p className="text-sm text-slate-600">Private questioning, short-term discomfort, no public exposure</p>
+              </div>
+              <div className="p-4 rounded-xl border-l-4" style={{ borderLeftColor: '#eab308', backgroundColor: '#eab30810' }}>
+                <div className="flex items-center gap-2 mb-1">
+                  <span className="w-4 h-4 rounded-full" style={{ backgroundColor: '#eab308' }} />
+                  <span className="font-bold text-slate-800">Level 2: Public Exposure</span>
+                </div>
+                <p className="text-sm text-slate-600">Accused in front of colleagues, family, school, or media</p>
+              </div>
+              <div className="p-4 rounded-xl border-l-4" style={{ borderLeftColor: '#f97316', backgroundColor: '#f9731610' }}>
+                <div className="flex items-center gap-2 mb-1">
+                  <span className="w-4 h-4 rounded-full" style={{ backgroundColor: '#f97316' }} />
+                  <span className="font-bold text-slate-800">Level 3: Material Sanction</span>
+                </div>
+                <p className="text-sm text-slate-600">Fired, suspended, arrested, divorced, custody loss, evicted</p>
+              </div>
+              <div className="p-4 rounded-xl border-l-4" style={{ borderLeftColor: '#ef4444', backgroundColor: '#ef444410' }}>
+                <div className="flex items-center gap-2 mb-1">
+                  <span className="w-4 h-4 rounded-full" style={{ backgroundColor: '#ef4444' }} />
+                  <span className="font-bold text-slate-800">Level 4: Life-Altering/Death</span>
+                </div>
+                <p className="text-sm text-slate-600">Suicide, murder, severe injury, permanent child removal</p>
+              </div>
+            </div>
+          )
+        } else if (slide.id === 'threats-explain') {
+          return (
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 h-full items-center px-4">
+              <div className="p-4 rounded-xl bg-red-50 border border-red-200">
+                <div className="font-bold text-red-900 mb-2">Verbal Threats</div>
+                <p className="text-sm text-red-800 mb-2">"We'll bury you," "We know you did it"</p>
+                <p className="text-xs text-red-700">Explicit threats of punishment or consequences</p>
+              </div>
+              <div className="p-4 rounded-xl bg-orange-50 border border-orange-200">
+                <div className="font-bold text-orange-900 mb-2">Coercive Tactics</div>
+                <p className="text-sm text-orange-800 mb-2">"Your DNA was at the scene" (when it wasn't)</p>
+                <p className="text-xs text-orange-700">Lies, false evidence claims, manipulation</p>
+              </div>
+              <div className="p-4 rounded-xl bg-yellow-50 border border-yellow-200">
+                <div className="font-bold text-yellow-900 mb-2">Insults/Degradation</div>
+                <p className="text-sm text-yellow-800 mb-2">"You're a predator," "Scum like you"</p>
+                <p className="text-xs text-yellow-700">Name-calling and moral condemnation</p>
+              </div>
+              <div className="p-4 rounded-xl bg-green-50 border border-green-200">
+                <div className="font-bold text-green-900 mb-2">None</div>
+                <p className="text-sm text-green-800 mb-2">Professional questioning</p>
+                <p className="text-xs text-green-700">No threatening or coercive behavior</p>
+              </div>
+            </div>
+          )
+        }
+        return null
+
       case 'pie':
         return (
           <ResponsiveContainer width="100%" height="100%">
@@ -457,6 +540,11 @@ export default function Story() {
             <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
               {slide.insight}
             </p>
+            {slide.detail && (
+              <p className="text-xs sm:text-sm text-slate-500 mt-3 leading-relaxed border-t border-slate-200 pt-3">
+                {slide.detail}
+              </p>
+            )}
           </div>
         </div>
 

@@ -17,7 +17,7 @@
 
 import { useMemo, useCallback, useEffect } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import { useEpisodes } from '../hooks/useData'
+import { useEpisodes, usePersons } from '../hooks/useData'
 import FilterPanel from '../components/FilterPanel'
 import EpisodeTable from '../components/EpisodeTable'
 
@@ -25,13 +25,33 @@ const ITEMS_PER_PAGE = 25
 
 export default function Episodes() {
   const episodes = useEpisodes()
+  const persons = usePersons()
   const [searchParams, setSearchParams] = useSearchParams()
+
+  // Build lookup of episode IDs to severity levels and threat types
+  const episodePersonsData = useMemo(() => {
+    const lookup: Record<string, { severities: Set<string>; threats: Set<string> }> = {}
+    persons.forEach(p => {
+      if (!lookup[p.custom_id]) {
+        lookup[p.custom_id] = { severities: new Set(), threats: new Set() }
+      }
+      if (p.consequence_severity) {
+        lookup[p.custom_id].severities.add(p.consequence_severity)
+      }
+      if (p.police_conduct_threat) {
+        lookup[p.custom_id].threats.add(p.police_conduct_threat)
+      }
+    })
+    return lookup
+  }, [persons])
 
   // Read filter state from URL
   const seasonFilter = searchParams.get('season') || ''
   const falseSuspectFilter = searchParams.get('suspect') || ''
   const publicExposureFilter = searchParams.get('exposure') || ''
   const reviewFilter = searchParams.get('review') || ''
+  const severityFilter = searchParams.get('severity') || ''
+  const threatFilter = searchParams.get('threat') || ''
   const searchTerm = searchParams.get('q') || ''
   const currentPage = parseInt(searchParams.get('page') || '1', 10)
 
@@ -72,6 +92,14 @@ export default function Episodes() {
     updateParams({ review: value })
   }, [updateParams])
 
+  const setSeverityFilter = useCallback((value: string) => {
+    updateParams({ severity: value })
+  }, [updateParams])
+
+  const setThreatFilter = useCallback((value: string) => {
+    updateParams({ threat: value })
+  }, [updateParams])
+
   const setSearchTerm = useCallback((value: string) => {
     updateParams({ q: value })
   }, [updateParams])
@@ -82,6 +110,19 @@ export default function Episodes() {
       if (falseSuspectFilter && episode.has_false_suspect !== falseSuspectFilter) return false
       if (publicExposureFilter && episode.has_public_exposure !== publicExposureFilter) return false
       if (reviewFilter && episode.needs_deep_review !== reviewFilter) return false
+
+      // Severity filter: check if episode has any person with this severity
+      if (severityFilter) {
+        const epData = episodePersonsData[episode.custom_id]
+        if (!epData || !epData.severities.has(severityFilter)) return false
+      }
+
+      // Threat filter: check if episode has any person with this threat type
+      if (threatFilter) {
+        const epData = episodePersonsData[episode.custom_id]
+        if (!epData || !epData.threats.has(threatFilter)) return false
+      }
+
       if (
         searchTerm &&
         !episode.episode_title.toLowerCase().includes(searchTerm.toLowerCase()) &&
@@ -90,7 +131,7 @@ export default function Episodes() {
         return false
       return true
     })
-  }, [episodes, seasonFilter, falseSuspectFilter, publicExposureFilter, reviewFilter, searchTerm])
+  }, [episodes, seasonFilter, falseSuspectFilter, publicExposureFilter, reviewFilter, severityFilter, threatFilter, searchTerm, episodePersonsData])
 
   const totalPages = Math.ceil(filteredEpisodes.length / ITEMS_PER_PAGE)
 
@@ -119,7 +160,7 @@ export default function Episodes() {
     setSearchParams({}, { replace: true })
   }, [setSearchParams])
 
-  const hasActiveFilters = seasonFilter || falseSuspectFilter || publicExposureFilter || reviewFilter || searchTerm
+  const hasActiveFilters = seasonFilter || falseSuspectFilter || publicExposureFilter || reviewFilter || severityFilter || threatFilter || searchTerm
 
   return (
     <div>
@@ -139,6 +180,10 @@ export default function Episodes() {
         setPublicExposureFilter={setPublicExposureFilter}
         reviewFilter={reviewFilter}
         setReviewFilter={setReviewFilter}
+        severityFilter={severityFilter}
+        setSeverityFilter={setSeverityFilter}
+        threatFilter={threatFilter}
+        setThreatFilter={setThreatFilter}
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}
       />
