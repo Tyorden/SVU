@@ -2,6 +2,7 @@
  * Filter Panel Component
  *
  * Control panel for filtering the episodes list.
+ * Responsive design with grid layout on mobile.
  * Provides dropdowns and search functionality for:
  * - Text search (title and summary)
  * - Season filter (1-27)
@@ -62,19 +63,20 @@ export default function FilterPanel({
   setSearchTerm,
 }: FilterPanelProps) {
   const selectClass =
-    'px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500'
+    'w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500'
 
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-4 mb-6">
-      <div className="flex flex-wrap gap-4 items-center">
-        <div>
+    <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-3 sm:p-4 mb-4 sm:mb-6">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+        {/* Search - full width on mobile */}
+        <div className="col-span-2 sm:col-span-3 lg:col-span-2">
           <label className="block text-xs font-medium text-slate-500 mb-1">Search</label>
           <input
             type="text"
             placeholder="Search episodes..."
             value={searchTerm}
             onChange={e => setSearchTerm(e.target.value)}
-            className="px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 w-48"
+            className={selectClass}
           />
         </div>
 
@@ -109,7 +111,7 @@ export default function FilterPanel({
         </div>
 
         <div>
-          <label className="block text-xs font-medium text-slate-500 mb-1">Public Exposure?</label>
+          <label className="block text-xs font-medium text-slate-500 mb-1">Exposure?</label>
           <select
             value={publicExposureFilter}
             onChange={e => setPublicExposureFilter(e.target.value)}
@@ -124,7 +126,7 @@ export default function FilterPanel({
         </div>
 
         <div>
-          <label className="block text-xs font-medium text-slate-500 mb-1">Review Status</label>
+          <label className="block text-xs font-medium text-slate-500 mb-1">Review</label>
           <select
             value={reviewFilter}
             onChange={e => setReviewFilter(e.target.value)}

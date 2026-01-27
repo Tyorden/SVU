@@ -2,6 +2,7 @@
  * Episodes Browser Page (/episodes)
  *
  * Searchable and filterable table of all 576 SVU episodes.
+ * Filter state is persisted in URL query parameters so it survives navigation.
  *
  * Features:
  * - Text search across title and summary
@@ -11,9 +12,11 @@
  * - Filter by review needed status
  * - Paginated results (25 per page)
  * - Click row to navigate to episode detail
+ * - Filters persist in URL (preserved on back navigation)
  */
 
-import { useState, useMemo } from 'react'
+import { useMemo, useCallback, useEffect } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import { useEpisodes } from '../hooks/useData'
 import FilterPanel from '../components/FilterPanel'
 import EpisodeTable from '../components/EpisodeTable'
@@ -22,13 +25,56 @@ const ITEMS_PER_PAGE = 25
 
 export default function Episodes() {
   const episodes = useEpisodes()
+  const [searchParams, setSearchParams] = useSearchParams()
 
-  const [seasonFilter, setSeasonFilter] = useState('')
-  const [falseSuspectFilter, setFalseSuspectFilter] = useState('')
-  const [publicExposureFilter, setPublicExposureFilter] = useState('')
-  const [reviewFilter, setReviewFilter] = useState('')
-  const [searchTerm, setSearchTerm] = useState('')
-  const [currentPage, setCurrentPage] = useState(1)
+  // Read filter state from URL
+  const seasonFilter = searchParams.get('season') || ''
+  const falseSuspectFilter = searchParams.get('suspect') || ''
+  const publicExposureFilter = searchParams.get('exposure') || ''
+  const reviewFilter = searchParams.get('review') || ''
+  const searchTerm = searchParams.get('q') || ''
+  const currentPage = parseInt(searchParams.get('page') || '1', 10)
+
+  // Update URL params helper
+  const updateParams = useCallback((updates: Record<string, string>) => {
+    const newParams = new URLSearchParams(searchParams)
+
+    Object.entries(updates).forEach(([key, value]) => {
+      if (value) {
+        newParams.set(key, value)
+      } else {
+        newParams.delete(key)
+      }
+    })
+
+    // Reset to page 1 when filters change (unless page is being set directly)
+    if (!('page' in updates)) {
+      newParams.delete('page')
+    }
+
+    setSearchParams(newParams, { replace: true })
+  }, [searchParams, setSearchParams])
+
+  // Filter setters that update URL
+  const setSeasonFilter = useCallback((value: string) => {
+    updateParams({ season: value })
+  }, [updateParams])
+
+  const setFalseSuspectFilter = useCallback((value: string) => {
+    updateParams({ suspect: value })
+  }, [updateParams])
+
+  const setPublicExposureFilter = useCallback((value: string) => {
+    updateParams({ exposure: value })
+  }, [updateParams])
+
+  const setReviewFilter = useCallback((value: string) => {
+    updateParams({ review: value })
+  }, [updateParams])
+
+  const setSearchTerm = useCallback((value: string) => {
+    updateParams({ q: value })
+  }, [updateParams])
 
   const filteredEpisodes = useMemo(() => {
     return episodes.filter(episode => {
@@ -47,26 +93,39 @@ export default function Episodes() {
   }, [episodes, seasonFilter, falseSuspectFilter, publicExposureFilter, reviewFilter, searchTerm])
 
   const totalPages = Math.ceil(filteredEpisodes.length / ITEMS_PER_PAGE)
+
+  // Ensure current page is valid
+  const validCurrentPage = Math.min(Math.max(1, currentPage), Math.max(1, totalPages))
+
+  // Update URL if page is out of bounds
+  useEffect(() => {
+    if (currentPage !== validCurrentPage && totalPages > 0) {
+      updateParams({ page: validCurrentPage.toString() })
+    }
+  }, [currentPage, validCurrentPage, totalPages, updateParams])
+
   const paginatedEpisodes = useMemo(() => {
-    const start = (currentPage - 1) * ITEMS_PER_PAGE
+    const start = (validCurrentPage - 1) * ITEMS_PER_PAGE
     return filteredEpisodes.slice(start, start + ITEMS_PER_PAGE)
-  }, [filteredEpisodes, currentPage])
+  }, [filteredEpisodes, validCurrentPage])
 
   const handlePageChange = (page: number) => {
-    setCurrentPage(page)
+    updateParams({ page: page.toString() })
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
-  // Reset to page 1 when filters change
-  useMemo(() => {
-    setCurrentPage(1)
-  }, [seasonFilter, falseSuspectFilter, publicExposureFilter, reviewFilter, searchTerm])
+  // Clear all filters
+  const clearFilters = useCallback(() => {
+    setSearchParams({}, { replace: true })
+  }, [setSearchParams])
+
+  const hasActiveFilters = seasonFilter || falseSuspectFilter || publicExposureFilter || reviewFilter || searchTerm
 
   return (
     <div>
-      <div className="mb-6">
-        <h1 className="text-3xl font-bold text-slate-900">Episodes Browser</h1>
-        <p className="text-slate-600 mt-2">
+      <div className="mb-4 sm:mb-6">
+        <h1 className="text-2xl sm:text-3xl font-bold text-slate-900">Episodes Browser</h1>
+        <p className="text-sm sm:text-base text-slate-600 mt-2">
           Browse and filter all {episodes.length} SVU episodes analyzed in this study.
         </p>
       </div>
@@ -84,14 +143,24 @@ export default function Episodes() {
         setSearchTerm={setSearchTerm}
       />
 
-      <div className="mb-4 text-sm text-slate-600">
-        Showing {paginatedEpisodes.length} of {filteredEpisodes.length} episodes
-        {filteredEpisodes.length !== episodes.length && ` (filtered from ${episodes.length} total)`}
+      <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
+        <p className="text-xs sm:text-sm text-slate-600">
+          Showing {paginatedEpisodes.length} of {filteredEpisodes.length} episodes
+          {filteredEpisodes.length !== episodes.length && ` (filtered from ${episodes.length} total)`}
+        </p>
+        {hasActiveFilters && (
+          <button
+            onClick={clearFilters}
+            className="text-xs sm:text-sm text-indigo-600 hover:text-indigo-800 underline"
+          >
+            Clear all filters
+          </button>
+        )}
       </div>
 
       <EpisodeTable
         episodes={paginatedEpisodes}
-        currentPage={currentPage}
+        currentPage={validCurrentPage}
         totalPages={totalPages}
         onPageChange={handlePageChange}
       />

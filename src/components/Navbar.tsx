@@ -40,6 +40,9 @@ export default function Navbar() {
             <NavLink to="/" className={linkClass} end>
               Dashboard
             </NavLink>
+            <NavLink to="/story" className={linkClass}>
+              Story
+            </NavLink>
             <NavLink to="/analysis" className={linkClass}>
               Analysis
             </NavLink>
@@ -90,6 +93,13 @@ export default function Navbar() {
                 onClick={() => setIsOpen(false)}
               >
                 Dashboard
+              </NavLink>
+              <NavLink
+                to="/story"
+                className={mobileLinkClass}
+                onClick={() => setIsOpen(false)}
+              >
+                Story
               </NavLink>
               <NavLink
                 to="/analysis"
