@@ -18,6 +18,8 @@ import Story from './pages/Story'
 import Analysis from './pages/Analysis'
 import Episodes from './pages/Episodes'
 import EpisodeDetail from './pages/EpisodeDetail'
+import Insights from './pages/Insights'
+import Visualizations from './pages/Visualizations'
 
 function App() {
   return (
@@ -29,6 +31,8 @@ function App() {
           <Route path="analysis" element={<Analysis />} />
           <Route path="episodes" element={<Episodes />} />
           <Route path="episodes/:id" element={<EpisodeDetail />} />
+          <Route path="insights" element={<Insights />} />
+          <Route path="visualizations" element={<Visualizations />} />
         </Route>
       </Routes>
     </BrowserRouter>

@@ -49,6 +49,12 @@ export default function Navbar() {
             <NavLink to="/episodes" className={linkClass}>
               Episodes
             </NavLink>
+            <NavLink to="/insights" className={linkClass}>
+              Insights
+            </NavLink>
+            <NavLink to="/visualizations" className={linkClass}>
+              Charts
+            </NavLink>
           </div>
 
           {/* Mobile Hamburger Button */}
@@ -114,6 +120,20 @@ export default function Navbar() {
                 onClick={() => setIsOpen(false)}
               >
                 Episodes
+              </NavLink>
+              <NavLink
+                to="/insights"
+                className={mobileLinkClass}
+                onClick={() => setIsOpen(false)}
+              >
+                Insights
+              </NavLink>
+              <NavLink
+                to="/visualizations"
+                className={mobileLinkClass}
+                onClick={() => setIsOpen(false)}
+              >
+                Charts
               </NavLink>
             </div>
           </div>
