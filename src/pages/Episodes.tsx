@@ -15,11 +15,18 @@
  * - Filters persist in URL (preserved on back navigation)
  */
 
-import { useMemo, useCallback, useEffect } from 'react'
+import { useMemo, useCallback, useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { useEpisodes, usePersons } from '../hooks/useData'
 import FilterPanel from '../components/FilterPanel'
 import EpisodeTable from '../components/EpisodeTable'
+import {
+  ROLE_IN_PLOT,
+  ACCUSATION_ORIGIN,
+  ACCUSED_OF,
+  INNOCENCE_STATUS,
+  EXPOSURE_CHANNEL,
+} from '../utils/definitions'
 
 const ITEMS_PER_PAGE = 25
 
@@ -28,22 +35,42 @@ export default function Episodes() {
   const persons = usePersons()
   const [searchParams, setSearchParams] = useSearchParams()
 
-  // Build lookup of episode IDs to severity levels and threat types
+  // Build lookup of episode IDs to all person-level data for filtering
   const episodePersonsData = useMemo(() => {
-    const lookup: Record<string, { severities: Set<string>; threats: Set<string> }> = {}
+    const lookup: Record<string, {
+      severities: Set<string>
+      threats: Set<string>
+      roles: Set<string>
+      origins: Set<string>
+      accusedOf: Set<string>
+      innocence: Set<string>
+      channels: Set<string>
+    }> = {}
     persons.forEach(p => {
       if (!lookup[p.custom_id]) {
-        lookup[p.custom_id] = { severities: new Set(), threats: new Set() }
+        lookup[p.custom_id] = {
+          severities: new Set(),
+          threats: new Set(),
+          roles: new Set(),
+          origins: new Set(),
+          accusedOf: new Set(),
+          innocence: new Set(),
+          channels: new Set(),
+        }
       }
-      if (p.consequence_severity) {
-        lookup[p.custom_id].severities.add(p.consequence_severity)
-      }
-      if (p.police_conduct_threat) {
-        lookup[p.custom_id].threats.add(p.police_conduct_threat)
-      }
+      if (p.consequence_severity) lookup[p.custom_id].severities.add(p.consequence_severity)
+      if (p.police_conduct_threat) lookup[p.custom_id].threats.add(p.police_conduct_threat)
+      if (p.role_in_plot) lookup[p.custom_id].roles.add(p.role_in_plot)
+      if (p.accusation_origin) lookup[p.custom_id].origins.add(p.accusation_origin)
+      if (p.accused_of) lookup[p.custom_id].accusedOf.add(p.accused_of)
+      if (p.innocence_status) lookup[p.custom_id].innocence.add(p.innocence_status)
+      if (p.exposure_channel) lookup[p.custom_id].channels.add(p.exposure_channel)
     })
     return lookup
   }, [persons])
+
+  // Advanced filters state
+  const [showAdvanced, setShowAdvanced] = useState(false)
 
   // Read filter state from URL
   const seasonFilter = searchParams.get('season') || ''
@@ -54,6 +81,14 @@ export default function Episodes() {
   const threatFilter = searchParams.get('threat') || ''
   const searchTerm = searchParams.get('q') || ''
   const currentPage = parseInt(searchParams.get('page') || '1', 10)
+
+  // Advanced filters from URL
+  const roleFilter = searchParams.get('role') || ''
+  const originFilter = searchParams.get('origin') || ''
+  const accusedOfFilter = searchParams.get('accusedOf') || ''
+  const innocenceFilter = searchParams.get('innocence') || ''
+  const channelFilter = searchParams.get('channel') || ''
+  const filterLogic = (searchParams.get('logic') || 'and') as 'and' | 'or'
 
   // Update URL params helper
   const updateParams = useCallback((updates: Record<string, string>) => {
@@ -104,24 +139,38 @@ export default function Episodes() {
     updateParams({ q: value })
   }, [updateParams])
 
+  // Advanced filter setters
+  const setRoleFilter = useCallback((value: string) => {
+    updateParams({ role: value })
+  }, [updateParams])
+
+  const setOriginFilter = useCallback((value: string) => {
+    updateParams({ origin: value })
+  }, [updateParams])
+
+  const setAccusedOfFilter = useCallback((value: string) => {
+    updateParams({ accusedOf: value })
+  }, [updateParams])
+
+  const setInnocenceFilter = useCallback((value: string) => {
+    updateParams({ innocence: value })
+  }, [updateParams])
+
+  const setChannelFilter = useCallback((value: string) => {
+    updateParams({ channel: value })
+  }, [updateParams])
+
+  const setFilterLogic = useCallback((value: 'and' | 'or') => {
+    updateParams({ logic: value })
+  }, [updateParams])
+
   const filteredEpisodes = useMemo(() => {
     return episodes.filter(episode => {
+      // Episode-level filters (always AND logic)
       if (seasonFilter && episode.season !== seasonFilter) return false
       if (falseSuspectFilter && episode.has_false_suspect !== falseSuspectFilter) return false
       if (publicExposureFilter && episode.has_public_exposure !== publicExposureFilter) return false
       if (reviewFilter && episode.needs_deep_review !== reviewFilter) return false
-
-      // Severity filter: check if episode has any person with this severity
-      if (severityFilter) {
-        const epData = episodePersonsData[episode.custom_id]
-        if (!epData || !epData.severities.has(severityFilter)) return false
-      }
-
-      // Threat filter: check if episode has any person with this threat type
-      if (threatFilter) {
-        const epData = episodePersonsData[episode.custom_id]
-        if (!epData || !epData.threats.has(threatFilter)) return false
-      }
 
       if (
         searchTerm &&
@@ -129,9 +178,33 @@ export default function Episodes() {
         !episode.summary.toLowerCase().includes(searchTerm.toLowerCase())
       )
         return false
+
+      // Person-level filters (support AND/OR logic)
+      const epData = episodePersonsData[episode.custom_id]
+      const personFilters = [
+        { active: !!severityFilter, matches: epData?.severities.has(severityFilter) },
+        { active: !!threatFilter, matches: epData?.threats.has(threatFilter) },
+        { active: !!roleFilter, matches: epData?.roles.has(roleFilter) },
+        { active: !!originFilter, matches: epData?.origins.has(originFilter) },
+        { active: !!accusedOfFilter, matches: epData?.accusedOf.has(accusedOfFilter) },
+        { active: !!innocenceFilter, matches: epData?.innocence.has(innocenceFilter) },
+        { active: !!channelFilter, matches: epData?.channels.has(channelFilter) },
+      ]
+
+      const activeFilters = personFilters.filter(f => f.active)
+      if (activeFilters.length > 0) {
+        if (filterLogic === 'or') {
+          // OR: at least one must match
+          if (!activeFilters.some(f => f.matches)) return false
+        } else {
+          // AND: all must match
+          if (!activeFilters.every(f => f.matches)) return false
+        }
+      }
+
       return true
     })
-  }, [episodes, seasonFilter, falseSuspectFilter, publicExposureFilter, reviewFilter, severityFilter, threatFilter, searchTerm, episodePersonsData])
+  }, [episodes, seasonFilter, falseSuspectFilter, publicExposureFilter, reviewFilter, severityFilter, threatFilter, roleFilter, originFilter, accusedOfFilter, innocenceFilter, channelFilter, filterLogic, searchTerm, episodePersonsData])
 
   const totalPages = Math.ceil(filteredEpisodes.length / ITEMS_PER_PAGE)
 
@@ -160,7 +233,8 @@ export default function Episodes() {
     setSearchParams({}, { replace: true })
   }, [setSearchParams])
 
-  const hasActiveFilters = seasonFilter || falseSuspectFilter || publicExposureFilter || reviewFilter || severityFilter || threatFilter || searchTerm
+  const hasActiveFilters = seasonFilter || falseSuspectFilter || publicExposureFilter || reviewFilter || severityFilter || threatFilter || roleFilter || originFilter || accusedOfFilter || innocenceFilter || channelFilter || searchTerm
+  const hasAdvancedFilters = roleFilter || originFilter || accusedOfFilter || innocenceFilter || channelFilter
 
   return (
     <div>
@@ -187,6 +261,134 @@ export default function Episodes() {
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}
       />
+
+      {/* Advanced Filters */}
+      <div className="bg-white rounded-xl shadow-sm border border-slate-200 mb-4 sm:mb-6">
+        <button
+          onClick={() => setShowAdvanced(!showAdvanced)}
+          className="w-full p-3 sm:p-4 flex items-center justify-between text-left hover:bg-slate-50 transition-colors"
+        >
+          <span className="font-medium text-slate-700 text-sm sm:text-base">
+            Advanced Filters
+            {hasAdvancedFilters && <span className="ml-2 text-xs text-indigo-600">(active)</span>}
+          </span>
+          <svg
+            className={`w-5 h-5 text-slate-400 transition-transform ${showAdvanced ? 'rotate-180' : ''}`}
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+
+        {showAdvanced && (
+          <div className="p-3 sm:p-4 pt-0 border-t border-slate-100">
+            {/* Logic Toggle */}
+            <div className="mb-4 flex items-center gap-3">
+              <span className="text-xs font-medium text-slate-600">Filter logic:</span>
+              <div className="flex rounded-lg overflow-hidden border border-slate-300">
+                <button
+                  onClick={() => setFilterLogic('and')}
+                  className={`px-3 py-1 text-xs font-medium transition-colors ${
+                    filterLogic === 'and'
+                      ? 'bg-indigo-600 text-white'
+                      : 'bg-white text-slate-600 hover:bg-slate-50'
+                  }`}
+                >
+                  AND
+                </button>
+                <button
+                  onClick={() => setFilterLogic('or')}
+                  className={`px-3 py-1 text-xs font-medium transition-colors border-l border-slate-300 ${
+                    filterLogic === 'or'
+                      ? 'bg-indigo-600 text-white'
+                      : 'bg-white text-slate-600 hover:bg-slate-50'
+                  }`}
+                >
+                  OR
+                </button>
+              </div>
+              <span className="text-xs text-slate-500">
+                {filterLogic === 'and' ? 'Episodes must match ALL filters' : 'Episodes match ANY filter'}
+              </span>
+            </div>
+
+            {/* Advanced filter dropdowns */}
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+              <div>
+                <label className="block text-xs font-medium text-slate-500 mb-1">Role in Plot</label>
+                <select
+                  value={roleFilter}
+                  onChange={e => setRoleFilter(e.target.value)}
+                  className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                >
+                  <option value="">All</option>
+                  {Object.entries(ROLE_IN_PLOT).map(([key, val]) => (
+                    <option key={key} value={key}>{val.label}</option>
+                  ))}
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-xs font-medium text-slate-500 mb-1">Accusation Origin</label>
+                <select
+                  value={originFilter}
+                  onChange={e => setOriginFilter(e.target.value)}
+                  className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                >
+                  <option value="">All</option>
+                  {Object.entries(ACCUSATION_ORIGIN).map(([key, val]) => (
+                    <option key={key} value={key}>{val.label}</option>
+                  ))}
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-xs font-medium text-slate-500 mb-1">Accused Of</label>
+                <select
+                  value={accusedOfFilter}
+                  onChange={e => setAccusedOfFilter(e.target.value)}
+                  className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                >
+                  <option value="">All</option>
+                  {Object.entries(ACCUSED_OF).map(([key, val]) => (
+                    <option key={key} value={key}>{val.label}</option>
+                  ))}
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-xs font-medium text-slate-500 mb-1">Innocence Status</label>
+                <select
+                  value={innocenceFilter}
+                  onChange={e => setInnocenceFilter(e.target.value)}
+                  className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                >
+                  <option value="">All</option>
+                  {Object.entries(INNOCENCE_STATUS).map(([key, val]) => (
+                    <option key={key} value={key}>{val.label}</option>
+                  ))}
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-xs font-medium text-slate-500 mb-1">Exposure Channel</label>
+                <select
+                  value={channelFilter}
+                  onChange={e => setChannelFilter(e.target.value)}
+                  className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                >
+                  <option value="">All</option>
+                  {Object.entries(EXPOSURE_CHANNEL).map(([key, val]) => (
+                    <option key={key} value={key}>{val.label}</option>
+                  ))}
+                </select>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
 
       <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
         <p className="text-xs sm:text-sm text-slate-600">

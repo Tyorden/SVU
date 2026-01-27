@@ -66,6 +66,9 @@ import {
   EXPOSURE_WHO_TOLD,
   EXPOSURE_CHANNEL,
   CONSEQUENCE_SEVERITY,
+  ROLE_IN_PLOT,
+  INNOCENCE_STATUS,
+  ACCUSED_OF,
 } from '../utils/definitions'
 
 export default function Analysis() {
@@ -450,6 +453,30 @@ export default function Analysis() {
                 <h4 className="font-semibold text-slate-700 mb-2">Who Exposed</h4>
                 <ul className="space-y-1 text-slate-600">
                   {Object.entries(EXPOSURE_WHO_TOLD).map(([key, val]) => (
+                    <li key={key}><span className="font-medium">{val.label}:</span> {val.description}</li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <h4 className="font-semibold text-slate-700 mb-2">Role in Plot</h4>
+                <ul className="space-y-1 text-slate-600">
+                  {Object.entries(ROLE_IN_PLOT).map(([key, val]) => (
+                    <li key={key}><span className="font-medium">{val.label}:</span> {val.description}</li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <h4 className="font-semibold text-slate-700 mb-2">Innocence Status</h4>
+                <ul className="space-y-1 text-slate-600">
+                  {Object.entries(INNOCENCE_STATUS).map(([key, val]) => (
+                    <li key={key}><span className="font-medium">{val.label}:</span> {val.description}</li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <h4 className="font-semibold text-slate-700 mb-2">Accused Of</h4>
+                <ul className="space-y-1 text-slate-600">
+                  {Object.entries(ACCUSED_OF).map(([key, val]) => (
                     <li key={key}><span className="font-medium">{val.label}:</span> {val.description}</li>
                   ))}
                 </ul>
