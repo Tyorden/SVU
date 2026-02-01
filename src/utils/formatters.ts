@@ -22,6 +22,8 @@ import {
   CONSEQUENCE_SEVERITY,
   POLICE_CONDUCT_THREAT,
   POLICE_APOLOGY,
+  PROSECUTORIAL_CONDUCT,
+  PROSECUTORIAL_APOLOGY,
 } from './definitions'
 
 /**
@@ -146,6 +148,24 @@ export function formatInnocenceStatus(status: string): string {
 export function formatConsequenceCategory(category: string): string {
   if (!category) return 'Unknown'
   return CONSEQUENCE_CATEGORY[category]?.label || formatSnakeCase(category)
+}
+
+/**
+ * Format prosecutorial_conduct field (Law & Order specific)
+ * @param conduct - Prosecutorial conduct code from dataset
+ */
+export function formatProsecutorialConduct(conduct: string): string {
+  if (!conduct) return 'None'
+  return PROSECUTORIAL_CONDUCT[conduct]?.label || formatSnakeCase(conduct)
+}
+
+/**
+ * Format prosecutorial_apology field (Law & Order specific)
+ * @param apology - Prosecutorial apology code from dataset
+ */
+export function formatProsecutorialApology(apology: string): string {
+  if (!apology) return 'None'
+  return PROSECUTORIAL_APOLOGY[apology]?.label || formatSnakeCase(apology)
 }
 
 /**

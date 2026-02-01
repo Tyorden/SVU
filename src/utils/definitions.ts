@@ -92,6 +92,94 @@ export const ACCUSED_OF: Record<string, { label: string; description: string }> 
     label: 'Sex Crime (Unspecified)',
     description: 'Sexual offense where specific type is unclear from transcript',
   },
+  manslaughter: {
+    label: 'Manslaughter',
+    description: 'Involuntary or voluntary manslaughter accusation',
+  },
+  attempted_murder: {
+    label: 'Attempted Murder',
+    description: 'Failed or interrupted homicide attempt',
+  },
+  kidnapping: {
+    label: 'Kidnapping',
+    description: 'Unlawful restraint or abduction accusation',
+  },
+  robbery: {
+    label: 'Robbery',
+    description: 'Taking property by force or threat',
+  },
+  burglary: {
+    label: 'Burglary',
+    description: 'Unlawful entry to commit a crime',
+  },
+  theft: {
+    label: 'Theft',
+    description: 'Taking property without consent',
+  },
+  fraud: {
+    label: 'Fraud',
+    description: 'Deception for financial gain',
+  },
+  embezzlement: {
+    label: 'Embezzlement',
+    description: 'Misappropriation of entrusted funds',
+  },
+  extortion: {
+    label: 'Extortion',
+    description: 'Obtaining something through coercion or threats',
+  },
+  racketeering: {
+    label: 'Racketeering',
+    description: 'Organized criminal enterprise (RICO)',
+  },
+  conspiracy: {
+    label: 'Conspiracy',
+    description: 'Agreement to commit a criminal act',
+  },
+  drug_trafficking: {
+    label: 'Drug Trafficking',
+    description: 'Distribution or transport of illegal drugs',
+  },
+  weapons_trafficking: {
+    label: 'Weapons Trafficking',
+    description: 'Illegal firearms or weapons distribution',
+  },
+  corruption: {
+    label: 'Corruption',
+    description: 'Abuse of public office for personal gain',
+  },
+  perjury: {
+    label: 'Perjury',
+    description: 'Lying under oath',
+  },
+  obstruction: {
+    label: 'Obstruction',
+    description: 'Interfering with investigation or legal proceedings',
+  },
+  bribery: {
+    label: 'Bribery',
+    description: 'Offering or accepting improper payment',
+  },
+  arson: {
+    label: 'Arson',
+    description: 'Deliberate fire-setting',
+  },
+  stalking: {
+    label: 'Stalking',
+    description: 'Repeated unwanted surveillance or contact',
+  },
+  terrorism: {
+    label: 'Terrorism',
+    description: 'Politically or ideologically motivated violence',
+  },
+  hate_crime: {
+    label: 'Hate Crime',
+    description: 'Crime motivated by bias against a group',
+  },
+  sexual_assault: {
+    label: 'Sexual Assault',
+    description: 'Sexual violence or coercion',
+  },
   other: {
     label: 'Other',
     description: 'Other crime type not covered by standard categories',
@@ -123,6 +211,10 @@ export const ACCUSATION_ORIGIN: Record<string, { label: string; description: str
   fabrication: {
     label: 'Fabricated Accusation',
     description: 'Knowingly false claim with proven lie or ulterior motive',
+  },
+  prosecutorial_theory: {
+    label: 'Prosecutorial Theory',
+    description: 'ADA/prosecutor\'s case theory that later proves wrong',
   },
   unknown: {
     label: 'Unknown',
@@ -168,6 +260,18 @@ export const EXPOSURE_CHANNEL: Record<string, { label: string; description: stri
     label: 'Legal/Court',
     description: 'Exposure through legal proceedings or court system',
   },
+  courtroom: {
+    label: 'Courtroom',
+    description: 'Public trial, grand jury, names become public record',
+  },
+  political: {
+    label: 'Political',
+    description: 'Government or political arena exposure',
+  },
+  community: {
+    label: 'Community',
+    description: 'Neighborhood, church, social circles informed',
+  },
   unknown: {
     label: 'Unknown',
     description: 'Exposure channel not determinable from transcript',
@@ -187,6 +291,14 @@ export const EXPOSURE_WHO_TOLD: Record<string, { label: string; description: str
   third_party: {
     label: 'Third Party',
     description: 'Lawyer, administrator, gossip, CPS, school official, etc.',
+  },
+  prosecution: {
+    label: 'Prosecution',
+    description: 'ADA or prosecution team reveals or exposes the accusation',
+  },
+  defense: {
+    label: 'Defense',
+    description: 'Defense attorney or defense process exposes the accusation',
   },
   media: {
     label: 'Media',
@@ -219,6 +331,14 @@ export const CONSEQUENCE_CATEGORY: Record<string, { label: string; description: 
   social: {
     label: 'Social',
     description: 'Social consequences (ostracism, reputation damage, eviction)',
+  },
+  political: {
+    label: 'Political',
+    description: 'Political career damage, loss of office, public disgrace',
+  },
+  financial: {
+    label: 'Financial',
+    description: 'Significant financial losses, bankruptcy, asset seizure',
   },
   multiple: {
     label: 'Multiple',
@@ -389,6 +509,50 @@ export const FUTURE_ANALYSIS = {
     },
   ],
   dataLimitation: 'The source transcripts used for this analysis did not consistently capture demographic information about characters. While character names and roles are recorded, extracting reliable race, gender, age, and socioeconomic data would require either: (1) manual review of each episode, (2) cross-referencing with episode wikis, or (3) using video/image analysis. This limitation means demographic patterns cannot be reliably analyzed from the current dataset.',
+}
+
+/** Definitions for prosecutorial_conduct field (Law & Order specific) */
+export const PROSECUTORIAL_CONDUCT: Record<string, { label: string; description: string }> = {
+  none: {
+    label: 'None',
+    description: 'No prosecutorial involvement or neutral conduct',
+  },
+  overreach: {
+    label: 'Overreach',
+    description: 'Prosecution pursued charges beyond what evidence supported',
+  },
+  misconduct: {
+    label: 'Misconduct',
+    description: 'Deliberate ethical violations by prosecution (withholding evidence, etc.)',
+  },
+  zealous_but_fair: {
+    label: 'Zealous but Fair',
+    description: 'Aggressive prosecution within ethical bounds',
+  },
+  dropped_appropriately: {
+    label: 'Dropped Appropriately',
+    description: 'Prosecution recognized error and dropped charges correctly',
+  },
+}
+
+/** Definitions for prosecutorial_apology field (Law & Order specific) */
+export const PROSECUTORIAL_APOLOGY: Record<string, { label: string; description: string }> = {
+  none: {
+    label: 'None',
+    description: 'No apology from prosecution',
+  },
+  partial: {
+    label: 'Partial',
+    description: 'Softened acknowledgment without full responsibility',
+  },
+  formal: {
+    label: 'Formal',
+    description: 'Clear acknowledgment of wrongful prosecution',
+  },
+  unknown: {
+    label: 'Unknown',
+    description: 'Whether apology occurred is unclear from transcript',
+  },
 }
 
 /**
