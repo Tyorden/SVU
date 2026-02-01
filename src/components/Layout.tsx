@@ -23,10 +23,17 @@ export default function Layout() {
               Created by Tyler Orden
             </p>
             <p className="text-xs sm:text-sm text-slate-500 leading-relaxed mb-3">
-              This is a personal project born out of curiosity about how procedural TV dramas
-              portray false accusations and their consequences. The data was collected and analyzed
-              for fun and is not affiliated with NBC, Dick Wolf, or any official entity.
-              All findings are observational and based on episode transcripts.
+              This project started after watching clips of SVU and Law & Order and being struck by
+              how often detectives and prosecutors zero in on the wrong person with absolute
+              certainty, pressuring them to accept guilt before the real perpetrator is revealed.
+              What's remarkable isn't that false accusations happen -- it's how casually and
+              frequently they're depicted in shows that are often seen as pro-law-enforcement.
+              That contradiction was interesting enough to warrant a closer look at the data.
+            </p>
+            <p className="text-xs sm:text-sm text-slate-500 leading-relaxed mb-3">
+              This is a personal project, made for fun and curiosity. It is not affiliated with
+              NBC, Dick Wolf Productions, or any official entity. All findings are observational
+              and based on episode transcripts.
             </p>
             <p className="text-xs sm:text-sm text-slate-500 leading-relaxed mb-4">
               If you're interested in using the data, collaborating, or just want to chat about
