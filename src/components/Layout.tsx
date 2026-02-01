@@ -26,11 +26,12 @@ export default function Layout() {
               This project started after watching clips of SVU and Law & Order and noticing
               how often detectives and prosecutors zero in on the wrong person with absolute
               certainty, pressuring them to accept guilt before the real perpetrator is revealed.
-              It's not surprising that TV shows use false suspects as a plot device, but for
-              franchises that are, by any measure, pro-law-enforcement copaganda, the frequency
-              was striking. I was curious whether I was just seeing viral clips or if the data
-              actually reflected how often they get it wrong. When I couldn't find any existing
-              analysis online, I decided to look into it myself.
+              Sure, in most police shows it's never the first suspect, but for franchises that
+              are, by any measure, pro-law-enforcement copaganda, as serious and beloved as
+              these are, I wanted to know: was the frequency just because false accusation clips
+              go more viral, or is the rate actually that high? I was curious enough to want to
+              see the real numbers, and when I couldn't find any existing analysis online, I
+              decided to look into it myself.
             </p>
             <p className="text-xs sm:text-sm text-slate-500 leading-relaxed mb-3">
               This is a personal project, made for fun and curiosity. It is not affiliated with
