@@ -27,8 +27,8 @@ export default function Layout() {
               how often detectives and prosecutors zero in on the wrong person with absolute
               certainty, pressuring them to accept guilt before the real perpetrator is revealed.
               What's remarkable isn't that false accusations happen -- it's how casually and
-              frequently they're depicted in shows that are often seen as pro-law-enforcement.
-              That contradiction was interesting enough to warrant a closer look at the data.
+              frequently they're depicted in shows that are, by any measure, pro-law-enforcement
+              copaganda. That was curious enough to warrant a closer look at the data.
             </p>
             <p className="text-xs sm:text-sm text-slate-500 leading-relaxed mb-3">
               This is a personal project, made for fun and curiosity. It is not affiliated with
