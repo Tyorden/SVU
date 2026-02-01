@@ -35,6 +35,18 @@ export default function Layout() {
               NBC, Dick Wolf Productions, or any official entity. All findings are observational
               and based on episode transcripts.
             </p>
+            <p className="text-xs sm:text-sm text-slate-500 leading-relaxed mb-3">
+              Episode transcripts sourced from{' '}
+              <a href="https://subslikescript.com" target="_blank" rel="noopener noreferrer" className="text-slate-600 underline hover:text-slate-800">
+                subslikescript.com
+              </a>.
+              Batch analysis of transcripts performed using{' '}
+              <a href="https://www.anthropic.com/claude" target="_blank" rel="noopener noreferrer" className="text-slate-600 underline hover:text-slate-800">
+                Claude
+              </a>{' '}
+              (Anthropic) with a standardized tagging methodology.
+              Dashboard built with Claude Code.
+            </p>
             <p className="text-xs sm:text-sm text-slate-500 leading-relaxed mb-4">
               If you're interested in using the data, collaborating, or just want to chat about
               the project, feel free to reach out.
