@@ -23,12 +23,14 @@ export default function Layout() {
               Created by Tyler Orden
             </p>
             <p className="text-xs sm:text-sm text-slate-500 leading-relaxed mb-3">
-              This project started after watching clips of SVU and Law & Order and being struck by
+              This project started after watching clips of SVU and Law & Order and noticing
               how often detectives and prosecutors zero in on the wrong person with absolute
               certainty, pressuring them to accept guilt before the real perpetrator is revealed.
-              What's remarkable isn't that false accusations happen -- it's how casually and
-              frequently they're depicted in shows that are, by any measure, pro-law-enforcement
-              copaganda. That was curious enough to warrant a closer look at the data.
+              It's not surprising that TV shows use false suspects as a plot device, but for
+              franchises that are, by any measure, pro-law-enforcement copaganda, the frequency
+              was striking. I was curious whether I was just seeing viral clips or if the data
+              actually reflected how often they get it wrong. When I couldn't find any existing
+              analysis online, I decided to look into it myself.
             </p>
             <p className="text-xs sm:text-sm text-slate-500 leading-relaxed mb-3">
               This is a personal project, made for fun and curiosity. It is not affiliated with
