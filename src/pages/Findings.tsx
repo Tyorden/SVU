@@ -2,12 +2,16 @@
  * Findings Page (/findings)
  *
  * Publication-grade verified findings (computed July 2026) surfaced from
- * docs/svu_paper_stats.md and the two academic papers.
+ * docs/svu_paper_stats_v2.md and the two academic papers.
  *
- * Analysis set: n = 536 persons — the 541-row dataset minus 5 persons coded
- * `actually_guilty`. The Episodes/Analysis pages display the full 541 rows;
- * this page applies the papers' exclusion rule so every statistic matches
- * the publication numbers.
+ * Analysis set: n = 521 persons — the 541-row dataset minus 5 persons coded
+ * `actually_guilty` and minus 15 phantom rows from 9 episodes whose source
+ * transcripts were found (July 2026 ground-truth audit, docs/revision_spec.md
+ * section 4B) to be duplicates of other episodes' scripts. Episode-level rates
+ * use the corrected 567-episode denominator (576 minus the 9 corrupted
+ * episodes). The Episodes/Analysis pages display the full raw dataset; this
+ * page applies the papers' exclusion rules so every statistic matches the
+ * publication numbers.
  *
  * Sections:
  * 1. Hero/intro with methodology note
@@ -20,13 +24,14 @@
  * Implementation notes:
  * - Field-based statistics are computed at runtime from persons.json /
  *   episodes.json with the same exclusion + normalization rules as the paper
- *   (innocence_status !== 'actually_guilty'; victim_misID → victim_ID;
- *   third_party → witness_misID), so charts stay live-data-driven.
+ *   (innocence_status !== 'actually_guilty'; the 9 corrupted episodes'
+ *   phantom rows dropped; victim_misID → victim_ID; third_party →
+ *   witness_misID), so charts stay live-data-driven.
  * - Only the row-audited death counts and the chi-square test results are
  *   hard-coded: they required manual row-by-row verification (free-text
  *   keyword matching overcounts deaths) and inferential computation that is
  *   not reproducible from the JSON fields alone. Both are labeled as
- *   verified/audited July 2026.
+ *   adjudicated/verified July 2026.
  */
 
 import { useMemo } from 'react'
@@ -45,9 +50,33 @@ import ChartCard from '../components/ChartCard'
 import StatCard from '../components/StatCard'
 import { getSeverityColor, formatExposureChannel, formatAccusationOrigin } from '../utils/formatters'
 
-// === Paper rules (mirror docs/svu_paper_stats.md) ===
+// === Paper rules (mirror docs/svu_paper_stats_v2.md) ===
 
-/** Exclusion rule: drop the 5 rows coded actually_guilty (541 → 536). */
+/**
+ * Source-corruption exclusion (July 2026 ground-truth audit, revision_spec
+ * section 4B): these 9 episodes carry the WRONG transcript in the source
+ * Excel — a duplicate of another episode's script — so their coded flags and
+ * person rows describe a different episode's content. Their 15 person rows
+ * are phantoms and are dropped from the person-level analysis set; the
+ * episodes themselves are dropped from the episode-level denominator
+ * (576 → 567).
+ */
+const CORRUPTED_EPISODE_IDS = new Set([
+  'svu_s01_e13', // contains S01E15 'Entitled'
+  'svu_s02_e11', // contains S02E10
+  'svu_s02_e18', // contains S02E19
+  'svu_s04_e10', // contains S04E23
+  'svu_s05_e04', // contains S06E14
+  'svu_s05_e14', // contains S12E10
+  'svu_s08_e11', // contains S18E08
+  'svu_s09_e19', // contains S26E19
+  'svu_s11_e09', // contains S26E08
+])
+
+/** Expected corrected analysis-set size (541 − 5 actually_guilty − 15 phantoms). */
+const EXPECTED_N = 521
+
+/** Exclusion rule: drop the 5 rows coded actually_guilty (541 → 536 → 521 with phantoms removed). */
 const isInnocent = (status: string) => status !== 'actually_guilty'
 
 /** Vocabulary normalization for accusation_origin (per paper Section A4). */
@@ -77,49 +106,67 @@ const ERA_META: Record<Era, { label: string; short: string; color: string }> = {
   post: { label: 'Post-2020 (S22-27)', short: 'S22-27', color: '#f97316' },
 }
 
-// === Hard-coded, row-level audited numbers (verified July 2026) ===
-// Each of these rows was manually audited against consequence_detail, notes,
-// and quote_or_scene because naive keyword matching on the free-text fields
-// overcounts deaths (e.g. `arrested_for_wrong_murder`, `suicide_attempt`,
-// `suicide_watch`, `family_murdered` all match death keywords without being
-// deaths of the accused person). Do not recompute these from tags.
+// === Hard-coded, row-level adjudicated numbers (July 2026) ===
+// Final adjudicated death-audit numbers: every row was adjudicated against
+// the source transcripts (docs/revision_spec.md section 4B / stats v2 A9)
+// because naive keyword matching on the free-text fields overcounts deaths
+// (e.g. `arrested_for_wrong_murder`, `suicide_attempt`, `suicide_watch`,
+// `family_murdered` all match death keywords without being deaths of the
+// accused person). Do not recompute these from tags.
 const DEATH_AUDIT = {
-  totalDeaths: 31,
-  deathEpisodes: 30,
-  deathEpisodeRate: '5.2%',
-  murdered: 21,
+  totalDeaths: 32,
+  deathEpisodes: 31,
+  deathEpisodeRate: '5.4%',
+  murdered: 21, // incl. 2 in custody; 1 killed by police (Terrence Reynolds S17E05)
   murderedInCustody: 2, // Russell Ramsay S02E08, Manny Montero S15E13
   suicides: 9,
-  overdose: 1, // Leon Tate S03E04
-  suicideAttempts: 7, // survived (structured field)
-  nonFatalAttacks: 27, // assaults / vigilante attacks / shootings (structured field)
-  apologiesInDeathCases: 6,
+  otherDeaths: 2, // 1 overdose (Leon Tate S03E04); 1 died of AIDS contracted during wrongful imprisonment (Ricky Torres S21E06)
+  suicideAttempts: 8, // survived (all structured)
+  nonFatalAttacks: 31, // 28 structured + 3 notes-only; incl. 4 police woundings + 1 fired-upon
+  apologiesInDeathCases: 5,
 }
 
 const DEATH_BREAKDOWN = [
   { category: 'Murdered', count: DEATH_AUDIT.murdered, fatal: true },
   { category: 'Completed suicide', count: DEATH_AUDIT.suicides, fatal: true },
-  { category: 'Overdose death', count: DEATH_AUDIT.overdose, fatal: true },
+  { category: 'Other death (overdose / AIDS)', count: DEATH_AUDIT.otherDeaths, fatal: true },
   { category: 'Suicide attempt (survived)', count: DEATH_AUDIT.suicideAttempts, fatal: false },
   { category: 'Non-fatal assault / attack', count: DEATH_AUDIT.nonFatalAttacks, fatal: false },
 ]
 
-// Hard-coded inferential results (Pearson chi-square, computed July 2026).
+// Hard-coded inferential results (Pearson chi-square, recomputed July 2026 on
+// the corrected analysis set: N = 567 episodes / n = 521 persons).
 const CHI_SQUARE = {
-  falseSuspectByEra: 'chi-square(2) = 21.61, p < .01',
-  severityByEra: 'chi-square(2) = 8.09, p < .05',
+  falseSuspectByEra: 'chi-square(2) = 20.89, p < .001, N = 567',
+  severityByEra: 'chi-square(2) = 8.06, p = .018',
+  coercionByEra: 'pooled chi-square(2) = 5.30, p = .071, n.s.',
 }
 
 export default function Findings() {
   const persons = usePersons()
   const episodes = useEpisodes()
 
-  // The paper's analysis set: 541 rows minus 5 actually_guilty = 536.
-  const innocent = useMemo(
-    () => persons.filter(p => isInnocent(p.innocence_status)),
-    [persons]
-  )
+  // The papers' corrected analysis set: 541 rows minus 5 actually_guilty
+  // minus 15 phantom rows from the 9 wrong-transcript episodes = 521.
+  const innocent = useMemo(() => {
+    const rows = persons.filter(
+      p => isInnocent(p.innocence_status) && !CORRUPTED_EPISODE_IDS.has(p.custom_id)
+    )
+    if (persons.length > 0 && rows.length !== EXPECTED_N) {
+      console.warn(
+        `Findings: corrected analysis set is n=${rows.length}, expected n=${EXPECTED_N}. ` +
+          'Rendered statistics may not match docs/svu_paper_stats_v2.md.'
+      )
+    }
+    return rows
+  }, [persons])
   const n = innocent.length
+
+  // Corrected episode-level denominator: 576 minus the 9 corrupted episodes = 567.
+  const validEpisodes = useMemo(
+    () => episodes.filter(e => !CORRUPTED_EPISODE_IDS.has(e.custom_id)),
+    [episodes]
+  )
 
   // === Section 3: The Apology Gradient ===
 
@@ -180,8 +227,11 @@ export default function Findings() {
   const mediaMultiplier = useMemo(() => {
     const media = severity4ByChannel.find(c => c.rawChannel === 'media')
     const policeOnly = severity4ByChannel.find(c => c.rawChannel === 'police_only')
-    if (!media || !policeOnly || policeOnly.rate === 0) return { media, policeOnly, multiplier: '—' }
-    return { media, policeOnly, multiplier: `${(media.rate / policeOnly.rate).toFixed(1)}x` }
+    if (!media || !policeOnly || policeOnly.sev4 === 0) return { media, policeOnly, multiplier: '—' }
+    // Ratio of the unrounded proportions (39/86 vs 12/142 = 5.4x), not of the
+    // display-rounded rates, so the multiplier matches the papers.
+    const ratio = (media.sev4 / media.count) / (policeOnly.sev4 / policeOnly.count)
+    return { media, policeOnly, multiplier: `${ratio.toFixed(1)}x` }
   }, [severity4ByChannel])
 
   // Exposure spread beyond law enforcement (channel other than police_only/unknown)
@@ -223,7 +273,7 @@ export default function Findings() {
 
   const eraStats = useMemo(() => {
     return (['pre', 'metoo', 'post'] as Era[]).map(era => {
-      const eraEpisodes = episodes.filter(e => getEra(parseInt(e.season)) === era)
+      const eraEpisodes = validEpisodes.filter(e => getEra(parseInt(e.season)) === era)
       const falseSuspectY = eraEpisodes.filter(e => e.has_false_suspect === 'Y').length
       const eraPersons = innocent.filter(p => getEra(parseInt(p.season)) === era)
       const sev34 = eraPersons.filter(
@@ -242,7 +292,7 @@ export default function Findings() {
         sev34Rate: parseFloat(((sev34 / eraPersons.length) * 100).toFixed(1)),
       }
     })
-  }, [episodes, innocent])
+  }, [validEpisodes, innocent])
 
   const coercionByBlock = useMemo(() => {
     const blocks: [number, number][] = [
@@ -290,10 +340,16 @@ export default function Findings() {
           These are the publication-grade statistics behind the two academic papers, computed
           July 2026 and verified at the row level. The analysis set is{' '}
           <span className="font-semibold">n = {n} persons</span>: the full 541-row dataset minus
-          5 persons coded <span className="font-mono text-[11px] sm:text-xs">actually_guilty</span>.
-          The Episodes and Analysis pages on this site display all 541 rows; this page applies
-          the papers&apos; exclusion rule, so small differences from those pages are expected and
-          intentional. Episode-level rates use all 576 episodes.
+          5 persons coded <span className="font-mono text-[11px] sm:text-xs">actually_guilty</span>{' '}
+          and minus 15 rows from 9 episodes whose source transcripts were found (July 2026
+          ground-truth audit) to be duplicates of other episodes&apos; scripts — their coded rows
+          describe a different episode&apos;s content. Episode-level rates likewise use the
+          corrected 567-episode denominator (576 minus the 9 corrupted episodes). A further known
+          source limitation: 145 of the 576 transcripts are truncated at Excel&apos;s 32,767-character
+          cell limit (mostly Seasons 1-18), which can only undercount early-era harms and
+          apologies. The Episodes and Analysis pages on this site still display the full raw
+          dataset; this page applies the papers&apos; exclusion rules, so differences from those
+          pages are expected and intentional.
         </p>
       </div>
 
@@ -310,8 +366,8 @@ export default function Findings() {
             <span className="font-mono text-[11px] sm:text-xs">arrested_for_wrong_murder</span>,{' '}
             <span className="font-mono text-[11px] sm:text-xs">suicide_attempt</span>, and{' '}
             <span className="font-mono text-[11px] sm:text-xs">family_murdered</span> match death
-            keywords without being deaths of the accused person. Every count below was manually
-            audited row-by-row (July 2026) against the consequence detail, notes, and scene quotes.
+            keywords without being deaths of the accused person. Every count below is row-level
+            adjudicated against the source transcripts (July 2026).
           </p>
         </div>
 
@@ -325,26 +381,26 @@ export default function Findings() {
           <StatCard
             title="Murdered"
             value={DEATH_AUDIT.murdered}
-            subtitle={`${DEATH_AUDIT.murderedInCustody} killed in custody: Russell Ramsay (S02E08), Manny Montero (S15E13)`}
+            subtitle={`${DEATH_AUDIT.murderedInCustody} killed in custody; 1 killed by police: Terrence Reynolds (S17E05)`}
             color="red"
           />
           <StatCard
             title="Completed Suicides"
             value={DEATH_AUDIT.suicides}
-            subtitle={`Plus ${DEATH_AUDIT.overdose} overdose death: Leon Tate (S03E04)`}
+            subtitle={`Plus ${DEATH_AUDIT.otherDeaths} other deaths: 1 overdose (S03E04), 1 died of AIDS contracted during wrongful imprisonment (S21E06)`}
             color="purple"
           />
           <StatCard
             title="Apologies in Death Cases"
             value={DEATH_AUDIT.apologiesInDeathCases}
-            subtitle={`Police apologized in ${DEATH_AUDIT.apologiesInDeathCases} of the ${DEATH_AUDIT.totalDeaths} deaths`}
+            subtitle={`Police apologized in ${DEATH_AUDIT.apologiesInDeathCases} of the ${DEATH_AUDIT.totalDeaths} death cases`}
             color="yellow"
           />
         </div>
 
         <ChartCard
-          title="Row-Audited Physical Harm Breakdown"
-          subtitle={`${DEATH_AUDIT.totalDeaths} deaths (dark red), plus ${DEATH_AUDIT.suicideAttempts} survived suicide attempts and ${DEATH_AUDIT.nonFatalAttacks} non-fatal assaults / vigilante attacks / shootings counted separately (orange)`}
+          title="Row-Adjudicated Physical Harm Breakdown"
+          subtitle={`${DEATH_AUDIT.totalDeaths} deaths (dark red), plus ${DEATH_AUDIT.suicideAttempts} survived suicide attempts and ${DEATH_AUDIT.nonFatalAttacks} non-fatal attacks (28 structured + 3 notes-only, incl. 4 police woundings + 1 fired-upon) counted separately (orange)`}
         >
           <ResponsiveContainer width="100%" height="100%">
             <BarChart data={DEATH_BREAKDOWN} layout="vertical" margin={{ left: 160 }}>
@@ -490,7 +546,7 @@ export default function Findings() {
 
         <ChartCard
           title="Accusation Origin (Controlled Field, Normalized)"
-          subtitle="Who first pointed the finger at each of the 536 innocent persons — the squad's own inference leads at 55.0%"
+          subtitle="Who first pointed the finger at each of the 521 innocent persons — the squad's own inference leads at 54.5%"
           height="lg"
         >
           <ResponsiveContainer width="100%" height="100%">
@@ -521,7 +577,7 @@ export default function Findings() {
             of those {wrongIdReconciliation.tagged} tagged rows sit on{' '}
             <span className="font-medium">squad inference</span> origins. On the controlled field,
             detectives&apos; own theories, not victim error, drive most false accusations: squad
-            inference accounts for 55.0% of cases, while genuine victim misidentification is 17.7%.
+            inference accounts for 54.5% of cases, while genuine victim misidentification is 18.0%.
           </p>
         </div>
       </section>
@@ -569,7 +625,7 @@ export default function Findings() {
 
           <ChartCard
             title="Innocent Persons Harmed per Episode by Era"
-            subtitle="The volume of falsely accused persons halved after #MeToo (1.08 to 0.57 to 0.56 per episode)"
+            subtitle="The volume of falsely accused persons roughly halved after #MeToo (1.06 to 0.57 to 0.56 per episode)"
           >
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={eraStats}>
@@ -621,7 +677,7 @@ export default function Findings() {
 
           <ChartCard
             title="Police Threat / Coercion Rate: The U-Shape"
-            subtitle="Three-season blocks: coercion bottoms out at 27.7% in S16-18, then rebounds to 56.7% (S22-24) and 60.0% (S25-27) — back at early-era levels"
+            subtitle={`Three-season blocks: coercion bottoms out at 27.7% in S16-18, then rebounds to 56.7% (S22-24) and 60.0% (S25-27) — back at early-era levels (${CHI_SQUARE.coercionByEra}, verified July 2026)`}
           >
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={coercionByBlock}>
@@ -652,9 +708,10 @@ export default function Findings() {
       {/* Provenance footnote */}
       <p className="text-xs text-slate-400 mb-8">
         All field-based statistics on this page are computed live from the site&apos;s dataset
-        using the papers&apos; exclusion and normalization rules. The death audit counts and
-        chi-square results are hard-coded from the row-level verified July 2026 analysis
-        (docs/svu_paper_stats.md).
+        using the papers&apos; exclusion and normalization rules (actually_guilty rows and the
+        15 phantom rows from the 9 wrong-transcript episodes removed). The death audit counts
+        and chi-square results are hard-coded from the row-level adjudicated July 2026 analysis
+        (docs/svu_paper_stats_v2.md).
       </p>
     </div>
   )
