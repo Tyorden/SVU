@@ -388,6 +388,8 @@ Raw JSON output for all episodes, one JSON object per line.
 4. **Wrong identification is the leading cause** — appearing in 323 of 541 cases
 5. **Workplace exposure is most common** after police-only interactions
 
+> **Correction (July 5, 2026):** Point 4 counts the `wrong_ID` *tag*, which marks any misidentification element in a case. The controlled `accusation_origin` *field* tells a different story: `squad_inference` (detectives' own theories) is the leading origin at 55.0% of the 536 qualifying persons; 195 of the 323 wrong_ID tags sit on squad_inference-origin rows. Later keyword-level claims derived from `consequence_detail` (e.g., death counts) were also found to be inflated by keyword matching. The verified, publication-grade statistics live in `docs/svu_paper_stats.md`, which supersedes the results tables in this document wherever they disagree.
+
 ### What This Data Does NOT Show
 
 1. The data does not capture suspects who are guilty

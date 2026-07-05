@@ -1,8 +1,25 @@
 # Publication Roadmap: Law & Order Franchise False Accusation Research
 
-**Prepared:** July 4, 2026
+**Prepared:** July 4, 2026 · **Updated:** July 5, 2026 (see Addendum)
 **Author of record for all papers:** Tyler Satchel Orden, Independent Researcher
 **Datasets:** SVU (576 episodes, 541 persons), original L&O (314 episodes, 429 persons), combined (890 episodes, 970 persons, 1990-2026)
+
+---
+
+## ADDENDUM (July 5, 2026): Policy news and the SVU-first track
+
+**1. Venue AI policy resolved in Tyler's favor.** Tyler contacted the candidate journals directly; all confirmed privately that AI may draft the manuscript in first person, provided the prose does not read as AI-generated. This moves every venue to effective Mode B. Consequences:
+- The rewrite-from-memory requirement is lifted for journal submissions; the human-voice style law (guide Parts 2-3: no AI tells, banned words, varied rhythm) remains binding since "must not sound like AI" is now the explicit acceptance condition.
+- Keep the private correspondence on file per the guide Part 7; acknowledgments must still disclose Claude's drafting role accurately.
+- SocArXiv's public ban on verbatim AI prose still stands for PREPRINTS. Options: post preprints to the OSF project page itself rather than SocArXiv, or hold preprints until the prose passes Tyler's own revision. Decide per paper.
+
+**2. SVU-only papers unblocked.** The L&O transcript-truncation re-run blocks only the franchise-wide papers. The SVU dataset is complete (576/576 episodes, 2.8% deep-review rate), so SVU-only papers proceed immediately. Two are now drafted in `papers/`:
+- `papers/svu_flagship_paper.md` — "Collateral Damage as Narrative Convention" (SVU flagship, revived from the docx with corrected statistics; target Crime, Media, Culture)
+- `papers/svu_metoo_longitudinal.md` — the era analysis (retreat post-#MeToo, severity paradox, coercion U-shape; target Television & New Media)
+
+The franchise flagship (Paper 2 below) remains the long-term centerpiece and still requires the L&O re-run; the SVU flagship supersedes the "do not submit the SVU docx separately" advice below, which was written when the franchise paper was the only flagship. The methods/validation paper (Paper 1 below) is unchanged and still gates on the validation study.
+
+**3. Statistics corrected.** `docs/svu_paper_stats.md` is now the single source of truth for all SVU numbers. Key corrections vs the old docx: n=536 after excluding actually_guilty rows; verified deaths are 21 murdered + 9 suicides + 1 overdose (the docx's "31 murders, 21 suicides" was keyword-inflated); squad_inference leads normalized origins at 55.0%; any-apology rate is 7.6% (41/536) with formal apologies at 1.7% (9 cases).
 
 ---
 
