@@ -1,5 +1,7 @@
 # SVU Statistical Fact-Brief for the Two Papers
 
+> **SUPERSEDED (July 5, 2026):** A transcript ground-truth audit found 9 episodes in the source Excel carry the wrong transcript (duplicates of other episodes), creating 15 phantom person-rows counted in this file's n=536, and 145 transcripts truncated at Excel's 32,767-character cell limit. All statistics below are superseded by **`svu_paper_stats_v2.md`** (n=521 persons; 567-episode primary base), whose reconciliation table maps every changed value. This file is retained for the audit trail only.
+
 **Generated:** 2026-07-05, computed directly from `svu_persons_harmed.csv` (541 rows) and `svu_episodes_summary.csv` (576 episodes) with Python (stdlib `csv`). No number below is estimated or carried over from earlier documents; the death/violence audit was verified row-by-row against `consequence_detail`, `notes`, and `quote_or_scene`.
 
 **Person-level analysis set:** 541 raw rows minus 5 `actually_guilty` rows = **n = 536** innocent (or partially-involved-but-innocent-of-the-accusation) persons. Excluded rows: svu_s03_e19 (Thomas 'Bird' Gordon); svu_s03_e19 (Judge Walter Thornburg); svu_s06_e20 (Gabriel Duvall (initial questioning)); svu_s12_e03 (Bill Harris (initially)); svu_s12_e12 (Orville Underwood).
