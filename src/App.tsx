@@ -25,13 +25,15 @@
 import { lazy, Suspense } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Layout from './components/Layout'
-import Dashboard from './pages/Dashboard'
-import Story from './pages/Story'
-import Analysis from './pages/Analysis'
-import Episodes from './pages/Episodes'
-import EpisodeDetail from './pages/EpisodeDetail'
-import Insights from './pages/Insights'
-import Visualizations from './pages/Visualizations'
+
+// SVU pages (lazy loaded)
+const Dashboard = lazy(() => import('./pages/Dashboard'))
+const Story = lazy(() => import('./pages/Story'))
+const Analysis = lazy(() => import('./pages/Analysis'))
+const Episodes = lazy(() => import('./pages/Episodes'))
+const EpisodeDetail = lazy(() => import('./pages/EpisodeDetail'))
+const Insights = lazy(() => import('./pages/Insights'))
+const Visualizations = lazy(() => import('./pages/Visualizations'))
 
 // Law & Order pages (lazy loaded)
 const LoDashboard = lazy(() => import('./pages/lo/LoDashboard'))
@@ -59,13 +61,13 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           {/* SVU Routes */}
-          <Route index element={<Dashboard />} />
-          <Route path="story" element={<Story />} />
-          <Route path="analysis" element={<Analysis />} />
-          <Route path="episodes" element={<Episodes />} />
-          <Route path="episodes/:id" element={<EpisodeDetail />} />
-          <Route path="insights" element={<Insights />} />
-          <Route path="visualizations" element={<Visualizations />} />
+          <Route index element={<Suspense fallback={<LoadingFallback />}><Dashboard /></Suspense>} />
+          <Route path="story" element={<Suspense fallback={<LoadingFallback />}><Story /></Suspense>} />
+          <Route path="analysis" element={<Suspense fallback={<LoadingFallback />}><Analysis /></Suspense>} />
+          <Route path="episodes" element={<Suspense fallback={<LoadingFallback />}><Episodes /></Suspense>} />
+          <Route path="episodes/:id" element={<Suspense fallback={<LoadingFallback />}><EpisodeDetail /></Suspense>} />
+          <Route path="insights" element={<Suspense fallback={<LoadingFallback />}><Insights /></Suspense>} />
+          <Route path="visualizations" element={<Suspense fallback={<LoadingFallback />}><Visualizations /></Suspense>} />
 
           {/* Law & Order Routes */}
           <Route path="lo" element={<Suspense fallback={<LoadingFallback />}><LoDashboard /></Suspense>} />

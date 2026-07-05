@@ -60,7 +60,7 @@ export default function Navbar() {
               to={switchTo}
               className={`hidden lg:inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-full border transition-colors ${switchBg}`}
             >
-              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
               </svg>
               Switch to {otherSeries}
@@ -94,12 +94,14 @@ export default function Navbar() {
             onClick={() => setIsOpen(!isOpen)}
             className="md:hidden p-2 rounded-lg hover:bg-slate-100 transition-colors"
             aria-label="Toggle menu"
+            aria-expanded={isOpen}
           >
             <svg
               className="w-6 h-6 text-slate-700"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
+              aria-hidden="true"
             >
               {isOpen ? (
                 <path
@@ -175,7 +177,7 @@ export default function Navbar() {
                   className={`flex items-center gap-2 px-4 py-3 rounded-lg transition-colors ${switchBg} border`}
                   onClick={() => setIsOpen(false)}
                 >
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
                   </svg>
                   Switch to {otherSeries}

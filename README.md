@@ -1,6 +1,6 @@
-# SVU False Accusation Data Visualization
+# Law & Order Franchise False Accusation Research
 
-An interactive React dashboard to explore false accusation patterns in Law & Order: SVU across 576 episodes and 541 documented persons harmed.
+An interactive React dashboard and research dataset exploring false accusation patterns across the Law & Order franchise: 576 SVU episodes (541 documented persons harmed) and 314 original Law & Order episodes (429 persons harmed) — 890 episodes and 970 persons in total, spanning 1990-2026.
 
 ## Live Demo
 
@@ -32,6 +32,14 @@ Deployed automatically via Vercel when changes are pushed to main.
 - Episode metadata and summary
 - Data quality warnings for episodes needing review
 - Expandable cards for each person harmed showing full details
+
+### Story, Insights & Visualizations (`/story`, `/insights`, `/visualizations`)
+- Narrative presentation mode, exportable insight summaries, and additional charts
+
+### Law & Order Mirror Site (`/lo/*`)
+- Full parallel site for the original Law & Order dataset (314 episodes, 429 persons)
+- Same page structure: dashboard, analysis, episodes, story, insights, visualizations
+- Pages live in `src/pages/lo/`, data hooks in `src/hooks/useLoData.ts`
 
 ## Tech Stack
 
@@ -125,16 +133,29 @@ npm run preview
 
 ## Data Sources
 
-The dashboard analyzes data from two CSV files that were converted to JSON:
-- `svu_episodes_summary.csv` → `src/data/episodes.json`
-- `svu_persons_harmed.csv` → `src/data/persons.json`
+The dashboard analyzes CSV datasets (repo root) converted to JSON (`src/data/`):
+
+| Show | Episodes | Persons | Raw JSONL |
+|------|----------|---------|-----------|
+| SVU | `svu_episodes_summary.csv` → `episodes.json` | `svu_persons_harmed.csv` → `persons.json` | `svu_analysis_complete_fixed.jsonl` |
+| Law & Order | `lo_episodes_summary.csv` → `lo_episodes.json` | `lo_persons_harmed.csv` → `lo_persons.json` | `lo_analysis_complete.jsonl` |
+
+Episode transcripts were sourced from subslikescript.com and analyzed with the Anthropic Batch API (Claude Sonnet 4.5) using the tagging methodology documented in `SVU_False_Accusation_Project_Documentation.md`. The original L&O batch project (scripts, tagging prompt, batch files) lives at `~/Desktop/LO`.
+
+## Research & Publication Materials
+
+- `SVU_False_Accusation_Project_Documentation.md` — full methodology, tagging prompt, and results summary
+- `SVU_False_Accusation_Academic_Paper.docx` — academic paper draft (SVU-only study)
+- `svu_publication_guide.md`, `lo_publication_guide.md`, `lo_standalone_publication_guide.md`, `franchise_combined_publication_guide.md` — publication and dissemination strategy guides
+- `docs/` — working documents (analysis findings, papers roadmap)
 
 ## Key Findings
 
-- **59.7%** of episodes contain false suspects
-- **52.1%** of episodes have public exposure of innocent people
-- **541** individuals documented as falsely accused or harmed
-- Severity distribution shows significant cases of life-altering consequences
+- **59.7%** of SVU episodes and **72.3%** of L&O episodes contain false suspects
+- **~60%** of persons harmed suffer severity 3-4 consequences (arrest, job loss, death)
+- Police apologize in under **2%** of cases on both shows (SVU 1.8%, L&O 1.6%)
+- **970** individuals documented as falsely accused and harmed across the franchise
+- The franchise portrays false accusation roughly **10x** more often than real-world wrongful conviction estimates (~6%)
 
 ## License
 
