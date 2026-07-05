@@ -78,6 +78,11 @@ export default function Navbar() {
             <NavLink to={`${prefix}/analysis`} className={linkClass}>
               Analysis
             </NavLink>
+            {!isLO && (
+              <NavLink to="/findings" className={linkClass}>
+                Findings
+              </NavLink>
+            )}
             <NavLink to={`${prefix}/episodes`} className={linkClass}>
               Episodes
             </NavLink>
@@ -148,6 +153,15 @@ export default function Navbar() {
               >
                 Analysis
               </NavLink>
+              {!isLO && (
+                <NavLink
+                  to="/findings"
+                  className={mobileLinkClass}
+                  onClick={() => setIsOpen(false)}
+                >
+                  Findings
+                </NavLink>
+              )}
               <NavLink
                 to={`${prefix}/episodes`}
                 className={mobileLinkClass}

@@ -7,6 +7,7 @@
  * - /              Dashboard with key statistics and summary charts
  * - /story         Interactive presentation walking through key findings
  * - /analysis      Interactive correlation analysis and trend exploration
+ * - /findings      Verified publication-grade findings (July 2026)
  * - /episodes      Searchable/filterable episode browser
  * - /episodes/:id  Episode detail with all persons harmed
  * - /insights      Data export and insights page
@@ -30,6 +31,7 @@ import Layout from './components/Layout'
 const Dashboard = lazy(() => import('./pages/Dashboard'))
 const Story = lazy(() => import('./pages/Story'))
 const Analysis = lazy(() => import('./pages/Analysis'))
+const Findings = lazy(() => import('./pages/Findings'))
 const Episodes = lazy(() => import('./pages/Episodes'))
 const EpisodeDetail = lazy(() => import('./pages/EpisodeDetail'))
 const Insights = lazy(() => import('./pages/Insights'))
@@ -64,6 +66,7 @@ function App() {
           <Route index element={<Suspense fallback={<LoadingFallback />}><Dashboard /></Suspense>} />
           <Route path="story" element={<Suspense fallback={<LoadingFallback />}><Story /></Suspense>} />
           <Route path="analysis" element={<Suspense fallback={<LoadingFallback />}><Analysis /></Suspense>} />
+          <Route path="findings" element={<Suspense fallback={<LoadingFallback />}><Findings /></Suspense>} />
           <Route path="episodes" element={<Suspense fallback={<LoadingFallback />}><Episodes /></Suspense>} />
           <Route path="episodes/:id" element={<Suspense fallback={<LoadingFallback />}><EpisodeDetail /></Suspense>} />
           <Route path="insights" element={<Suspense fallback={<LoadingFallback />}><Insights /></Suspense>} />
