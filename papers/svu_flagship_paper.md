@@ -1,8 +1,8 @@
 # Collateral Damage as Narrative Convention: A Systematic Content Analysis of False Accusation Portrayals Across 27 Seasons of Law & Order: Special Victims Unit
 
-**Tyler Orden**
+**Tyler Satchel Orden**
 Independent researcher
-Contact: [email]
+Contact: tylerorden@gmail.com
 
 *Manuscript prepared July 2026*
 

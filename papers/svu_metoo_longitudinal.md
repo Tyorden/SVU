@@ -1,8 +1,8 @@
 # Fewer Accusations, Worse Outcomes: How Law & Order: SVU Rewrote Its False Accusation Narratives after #MeToo
 
-**Tyler Orden**
+**Tyler Satchel Orden**
 Independent researcher
-[email]
+tylerorden@gmail.com
 
 *Manuscript prepared for submission to Television & New Media*
 
