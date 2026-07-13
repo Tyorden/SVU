@@ -1,0 +1,1379 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[
+]{article}
+\usepackage{xcolor}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{longtable,booktabs,array}
+\newcounter{none} % for unnumbered tables
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\author{}
+\date{}
+
+\begin{document}
+
+\section{Collateral Damage as Narrative Convention: False Accusation and
+Its Costs Across 27 Seasons of Law \& Order: Special Victims
+Unit}\label{collateral-damage-as-narrative-convention-false-accusation-and-its-costs-across-27-seasons-of-law-order-special-victims-unit}
+
+\textbf{Tyler Satchel Orden} Independent researcher Contact:
+tylerorden@gmail.com
+
+\emph{Manuscript prepared July 2026}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Abstract}\label{abstract}
+
+Law \& Order: Special Victims Unit is one of the most durable fictions
+about policing ever broadcast in the United States. This article reports
+a census-style content analysis of the show's 27 seasons, asking how
+often the series depicts innocent people harmed by false or mistaken
+accusations, what those harms look like, and how the fictional
+detectives answer for them. A large language model applied a fixed
+codebook to every episode transcript, functioning as a measurement
+instrument; a ground-truth audit then found that nine source cells held
+another episode's script, a silent corruption the coding had inherited,
+and all analyses use the corrected set of 567 episodes and 521
+person-episode records. At least one falsely accused person appears in
+59.4\% of episodes (62.1\% counting ambiguous cases), 62.4\% of persons
+reach severity 3 or 4 on a four-point scale, and a row-level audit,
+adjudicated case by case, finds 32 accusation-linked deaths: 21 murders,
+9 suicides, and 2 others. The detectives' own inference is the leading
+accusation origin (54.5\%), detectives threaten, coerce, or degrade the
+innocent in 53.0\% of cases, and where an accusation spreads beyond the
+precinct the squad itself is the discloser 83.9\% of the time. Yet an
+apology of any kind follows in only 7.5\% of cases, and a formal apology
+in 1.5\%. Apology tracks catastrophe rather than conduct: 0.0\% at
+severity 1 against 16.4\% at severity 4, while threatened and
+unthreatened persons are apologized to at nearly identical rates. The
+show also pairs media exposure with catastrophe: 45.3\% of media-exposed
+persons reach severity 4, against 8.5\% when word never leaves the
+precinct. I argue that the series renders collateral harm to the
+innocent as a narrative convention, visible but unaccounted for.
+
+\textbf{Keywords:} false accusations; police procedural; copaganda;
+cultivation theory; content analysis; Law \& Order: Special Victims
+Unit; large language models; wrongful conviction
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{1. Introduction}\label{introduction}
+
+In the eighth episode of its second season, Law \& Order: Special
+Victims Unit arrests a man named Russell Ramsay for a rape he did not
+commit. The accusation reaches him through the sex-offender registry. He
+is perp-walked, charged, and remanded to Rikers Island, where he begs
+the detectives for help: ``I gotta stay awake at night so I don't get
+ambushed\ldots{} I can't look at a guy without getting jumped.'' A few
+scenes later the outcome arrives in three flat sentences: ``Russell
+Ramsay was attacked at Rikers. He was beaten and raped. He was killed.''
+The episode then identifies the real rapist and ends.
+
+Ramsay is fictional, and so is the harm the script assigns him. What
+interests me is that the series has done some version of this to 520
+other people.
+
+SVU premiered in September 1999 and was still airing new episodes when I
+collected data in January 2026: 27 seasons, 576 episodes, plus a second
+life in syndication and streaming that puts its reruns in front of
+viewers more or less continuously. Scholarship on the show has
+concentrated on its treatment of victims and its gender politics, and a
+larger literature treats the police procedural as a machine for
+producing favorable beliefs about policing; Section 2 reviews both.
+Almost none of that work looks squarely at the people the fictional
+investigation chews through on its way to the real perpetrator: the
+suspects who are accused, exposed, and then cleared.
+
+That omission is worth repairing, because the cleared suspect is where a
+procedural quietly states its theory of acceptable loss. A show can be
+sympathetic to victims, hostile to offenders, and still teach its
+audience something specific about the innocent people in between: how
+often they get caught in the machinery, how badly they are hurt, who
+pointed the finger first, and whether anyone ever says sorry. Those are
+empirical questions about the text itself, and they can be answered by
+counting.
+
+This study counts.
+
+I coded every SVU episode broadcast through January 2026 for persons who
+are accused of a crime, later shown or strongly implied to be innocent,
+and harmed by the accusation through public exposure or physical
+consequence. The coding was performed by a large language model applying
+a fixed written codebook, a design I describe in Section 3 and treat
+throughout as an instrument to be audited rather than a collaborator to
+be trusted. Auditing mattered more than I planned: it caught corruption
+in the source transcripts themselves, and every figure here comes from
+the corrected set, 521 person-episode records across 567 verified
+episodes. One result belongs up front: the row-level death audit finds
+32 accusation-linked deaths, among them 21 murders and 9 suicides.
+
+The pattern the full results describe, I will argue, is a narrative
+convention: collateral damage to the innocent as a routine, visible, and
+unaccounted-for cost of the fictional investigation.
+
+SVU repays this much counting because of its unusual position in
+American media. Few scripted programs have run long enough to constitute
+the stable, decades-long message system that cultivation theory was
+built to study. Fewer still occupy a topic where public beliefs bear so
+directly on institutional behavior: how sex-crime allegations should be
+investigated, how much collateral suspicion is tolerable, and what the
+police owe the people they wrongly pursue. A viewer who has watched even
+a fraction of the catalogue encounters hundreds of worked examples of
+those questions, each resolved the same way. This article documents what
+the worked examples contain.
+
+\subsection{2. The Procedural and Its
+Casualties}\label{the-procedural-and-its-casualties}
+
+\subsubsection{2.1 Cultivation, crime drama, and what viewers take
+away}\label{cultivation-crime-drama-and-what-viewers-take-away}
+
+Cultivation research holds that heavy television viewing pulls beliefs
+about the world toward the world television depicts (Gerbner et al.,
+2002). Crime programming is the classic site for the effect, because the
+genre's distortions are large and consistent: violent crime is
+overrepresented, clearance is near-certain, and investigation is fast.
+The survey record is messier than the theory. Dowler (2003) found
+crime-drama viewing weakly linked to fear of crime and, in his own
+conclusion, unrelated to perceived police effectiveness. Kort-Butler and
+Sittner Hartshorn (2011) found that crime dramas predicted support for
+the death penalty through a path that did not run through fear, while
+nonfiction crime programming eroded confidence in the justice system by
+stoking fear. Surette (2015) frames the underlying mechanism as a
+substitution: for most viewers, mediated experience of criminal justice
+is nearly all the experience they have.
+
+The CSI-effect literature concedes on all sides that procedural
+television plausibly shapes expectations about how investigation and
+evidence work (Cole \& Dioso-Villa, 2009; Podlas, 2006). If jurors can
+absorb a forensic fantasy from CSI, viewers can absorb an
+interrogation-room ethics from SVU, and content analysis is the tool for
+reading what that ethics contains (Eschholz et al., 2004).
+
+The content-analytic tradition in this area has usually worked from
+samples: a season here, a composite week of programming there, coded by
+hand because hand-coding is expensive. Eschholz et al.~(2004) built
+their analysis of NYPD Blue and Law \& Order from single-season samples.
+A sample is a compromise, though, and for questions about a show's
+conventions the compromise bites, because conventions are what varies
+least within a season and most across eras. The present study codes the
+population: every episode the program has aired. Whatever else may be
+said about the instrument that made this affordable, the census design
+removes an entire class of inferential worry.
+
+\subsubsection{2.2 Copaganda and the SVU
+literature}\label{copaganda-and-the-svu-literature}
+
+A second body of work reads the procedural as advocacy. Kappeler and
+Potter (2018) catalogue the mythologies that crime media sustain.
+Karakatsanis (2025) popularized the term copaganda for the phenomenon;
+his target is news coverage, though the entertainment genre raises the
+same questions. Rapping (2003) reads the Law \& Order franchise
+specifically as a long argument for prosecution as the solution to
+social disorder.
+
+SVU and its genre have drawn their own scholarship, most of it centered
+on victims. Cuklanz (2000) traces how prime-time rape narratives evolved
+from the 1970s onward, with the detective's sensitivity becoming the
+genre's proof of enlightenment; Projansky (2001) maps how pervasively
+rape structures postfeminist film and television. On SVU itself, Britto
+et al.~(2007) find the show's victim pool skews young, white, and female
+relative to crime statistics, and Cuklanz and Moorti (2006) credit the
+series with a prime-time feminism that takes sexual violence seriously
+while noting the limits of its politics. Bernabo (2022) examines how
+broadcast procedurals answered the post-2020 reckoning over policing,
+finding varied narrative strategies rather than a single reform posture.
+What the SVU literature has needed is a systematic account of the show's
+other recurring character: the innocent suspect. Critics of the genre
+have long observed that procedurals churn through wrong men on the way
+to the right one. Nobody, to my knowledge, has counted them, graded
+their injuries, and checked who apologized.
+
+That last item matters more than it may appear, because acknowledgment
+of error is central to institutional legitimacy (Tyler, 2006); a drama
+that shows harm without acknowledgment is modeling an accountability
+norm, hundreds of times.
+
+One conceptual point the copaganda framing sometimes flattens:
+pro-police messaging need not hide harm; it can display harm and detach
+it from responsibility. A series that showed no wrongful arrests would
+be implausible to its own audience. A series that shows wrongful arrests
+constantly, attaches them to sympathetic protagonists, resolves them
+within the hour, and moves on without consequence is doing something
+subtler than concealment. Whether SVU fits that description is an
+empirical question about its scripts.
+
+\subsubsection{2.3 Wrongful accusation off
+screen}\label{wrongful-accusation-off-screen}
+
+Off screen, wrongful accusation is neither rare nor cheap, but it is
+rarer than SVU implies and far more expensive. Garrett (2011) documents
+how ordinary investigative practice produced the first 250 DNA
+exonerations. Gross et al.~(2005) catalogue exonerations from 1989 to
+2003, a count the National Registry of Exonerations (2026) continues.
+Loeffler et al.~(2019) estimate a wrongful conviction rate near 6\% from
+prisoner self-reports. The aftermath is long: lasting psychiatric injury
+(Grounds, 2004), years spent rebuilding identity and community
+(Westervelt \& Cook, 2012). And the research consensus places knowingly
+false reports of sexual assault at 2\% to 10\% of reports (Lisak et al.,
+2010), with the stigma of a sex-crime allegation attaching regardless of
+outcome. Sex crimes are SVU's entire jurisdiction.
+
+\subsection{3. Method}\label{method}
+
+\subsubsection{3.1 Sample and the state of the
+source}\label{sample-and-the-state-of-the-source}
+
+The sample is a census: all 576 episodes of SVU, seasons 1 through 27,
+with season 27 partial at three episodes because it was airing at
+collection time. Full episode transcripts were collected from
+subslikescript.com and assembled into a single spreadsheet, one row per
+episode.
+
+That spreadsheet turned out to be corrupted in ways the coding
+inherited, and the discovery is worth telling in order. The pipeline's
+working assumption was simple: row i holds episode i's transcript.
+Nothing in the coding output contradicted it. The failure surfaced only
+when I audited the coded content against ground truth, comparing every
+transcript's full text against every other's. Nine episodes' cells
+contain a duplicate of another episode's script: S01E13 holds S01E15's,
+and S02E11, S02E18, S04E10, S05E04, S05E14, S08E11, S09E19, and S11E09
+likewise hold other episodes' transcripts (the full mapping is in the
+supplementary material). The instrument coded the nine faithfully; none
+drew its needs-deep-review flag, because each was a perfectly coherent
+transcript of the wrong episode. The nine are excluded from every
+episode-level denominator in this article, which is why the primary base
+is 567 rather than 576, and the 15 person-records they generated are
+removed from the person-level set. The assumption failed silently; only
+ground-truth verification caught it.
+
+The same audit quantified a second defect: 145 of the 576 transcripts
+(25.2\%) end at 32,767 characters to the character, the Excel cell cap,
+their final scenes cut off. The truncation is lopsided, 138 of the 145
+in seasons 1-18 (33.7\% of that era) against 2 and 5 in the later eras,
+and because it censors endings, where resolutions, apologies, and
+final-scene harms live, it can only undercount early-era harm and
+acknowledgment.
+
+Five further episodes had defective text of more ordinary kinds: four
+(S14E01, S14E02, S15E01, S17E01) had empty transcripts, and one (S06E09)
+contained non-English character encoding. In total, then, 14 of 576
+source episodes were defective. Sections 3.4 and 6 describe how each
+kind was handled.
+
+\subsubsection{3.2 The coding instrument}\label{the-coding-instrument}
+
+Every transcript was coded by a large language model,
+claude-sonnet-4-5-20250929 (Anthropic), accessed through the Messages
+Batch API. Each of the 576 requests contained the same fixed system
+prompt, which is the complete codebook, and one episode transcript. The
+model returned structured JSON: episode-level flags plus one record per
+qualifying person. All 576 requests returned output without error, at a
+cost between \$15 and \$17 in API fees and roughly 14 hours of waiting.
+
+I treated the model as an instrument rather than an assistant. It never
+saw my hypotheses and never participated in a conversation; it exercised
+no discretion beyond what the codebook grants any coder: one transcript
+in, one fixed rubric applied, one structured record out, 576 times. It
+sits closer to an optical scanner than to a research collaborator. Like
+any instrument it has error, and that error is described here but not
+yet quantified: a stratified human validation study, prioritizing the
+death rows in Section 4.8, is in progress. The design sits inside an
+emerging methods literature on language models as annotators, which
+insists on downstream validation (Gilardi et al., 2023; Törnberg, 2023;
+Ziems et al., 2024), measured against classical content-analytic
+reliability standards (Krippendorff, 2019; Neuendorf, 2017).
+
+The batch design was chosen for discipline as much as cost. Because all
+576 requests were submitted as a single job against a frozen prompt, no
+coding decision could contaminate a later one. Batch independence rules
+out sequential drift, the instrument learning my preferences or being
+nudged mid-run; it does not rule out run-to-run variance, which is one
+of the validation study's jobs. The output pipeline was mundane, and I
+record it for replication. The model returned each episode's coding as
+JSON; despite instructions it wrapped most responses in markdown fences,
+stripped in post-processing. Records were then aggregated into two flat
+files, one row per episode and one row per qualifying person, and those
+two files are the sole source of every statistic in this article. The
+full codebook accompanies the submission as supplementary material, and
+the batch input can be regenerated from the transcript file, so the
+measurement is repeatable by anyone for the price of a modest dinner.
+
+Affordability is the methodological point: hand-coding 576 hour-long
+episodes on a twenty-field codebook is a multi-year project or a funded
+team, and this coding cost less than \$20. The trade is that
+reliability, which a team of human coders establishes as it works, must
+here be established afterward, by audit. Section 3.5 describes the
+audits already performed; the Limitations section describes the one
+still owed.
+
+\subsubsection{3.3 Codebook and inclusion
+criteria}\label{codebook-and-inclusion-criteria}
+
+The codebook's inclusion rule, which I refer to as the North Star
+criteria, admits a person-record only if all three conditions hold: (1)
+the person is proven or strongly implied innocent of the accused
+offense; (2) the person experiences public exposure (workplace, family,
+school, media, church, or online) or a physical or violent consequence;
+and (3) the harm follows from the accusation itself rather than from
+unrelated events. Being accused in front of colleagues with no further
+sanction qualifies, at the low end of the severity scale. Private
+questioning with no spread and no material harm does not qualify at all.
+
+Each record carries controlled-vocabulary fields: innocence status
+(proven innocent, strongly implied innocent, partially involved,
+actually guilty); role in plot (initial suspect, red herring, family
+member, colleague, community member, other); the offense accused of;
+accusation origin, defined as who first pointed the finger (victim
+identification, witness misidentification, squad inference, coerced
+interview, technical or database error, fabrication, unknown); exposure
+channel and the party who disclosed; consequence category and free-text
+detail; and a four-point severity scale: 1, private or low-level harm;
+2, public exposure without formal sanction; 3, material sanction or
+serious fallout; 4, life-altering outcomes or death. Two further fields
+code police behavior: conduct toward the person (none, verbal threat,
+coercive tactic, insult or degradation, multiple) and apology (none,
+partial, formal, unknown), where a partial apology is softened language
+without responsibility and a formal apology is a clear on-screen
+acknowledgment of the wrongful accusation. Records also store verbatim
+supporting quotes, free-form tags, and notes.
+
+Two design choices are deliberate rather than incidental. The North Star
+criteria are conservative, built to exclude rather than include: a
+person privately questioned and released, with no spread and no material
+consequence, generates no record, however unpleasant the scene. This
+buys precision at the price of recall, and it means the counts reported
+here are floors. And the retention of partially involved persons follows
+from the study's definition of its object. A man who lied about an
+affair and was then wrongly accused of the rape is innocent of the
+accusation; the harm the accusation causes him is the phenomenon under
+measurement, whatever else he did. Excluding such cases would quietly
+adopt the detectives' own logic, that prior bad acts make a person a
+legitimate target, and that logic is part of what the study exists to
+examine. The codebook carries one documented defect here: its rules line
+says exclude the guilty while its vocabulary includes
+partially\_involved, a conflict at the margin that Section 3.4 records
+resolving.
+
+\subsubsection{3.4 Analysis set, exclusions, and
+normalization}\label{analysis-set-exclusions-and-normalization}
+
+The raw coding produced 541 person-records. Five are coded actually
+guilty: Thomas ``Bird'' Gordon and Judge Walter Thornburg (both S03E19),
+Gabriel Duvall in his initial questioning (S06E20), Bill Harris
+initially (S12E03), and Orville Underwood (S12E12). I excluded the five:
+the study counts harm to the innocent, and the codebook itself instructs
+their exclusion. The transcript audit then removed 15 more: the phantom
+records generated by the nine wrong-transcript episodes, among them
+Stephanie Mulroney's S01E13 row and Larry Tauber's S05E04 row, both
+codings of another episode's script. The analysis set is therefore n =
+521.
+
+The unit is the person-episode, and I use that term deliberately. Eight
+records beyond the phantoms belong to recurring persons accused in
+separate episodes: Nick Amaro and Marsden are coded three times each,
+and Brian Cassidy, Elliot Stabler, Ed Tucker, and Lomatin twice each.
+The 521 person-episode records therefore describe roughly 513 unique
+persons. Records coded partially involved (n = 43) are retained: by the
+controlled-vocabulary definition, these people are guilty of something
+else and innocent of the accused offense, which is the situation the
+study measures.
+
+Two fields required normalization, disclosed here in full. In accusation
+origin, the coder produced four out-of-vocabulary records labeled
+victim\_misID (S12E15, S16E13, S20E09, S21E05); each is a victim
+personally identifying the wrong person, the documented definition of
+victim\_ID, so the four were folded in (90 + 4 = 94). One record labeled
+third\_party (S17E17) matches the documented definition of
+witness\_misID and was folded in (38 + 1 = 39). In the accused-of field,
+three spelling variants of kidnapping were unified, and five
+undocumented values (murder, kidnapping, arson, terrorism, child
+abandonment) were retained as coded. The apology field contains two
+records coded unknown (both S20E21); these are treated as non-apologies
+in every rate.
+
+The four transcriptless episodes returned has\_false\_suspect = Maybe
+and zero person-records. Because 15 episodes in total carry the Maybe
+flag, every episode-level rate in this article is reported under both
+treatments, Y-only and Y-plus-Maybe; the overall false-suspect rate
+moves by 2.7 percentage points between them, and no conclusion depends
+on the choice. The single encoding-damaged episode (S06E09) still
+yielded one person-record, which I treat as lower confidence. Sixteen
+episodes (2.8\%) carry the coder's needs-deep-review flag. Those 16 have
+not yet been individually re-reviewed; four are the transcriptless
+episodes, and the rest are queued for the validation pass.
+
+\subsubsection{3.5 Verification, the death audit, and
+quotes}\label{verification-the-death-audit-and-quotes}
+
+The free-text consequence field is a keyword trap, and I fell into it
+before I climbed out. An early internal draft of this analysis counted
+deaths by keyword matching and reported 31 murders, 21 suicides, and 25
+assaults. Row-level verification against the consequence detail, notes,
+and quoted scenes showed all three figures were wrong: the keyword count
+had absorbed strings such as arrested\_for\_wrong\_murder,
+suicide\_watch, suicide\_attempt, assisted\_suicide, family\_murdered,
+and suspected\_then\_cleared\_by\_death, none of which is a death of the
+accused person. Every death and injury figure in Section 4.8 was
+therefore adjudicated row by row: each qualifying record inspected, each
+borderline ruled on by name, each keyword trap excluded. Three injuries
+that appear only in the notes field, never in the structured consequence
+detail, are reported separately and never merged into headline counts. I
+flagged this correction in the first draft because it taught a simple
+rule: structured fields are for counting, free text is for reading.
+
+The transcript audit extended that rule one level down. Structured
+fields are only as trustworthy as the source cell they were computed
+from, and the audit found deaths hiding in both directions: a murder
+recorded only in the free-form tags (Dr.~Archibald Newlands, S05E05),
+which the first death pass missed, and a suicide duplicated across two
+episodes by a copied transcript (Larry Tauber), which the first pass
+counted twice. The rules were tightened accordingly, and Section 4.8
+reports the adjudicated final numbers with every borderline ruling
+named.
+
+All quoted dialogue in this article was verified verbatim against the
+source transcripts. The transcripts carry no speaker labels, so where a
+quote is attributed to a named character, the attribution follows scene
+context.
+
+\subsubsection{3.6 Analytic approach}\label{analytic-approach}
+
+Because the dataset is a census of the show rather than a sample, the
+results are population descriptions of the text and carry no sampling
+error; I report proportions and cross-tabulations without significance
+tests. The companion longitudinal study tests era contrasts, under an
+explicitly stated view of each season as one draw from a stochastic
+writers'-room process (Orden, in preparation); for the census
+description here, the proportions are the facts. Severity means treat
+the four-point scale as interval for summary only, and medians are
+reported alongside. All figures were computed directly from the two flat
+files with a Python standard-library script, and I validated every
+number against them.
+
+\subsection{4. Results}\label{results}
+
+\subsubsection{4.1 Prevalence}\label{prevalence}
+
+Table 1 reports the episode-level rates on the corrected base. Of 567
+episodes, 337 (59.4\%) contain at least one person accused and later
+shown or strongly implied to be innocent; adding the 15 ambiguous
+episodes raises the figure to 352 (62.1\%). Public exposure of an
+innocent person occurs in 295 episodes (52.0\%; 306 or 54.0\% with
+ambiguous cases). More than half the time, an hour of SVU includes the
+public shaming of somebody who did not do it.
+
+\textbf{Table 1. Episode-level prevalence (N = 567 episodes)}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Flag
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Y
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Maybe
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Y-only rate
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Y+Maybe rate
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Contains a false suspect & 337 & 15 & 337/567 = 59.4\% & 352/567 =
+62.1\% \\
+Contains public exposure of an innocent person & 295 & 11 & 295/567 =
+52.0\% & 306/567 = 54.0\% \\
+Flagged for deep review & 16 & n/a & 16/567 = 2.8\% & n/a \\
+\end{longtable}
+}
+
+At the person level, the 521 qualifying records work out to 0.92 per
+episode: nearly one innocent life disrupted per hour of television,
+sustained for 27 years. Table 2 gives the per-season counts. The early
+and middle seasons run hottest, with season 9 the densest at 1.89
+persons per episode, and the rate falls in the 2020s, bottoming at 6
+persons in season 21 (0.30 per episode), though it never reaches zero.
+
+\textbf{Table 2. Persons harmed per season (episode counts exclude
+corrupted-source episodes)}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}llll@{}}
+\toprule\noalign{}
+Season & Episodes & Persons harmed & Persons/episode \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+1 & 21 & 17 & 0.81 \\
+2 & 19 & 29 & 1.53 \\
+3 & 23 & 25 & 1.09 \\
+4 & 24 & 32 & 1.33 \\
+5 & 23 & 34 & 1.48 \\
+6 & 23 & 27 & 1.17 \\
+7 & 22 & 18 & 0.82 \\
+8 & 21 & 22 & 1.05 \\
+9 & 18 & 34 & 1.89 \\
+10 & 22 & 27 & 1.23 \\
+11 & 23 & 29 & 1.26 \\
+12 & 24 & 22 & 0.92 \\
+13 & 23 & 29 & 1.26 \\
+14 & 24 & 20 & 0.83 \\
+15 & 24 & 15 & 0.62 \\
+16 & 23 & 14 & 0.61 \\
+17 & 23 & 16 & 0.70 \\
+18 & 21 & 17 & 0.81 \\
+19 & 24 & 15 & 0.62 \\
+20 & 24 & 18 & 0.75 \\
+21 & 20 & 6 & 0.30 \\
+22 & 16 & 8 & 0.50 \\
+23 & 22 & 9 & 0.41 \\
+24 & 22 & 13 & 0.59 \\
+25 & 13 & 8 & 0.62 \\
+26 & 22 & 14 & 0.64 \\
+27 & 3 & 3 & 1.00 \\
+\textbf{Total} & \textbf{567} & \textbf{521} & \textbf{0.92} \\
+\end{longtable}
+}
+
+\subsubsection{4.2 Who gets accused, and of
+what}\label{who-gets-accused-and-of-what}
+
+Innocence is rarely left ambiguous. Of the 521 persons, 429 (82.3\%) are
+proven innocent on screen through DNA, a confession by the real
+perpetrator, or an explicit exoneration; 49 (9.4\%) are strongly implied
+innocent; 43 (8.3\%) are partially involved, guilty of some lesser wrong
+but innocent of the accusation. The show wants the audience to know
+these people did not do it.
+
+The accusation itself is usually rape (316 persons, 60.7\%), followed by
+assault (65, 12.5\%), child sexual abuse (45, 8.6\%), and vaguely
+specified sex crimes (39, 7.5\%), consistent with the unit's
+jurisdiction. Structurally, the accused fall into two large groups:
+initial suspects, the first person the squad pursues (205, 39.3\%), and
+red herrings written into the script to mislead the viewer (172,
+33.0\%). The two groups are treated differently by the narrative.
+Initial suspects carry a mean severity of 2.98 and reach severity 4 in
+28.8\% of cases; red herrings average 2.44 and reach severity 4 in
+13.4\%. Family members of victims or suspects (78, 15.0\%) sit in
+between at a mean of 2.68, with colleagues (24), community members (19),
+and others (23) making up the remainder.
+
+The free-form tags sketch who these people are, with a caution: the tags
+are the coder's own free vocabulary, unaudited, so the counts are
+indicative only. On that footing, 51 persons are tagged as teenagers, 40
+are entangled in custody disputes, 28 are police officers, 22 are
+teachers, 13 are doctors, and 13 are immigrants: statuses in which
+accusation alone ends careers or triggers deportation machinery.
+
+\subsubsection{4.3 Severity}\label{severity}
+
+Table 3 shows the distribution across the four-point scale, and the
+finding is its center of gravity: 325 of 521 persons (62.4\%) land at
+severity 3 or 4, with a mean of 2.72 and a median of 3. Only 60 persons
+(11.5\%) escape with private, low-level harm.
+
+\textbf{Table 3. Consequence severity (n = 521 persons)}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}llll@{}}
+\toprule\noalign{}
+Severity & Definition & n & \% \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+1 & Private or low-level harm & 60 & 11.5\% \\
+2 & Public exposure, no formal sanction & 136 & 26.1\% \\
+3 & Material sanction or serious fallout & 215 & 41.3\% \\
+4 & Life-altering outcome or death & 110 & 21.1\% \\
+\end{longtable}
+}
+
+Most persons are hurt in more than one domain at once: 204 (39.2\%) are
+coded into multiple consequence categories, with legal consequences
+alone accounting for a further 152 (29.2\%), and social, work, physical,
+and family harm dividing the rest.
+
+\subsubsection{4.4 Where accusations come
+from}\label{where-accusations-come-from}
+
+Table 4 reports the accusation origin, the controlled field recording
+who first pointed the finger, and its lead finding: the single largest
+source of false accusation, at 284 of 521 persons (54.5\%), is squad
+inference, the detectives' own theory, built from pattern-matching,
+proximity, or a prior record.
+
+\textbf{Table 4. Accusation origin (n = 521 persons)}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}lllll@{}}
+\toprule\noalign{}
+Origin & n & \% & Mean severity & \% severity 4 \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Squad inference & 284 & 54.5\% & 2.50 & 14.1\% \\
+Victim identification & 94 & 18.0\% & 2.99 & 25.5\% \\
+Fabrication & 66 & 12.7\% & 3.24 & 42.4\% \\
+Witness misidentification & 39 & 7.5\% & 2.44 & 7.7\% \\
+Technical/database error & 25 & 4.8\% & 2.92 & 32.0\% \\
+Coerced interview & 12 & 2.3\% & 3.33 & 50.0\% \\
+Unknown & 1 & 0.2\% & 4.00 & 100.0\% \\
+\end{longtable}
+}
+
+One reconciliation is needed, because the free-form tags look like a
+different story. The tag wrong\_ID appears on 309 of the innocent
+records and could be misread as evidence that misidentification is the
+leading cause. It is a different measurement: the tag marks an episode
+outcome, ``the squad had the wrong person,'' and among the 309 tagged
+records the controlled origin field is squad inference in 185 (59.9\%),
+victim identification in 67, and witness misidentification in only 29.
+The controlled field records who first pointed the finger, and on that
+field the squad's own reasoning dominates.
+
+The severity columns of Table 4 carry a second finding. Fabrication and
+coerced interviews, the origins involving deliberate wrongdoing, produce
+the most catastrophic outcomes (42.4\% and 50.0\% severity 4, the latter
+on a small n of 12), while squad inference, the most common origin,
+produces the gentlest (14.1\% severity 4, mean 2.50). I return to this
+asymmetry in Section 5.4.
+
+\subsubsection{4.5 Exposure and the media
+multiplier}\label{exposure-and-the-media-multiplier}
+
+For 377 of 521 persons (72.4\%), the accusation spreads beyond law
+enforcement. The two largest channels, workplace (143 persons, 27.4\%)
+and police-only containment (142, 27.3\%), are a single record apart, a
+difference on which nothing should be built; family (90, 17.3\%) and
+media (86, 16.5\%) follow, with the rest divided among schools, courts,
+churches, online, and multiple channels.
+
+Who spreads the word is less ambiguous. The squad is coded as the
+disclosing party for 454 of the 521 persons (87.1\%), but that raw
+figure includes 136 cases that never left the precinct. The fairer
+version is conditional: among the 379 persons whose accusation traveled
+beyond the police, detectives are the ones who told the employer,
+confronted the person in public, or staged the arrest for an audience in
+318 cases (83.9\%), which is 61.0\% of all persons in the dataset.
+Victims disclose in 4.8\% of cases, and the media originate the exposure
+in only 3.3\%.
+
+Where the exposure lands tracks how bad things get. Table 5 crosses
+channel with severity: cases contained to the police average 2.04, with
+8.5\% reaching severity 4, while media exposure averages 3.31, with
+45.3\% reaching severity 4, a 5.4-fold difference in catastrophic
+outcomes. The small legal-exposure category runs even higher (57.1\%
+severity 4 on n = 14). A caution before reading this causally: channel
+and severity are co-authored by the same scripts, and an episode built
+as a catastrophe is also one likely to feature cameras, so narrative
+prominence confounds any claim that publicity produces the damage. What
+the table establishes is dramaturgical: the show pairs media exposure
+with catastrophe, consistently, across 27 seasons.
+
+\textbf{Table 5. Severity by exposure channel (n = 521 persons)}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}lllll@{}}
+\toprule\noalign{}
+Channel & n & \% of persons & Mean severity & \% severity 4 \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Workplace & 143 & 27.4\% & 2.78 & 15.4\% \\
+Police only & 142 & 27.3\% & 2.04 & 8.5\% \\
+Family & 90 & 17.3\% & 2.84 & 20.0\% \\
+Media & 86 & 16.5\% & 3.31 & 45.3\% \\
+School & 20 & 3.8\% & 3.00 & 20.0\% \\
+Multiple & 18 & 3.5\% & 3.33 & 33.3\% \\
+Legal & 14 & 2.7\% & 3.57 & 57.1\% \\
+Church & 4 & 0.8\% & 2.75 & 25.0\% \\
+Online & 2 & 0.4\% & 3.00 & 0.0\% \\
+Unknown & 2 & 0.4\% & 1.00 & 0.0\% \\
+\end{longtable}
+}
+
+Read together, the two findings are damning on the show's own terms:
+publicity accompanies the worst outcomes, and in 83.9\% of the cases
+where word spreads, the squad is the one spreading it.
+
+\subsubsection{4.6 How detectives treat the
+innocent}\label{how-detectives-treat-the-innocent}
+
+Just over half of the innocent persons in the dataset, 276 of 521
+(53.0\%), are threatened, coerced, or degraded by detectives at some
+point in their episode. Table 6 gives the breakdown; verbal threats
+lead, with coercive tactics such as fabricated evidence claims and false
+promises close behind.
+
+\textbf{Table 6. Police conduct toward the innocent person (n = 521)}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}lll@{}}
+\toprule\noalign{}
+Conduct & n & \% \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+None documented & 245 & 47.0\% \\
+Verbal threat & 108 & 20.7\% \\
+Coercive tactic & 68 & 13.1\% \\
+Multiple types & 55 & 10.6\% \\
+Insult or degradation & 45 & 8.6\% \\
+\textbf{Any threat, coercion, or degradation} & \textbf{276} &
+\textbf{53.0\%} \\
+\end{longtable}
+}
+
+Two scenes, a quarter century apart, put flesh on those categories. In
+S01E12, detectives threaten a sex worker named Katya Ivanova with
+deportation: ``we know you're illegal\ldots{} if you're not at our
+office by 9:00 a.m., Immigration will be at your house by 9:05. That I
+can personally guarantee you.'' Twenty seasons later, in S21E06, Carlos
+Hernandez describes the interrogation that took 16 years of his life:
+``Because Monte and the DA told me if I didn't confess, that I'd get the
+sayonara syringe. Man, I was 18. I didn't have no mommy no more to help
+me.''
+
+The dataset does not distinguish beloved series regulars from
+one-episode bad cops; what it records is that the person on the
+receiving end was innocent, and that this happens in more than half of
+all qualifying cases.
+
+\subsubsection{4.7 The apology gradient}\label{the-apology-gradient}
+
+Acknowledgment is where the numbers get quiet. Across 521 innocent
+persons, detectives offer no apology at all in 480 cases (92.1\%).
+Partial apologies, softened language without responsibility, occur 31
+times (6.0\%). Formal on-screen acknowledgment of the wrongful
+accusation occurs 8 times: 1.5\% of cases, spread over 27 seasons (Table
+7). The coding originally showed nine formal-apology rows, with
+Stephanie Mulroney apparently apologized to in two consecutive episodes.
+The audit dissolved the oddity: the S01E13 cell contains S01E15's
+script, so the one apology in ``Entitled'' had been coded twice.
+
+\textbf{Table 7. Police apology (n = 521 persons)}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}lll@{}}
+\toprule\noalign{}
+Apology & n & \% \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+None & 480 & 92.1\% \\
+Partial & 31 & 6.0\% \\
+Formal & 8 & 1.5\% \\
+Unknown & 2 & 0.4\% \\
+\textbf{Any apology (partial + formal)} & \textbf{39} &
+\textbf{7.5\%} \\
+\end{longtable}
+}
+
+Who gets the 39 apologies is more revealing than how few there are.
+Table 8 shows the severity gradient: none of the 60 severity-1 persons
+receives even a partial apology; severity-2 and severity-3 persons
+receive one 6.6\% and 5.6\% of the time; severity-4 persons, the
+destroyed and the dead, receive one 16.4\% of the time, and five of the
+eight formal apologies belong to them. Misconduct, by contrast, moves
+the rate by nothing measurable: persons who were threatened or coerced
+are apologized to at 8.0\%, persons who were treated correctly at 6.9\%.
+Apology in this fiction tracks catastrophe, never conduct. Detectives
+say sorry when someone is ruined or dead, at odds of about one in six;
+they do not say sorry because of anything they themselves did.
+
+\textbf{Table 8. Apology by severity and by police conduct (n = 521
+persons)}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}lllll@{}}
+\toprule\noalign{}
+Group & n & Any apology & Rate & Formal \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Severity 1 & 60 & 0 & 0.0\% & 0 \\
+Severity 2 & 136 & 9 & 6.6\% & 2 \\
+Severity 3 & 215 & 12 & 5.6\% & 1 \\
+Severity 4 & 110 & 18 & 16.4\% & 5 \\
+Threatened or coerced & 276 & 22 & 8.0\% & n/a \\
+Not threatened & 245 & 17 & 6.9\% & n/a \\
+\end{longtable}
+}
+
+The eight formal apologies are the entire on-screen accountability
+record of a 567-episode corpus, so they can be listed. Captain Cragen
+tells Stephanie Mulroney (S01E15), ``I was wrong, Ms.~Mulroney,'' and,
+over her flat ``All right,'' asks her to ``please accept my apologies to
+your family.'' A court apologizes to Evan Ramsey (S03E01), who is shot
+dead days later by his own daughter. A detective quietly corrects the
+record for Varla, a homeless woman with a phantom pregnancy accused of
+abandoning a baby (S07E14). Victor Tate (S11E01) hears Stabler say, ``I
+made a mistake, Victor. I wanted to tell you myself''; Tate's answer is
+quoted in Section 5.2. Frank Sullivan (S11E21) receives his from an ADA
+after he slits his wrists in an interrogation room. Detectives reveal
+that Vicki Harris's arrest for prostitution (S13E10) was staged to get
+her out of danger. Omar Pena's exoneration (S13E17) carries two
+acknowledgments, one private and one official: Benson admits to a
+colleague, ``I broke him,'' and then, ``I forced a false confession,''
+and it is the judge, vacating the conviction, who tells Pena in open
+court that ``this court sincerely apologizes.'' Stephen Lomatin
+(S17E09), an auxiliary police officer accused of rape, receives the
+eighth. That is the complete list.
+
+\subsubsection{4.8 The dead}\label{the-dead}
+
+Table 9 summarizes the adjudicated death and physical-harm audit
+described in Section 3.5. Every count below was verified record by
+record, and every borderline case was ruled on by name.
+
+\textbf{Table 9. Adjudicated deaths and physical harm among the 521
+innocent persons}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Category
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Final count
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Murdered or killed as a consequence of the accusation & 21 (2 in
+custody; 1 killed by police) \\
+Completed suicides & 9 \\
+Other accusation-linked deaths (overdose; AIDS after wrongful
+imprisonment) & 2 \\
+\textbf{Total dead} & \textbf{32, across 31 distinct episodes} \\
+Apologies (partial or formal) among the dead & 5 of 32 \\
+Suicide attempts, survived & 8, all in structured fields \\
+Non-fatal assaults, vigilante attacks, and shootings & 28 in structured
+fields, plus 3 verified in notes only \\
+\end{longtable}
+}
+
+Twenty-one innocent persons are murdered or killed as a consequence of
+the accusation. Two die in custody: Russell Ramsay, beaten, raped, and
+killed at Rikers (S02E08), and Manny Montero, murdered at Rikers after
+agreeing to testify (S15E13). One is killed by the police themselves:
+Terrence Reynolds (S17E05). The rest die outside, mostly at the hands of
+people who believed the accusation. Eric Byers (S10E02), a 17-year-old
+stepbrother of the victim, is among them. So is Jerome Jones (S16E13),
+seized on the street trying to return a woman's purse; she cries
+``Please! He attacked me,'' and moments later, ``Then arrest him! He
+raped me!'', and after security footage clears him, the victim's father
+kidnaps, tortures, and murders him anyway. One murder entered the count
+only at adjudication: Dr.~Archibald Newlands (S05E05), whose death sits
+in the free-form tags and never in the structured consequence field,
+which is why the first pass missed him; the rules now sweep the tags
+too.
+
+Nine more die by suicide. Mariel Plummer (S05E18), a child-services
+worker, is arrested, fired, stripped of her pension, and pilloried in
+the press before killing herself. Edwin Adelson (S12E02), framed with
+planted files, perp-walked, and outed in the media, jumps in front of a
+train after arraignment. Eddie Cappilla (S04E21) kills himself in the
+same episode in which his brother Joe is murdered, making that hour the
+only one in the series with two accusation-linked deaths. One suicide
+moved houses during the audit: Larry Tauber's death had been coded to
+S05E04, but that cell holds S06E14's script; the suicide is S06E14
+content, where Tauber's genuine record already sat, and it is counted
+once. Two deaths fall outside both categories. Leon Tate (S03E04) dies
+of a drug overdose while wrongly suspected of serial murders, and his
+mother blames the police. Ricardo Torres (S21E06), coerced into false
+testimony at 15, spends 15 years in prison, contracts HIV there, and
+dies of AIDS shortly after release.
+
+In total, 32 people innocent of the accusation against them die, across
+31 distinct episodes: 5.4\% of the 576 aired hours, 5.5\% of the
+corrected base. Among the 32 dead, police apologize, formally or
+partially, in 5 cases.
+
+Below the fatal line, 8 persons attempt suicide and survive, all
+recorded in structured fields: among them Charlotte Truex (S08E14), a
+minor who slits her wrist immediately after a coerced confession taken
+without counsel, and Kevin Wright (S12E21), whose attempt sits in the
+structured tags, where an earlier pass had misfiled it as notes-only.
+Five named records were considered and excluded (Robert Logan S05E03,
+Colin Bennett S18E15, Aidan Connor S05E15, Javier Vega S05E21, Ashlee
+Walker S10E19): in each, the record supports ideation, threat, or
+ambiguity rather than an attempt. Twenty-eight persons suffer non-fatal
+violence recorded in structured fields, with three more verified only in
+notes. Police gunfire accounts for five: Willie Angel (S04E13) is shot,
+paralyzed, framed with a drop gun, and wrongfully imprisoned for 25
+years; Yusef Barre (S15E11) is shot and paralyzed by a detective who
+believed he was armed; Michael Baxter (S05E11) and Larry Luft (S11E13)
+survive their wounds; and Xavier Gonzalez (S22E07) is fired upon and
+missed. The remainder are vigilante beatings, family violence, and
+in-custody assaults: Coach Alexei Belyakov (S14E13), stabbed with an ice
+pick over an abuse accusation that proves false; Eric Plummer (S03E02),
+wrongfully convicted and then beaten, raped, and tortured across seven
+years in prison; Sean Roberts (S18E02), whose 16 years of wrongful
+imprisonment included repeated rape, adjudicated in as in-custody
+violence; and Luna Prasada (S21E15), a framed executive jailed without
+bail amid a media pile-on and sexually assaulted by fellow inmates. One
+of the three notes-only cases, Marc Rajic (S13E09), survives an attempt
+to burn him alive with gasoline while the structured field records only
+a vigilante threat.
+
+The audit's exclusions define the counts as much as its inclusions, so I
+list the traps by name. Travis Hall (S01E04) is tagged
+suspected\_then\_cleared\_by\_death, but he overdosed a week before the
+crime; the death precedes the accusation. Officer Peter Ridley (S01E04)
+is arrested\_for\_wrong\_murder, a phrase containing the word murder and
+no dead accused person. Carlos Hernandez (S21E06) carries a tag
+recording that his mother and sister were murdered while he sat wrongly
+imprisoned; he survived, so he counts toward no death figure, however
+much he belongs in any moral accounting. Doug Loveless (S12E19) and Jean
+Dussault (S01E08) carry death-keyword tags referring to other people's
+deaths and a pre-accusation overdose. Dr.~Matt Spevak (S05E23) was
+murdered by his twin and framed posthumously: death before accusation,
+again. Mr.~Lee (S18E17), a restaurant owner, receives death threats and
+an armed intrusion but no on-screen injury. And Guarana (S15E17) is
+excluded from the audit entirely as a dataset inclusion error: she was
+never accused, and her row is queued for removal in the validation pass.
+Every one of these strings defeats a keyword counter, which is how an
+earlier draft came to report 31 murders and 21 suicides. The adjudicated
+figures are 21 and 9.
+
+\subsection{5. Discussion}\label{discussion}
+
+\subsubsection{5.1 The wrong man as
+furniture}\label{the-wrong-man-as-furniture}
+
+The prevalence numbers settle one question: the falsely accused person
+is a load-bearing element of the SVU formula, present in three of every
+five episodes and averaging nearly one qualifying victim per hour across
+27 years. Red herrings alone account for 172 persons, characters the
+writers created specifically to be wrongly suspected, whose narrative
+function is to absorb suspicion for two acts and release it in the
+third.
+
+What the counting adds to that familiar observation is the injury
+report. These disposable characters are damaged severely: 62.4\% at
+severity 3 or 4, arrest and firing and divorce as standard equipment,
+death for 32 of them. The convention, named plainly, is that serious
+harm to the innocent is a normal, expected, and narratively unremarkable
+byproduct of investigation. The show does show the harm; that is what
+makes the dataset possible. What it declines to show, 92.1\% of the
+time, is anyone answering for it.
+
+Table 2 does record a real decline in volume, from 1.53 persons per
+episode in season 2 down to 0.30 in season 21, and the companion study
+takes that trajectory across the show's cultural eras in detail (Orden,
+in preparation). For present purposes two facts suffice: the convention
+never stops, even the quietest season injures someone, and the harm to
+those who still qualify has grown no milder, during the \#MeToo-era
+seasons measurably worse (see the companion).
+
+The severity gap between initial suspects (mean 2.98) and red herrings
+(2.44) has its own dramaturgical logic. Red herrings exist for the
+audience, so the script releases them cheaply at the reveal; initial
+suspects exist for the detectives, and the story extracts full value:
+the arrest, the arraignment, the family fracturing on the courthouse
+steps. On the numbers, the suspects the squad believes in hardest are
+the ones the fiction hurts worst.
+
+\subsubsection{5.2 An economy of apology}\label{an-economy-of-apology}
+
+The apology findings are, to me, the most legible single result in the
+study, and they were the first thing in the data that genuinely
+surprised me. I expected apologies to be rare. I did not expect them to
+be indifferent to conduct. A detective who threatens an innocent
+teenager and a detective who behaves impeccably apologize at nearly
+identical rates, 8.0\% against 6.9\%. The only variable that moves
+apology is the size of the wreckage, and even catastrophe only lifts the
+rate to 16.4\%. Five of the eight formal apologies in the whole series
+attach to severity-4 cases, and most of the dead still receive none:
+police apologize in only 5 of the 32 fatal cases.
+
+Procedural-justice research treats acknowledgment of error as a core
+input to institutional legitimacy (Tyler, 2006). SVU models the opposite
+equilibrium, several hundred times: error without acknowledgment,
+followed by the next case. The lesson on offer is that when police harm
+the innocent, apology is a discretionary grace triggered by ruin, never
+an obligation triggered by conduct. The show's most sympathetic
+characters administer this equilibrium, and that is what gives it force;
+the norm is modeled by heroes.
+
+The one scene that breaks the pattern proves it. When Stabler apologizes
+to Victor Tate in S11E01, the script gives Tate the reply almost no one
+else in the dataset gets to deliver: ``And then my life just stopped!
+Lost my woman, my friends! Hell, my mother barely knows me!'' The show
+knows what an accusation costs and can write the bill when it chooses.
+It chooses eight times in 27 seasons. The CSI-effect literature spent a
+decade asking whether television teaches jurors to expect too much of
+forensic evidence (Cole \& Dioso-Villa, 2009; Podlas, 2006); the
+parallel question raised here is whether television teaches audiences to
+expect nothing at all when the state gets it wrong.
+
+\subsubsection{5.3 Publicity as
+punishment}\label{publicity-as-punishment}
+
+SVU has an implicit theory of stigma, and the severity-by-channel table
+recovers it with numbers. Accusation contained to the precinct is
+survivable: mean severity 2.04, catastrophic outcomes at 8.5\%.
+Accusation that reaches a camera is close to a sentence: 45.3\% of
+media-exposed persons reach severity 4, the 5.4-fold difference at the
+center of this study. The show understands, as Goffman (1963) did, that
+the injury of stigma is administered by an audience, and it stages the
+principle again and again: the perp walk, the reporters on the
+courthouse steps, the neighbor watching the arrest. Within the fiction
+this is dramaturgy rather than demonstrated causation; the scripts that
+convene the cameras are the scripts that plan the catastrophe.
+
+The uncomfortable half of the finding is who convenes the audience. In
+83.9\% of the cases where the accusation spreads at all, the disclosing
+party is the squad itself; the press originates exposure in 3.3\%.
+Within the fiction, the institution that transforms a survivable
+suspicion into a public catastrophe is the police department the series
+celebrates, and the transformation is depicted as procedure: telling the
+employer, confronting the suspect at work, staging the arrest. A show
+built on sympathy for victims has spent 27 seasons scripting its own
+detectives' communication habits as the most reliable amplifier of harm
+to the innocent.
+
+The ordinary case tells the same story at lower volume. Accusations
+spread beyond the police for 72.4\% of persons, and the workplace, one
+of the two largest channels at 27.4\%, is where the show's middle-class
+professionals are questioned in front of colleagues and escorted past
+their desks. The codebook's severity floor captures the logic: public
+accusation with no formal sanction at all is already severity 2, because
+the audience is the sanction. Keeping suspicion inside the building
+reads on screen as an act of unusual restraint; it occurs in just over a
+quarter of cases.
+
+\subsubsection{5.4 Fiction against the
+record}\label{fiction-against-the-record}
+
+Setting the show's world beside the documented one requires care about
+units. The best available estimate of the wrongful conviction rate, from
+prisoner self-reports, sits near 6\% (Loeffler et al., 2019), and
+exoneration registries count the confirmed cases in the low thousands
+over three and a half decades (Gross et al., 2005; National Registry of
+Exonerations, 2026). SVU stages a false accusation in 59.4\% of
+episodes. An episode is a case, roughly, and a false suspect is upstream
+of a wrongful conviction, so the two rates measure different points in
+the funnel; no adjustment I can construct, however, closes a gap of that
+order. The show's fictional world is one in which wrongful suspicion is
+the majority experience of contact with a sex-crimes unit.
+
+The distortion runs in a second direction with the opposite sign. On
+SVU, the error is discovered within the hour, the real perpetrator
+confesses, and innocence is proven on screen for 82.3\% of the harmed.
+In the documented record, discovery takes years or decades, arrives for
+a fraction of the wrongly convicted, and leaves psychiatric injury that
+outlasts the exoneration (Garrett, 2011; Grounds, 2004; Westervelt \&
+Cook, 2012). The series therefore rehearses two miscalibrations at once:
+wrongful accusation as far more common than reality, and far more
+self-correcting. A viewer who took both lessons on board would arrive at
+something like the show's own implicit position, that collateral damage
+is ubiquitous, temporary, and nobody's fault.
+
+A related caution: the 12.7\% fabrication share in Table 4 is a share of
+harmed persons in a drama, and it cannot be read as a false-report rate;
+the consensus for knowingly false sexual assault reports, 2\% to 10\%,
+uses a different denominator entirely (Lisak et al., 2010). What the
+origin table does support is a claim about dramaturgy. The show reserves
+its worst outcomes for accusations rooted in civilian deceit (42.4\%
+catastrophic) and its mildest for accusations rooted in detective
+reasoning (14.1\%), even though detective reasoning generates the
+majority of false accusations in the first place. Institutional error is
+rendered frequent but gentle; civilian malice is rendered rare but
+lethal. That allocation protects the heroes twice over, and it is
+exactly the pattern the copaganda literature would predict a
+police-centered drama to produce (Kappeler \& Potter, 2018;
+Karakatsanis, 2025).
+
+Whether viewers absorb any of this is a question this study cannot
+answer and deliberately does not claim to. Content sets the ceiling on
+cultivation; reception decides what passes through, and the audience
+research cuts both ways: Hust et al.~(2015) found Law \& Order franchise
+exposure associated with lower rape-myth acceptance and better consent
+negotiation among college students. Reception can diverge from the
+message system. What the findings here specify is the message system
+itself, and they hand experimental researchers concrete stimuli: the
+uncommented coerced confessions, the eight formal apologies, the perp
+walks that precede suicides. Whether exposure to the convention shifts
+beliefs about police accountability or juror expectations about
+accusation and error is now a designable experiment.
+
+\subsection{6. Limitations}\label{limitations}
+
+Six limitations bound these findings. First, and most important, the
+coding instrument has no human reliability estimate yet. On the fields I
+could check mechanically, the instrument violated instructions at a
+measurable rate: it returned five actually-guilty person-records despite
+a codebook prohibition, produced out-of-vocabulary origin values,
+introduced undocumented accused-of values, and wrapped output in
+markdown fences it was told to omit. Errors measured on checkable fields
+imply nonzero error on uncheckable ones, severity judgments above all.
+The stratified human validation study, prioritizing the 32 death records
+and the severity-4 stratum, is therefore a requirement for confidence,
+not a formality. The model rates its own confidence high on 506 of 521
+records (97.1\%); that figure is uncalibrated and substitutes for
+nothing.
+
+Second, the source text was imperfect in ways that survive the audit.
+The nine wrong-transcript episodes are excluded and their phantom
+records removed, but 145 transcripts (25.2\%) are truncated at the Excel
+cell limit, and the truncation concentrates in seasons 1-18 (33.7\% of
+that era); the early-era harm and apology counts are therefore best read
+as undercounts. Four episodes had no transcript and contribute only
+ambiguity flags; one had encoding damage and contributes a single
+lower-confidence record; season 27 was three episodes old at collection.
+
+Third, the coder read transcripts, never footage, so tone, framing, and
+performance are invisible to it. A raised eyebrow can turn a threat into
+a bluff both parties understand; no transcript records the eyebrow. A
+single instrument also means any interpretive bias it carries is applied
+uniformly across all episodes. Uniform bias leaves comparisons between
+categories intact, the media multiplier and the apology gradient among
+them; absolute levels, such as the 53.0\% conduct rate, depend on where
+the instrument set its thresholds.
+
+Fourth, the codebook's precision-first design excludes ambiguous cases,
+so 521 is best read as a floor. Fifth, the model leaked small amounts of
+out-of-vocabulary coding, disclosed in Section 3.4, and the unit of
+analysis is the person-episode: eight records are recurring persons
+accused in separate episodes, so claims about unique lives should use
+the figure of roughly 513. Sixth, the dataset codes no demographics.
+Questions about the race, class, and gender of the falsely accused await
+the next pass, and the SVU literature makes them pressing (Britto et
+al., 2007).
+
+None of these limitations, I think, threatens the central proportions:
+the sensitivity band on the episode rate is 2.7 points, the death audit
+was adjudicated row by row precisely because it is the most quotable
+finding, and the apology and exposure results come from controlled
+fields with almost no missing data.
+
+\subsection{7. The Acceptable Casualty}\label{the-acceptable-casualty}
+
+Every long-running procedural teaches its audience an accounting: this
+is what an investigation costs, and this is who pays. The account this
+study reads out of SVU is specific. The payer is an innocent person in
+three of every five hours. The price is usually arrest, a job, a
+marriage, or a reputation, and in 32 cases a life. The bill is presented
+by the detectives themselves, whose inference starts most false
+accusations and whose disclosure habits accompany the worst damage. And
+the ledger closes without acknowledgment 92.1\% of the time.
+
+I set out to measure a narrative convention, and the convention turned
+out to have a moral architecture: harm that is shown, so the drama can
+use it, and accountability that is withheld, so the heroes can survive
+it. Twenty-seven seasons of that architecture, syndicated daily, is a
+sustained rehearsal of what wrongful accusation looks like and what
+follows it. What follows it, on SVU, is the next case.
+
+The dataset, the codebook, and the audit trail behind this article will
+be deposited with the project's OSF repository at submission, and two
+extensions are underway: the companion longitudinal study (Orden, in
+preparation) and the human validation study the method requires. The
+count itself now exists. Anyone who wants to argue that the falsely
+accused of SVU are treated better, or worse, than I have described can
+check the rows.
+
+\subsection{Acknowledgments}\label{acknowledgments}
+
+Claude (Anthropic) performed the episode coding for this study as the
+measurement instrument described in Section 3, applying the fixed
+codebook to all 576 transcripts through the Messages Batch API, and
+drafted the manuscript text under my direction, which I revised and
+verified. I validated every figure in this article against the
+underlying dataset, including the adjudicated death audit in Section
+4.8, and I take full responsibility for the content. One circularity
+should be on the record: the same model family coded the data and
+drafted the text, which is a further reason the planned validation
+cross-check uses a non-Anthropic model. Episode transcripts were
+collected from subslikescript.com.
+
+\subsection{References}\label{references}
+
+Bernabo, L. (2022). Copaganda and post-Floyd TVPD: Broadcast
+television's response to policing in 2020. Journal of Communication,
+72(4), 488-496.
+
+Britto, S., Hughes, T., Saltzman, K., \& Stroh, C. (2007). Does
+``special'' mean young, white and female? Deconstructing the meaning of
+``special'' in Law \& Order: Special Victims Unit. Journal of Criminal
+Justice and Popular Culture, 14(1), 39-57.
+
+Cole, S. A., \& Dioso-Villa, R. (2009). Investigating the ``CSI effect''
+effect: Media and litigation crisis in criminal law. Stanford Law
+Review, 61(6), 1335-1373.
+
+Cuklanz, L. M. (2000). Rape on prime time: Television, masculinity, and
+sexual violence. University of Pennsylvania Press.
+
+Cuklanz, L. M., \& Moorti, S. (2006). Television's ``new'' feminism:
+Prime-time representations of women and victimization. Critical Studies
+in Media Communication, 23(4), 302-321.
+
+Dowler, K. (2003). Media consumption and public attitudes toward crime
+and justice: The relationship between fear of crime, punitive attitudes,
+and perceived police effectiveness. Journal of Criminal Justice and
+Popular Culture, 10(2), 109-126.
+
+Eschholz, S., Mallard, M., \& Flynn, S. (2004). Images of prime time
+justice: A content analysis of ``NYPD Blue'' and ``Law \& Order.''
+Journal of Criminal Justice and Popular Culture, 10(3), 161-180.
+
+Garrett, B. L. (2011). Convicting the innocent: Where criminal
+prosecutions go wrong. Harvard University Press.
+
+Gerbner, G., Gross, L., Morgan, M., Signorielli, N., \& Shanahan, J.
+(2002). Growing up with television: Cultivation processes. In J. Bryant
+\& D. Zillmann (Eds.), Media effects: Advances in theory and research
+(2nd ed., pp.~43-67). Lawrence Erlbaum Associates.
+
+Gilardi, F., Alizadeh, M., \& Kubli, M. (2023). ChatGPT outperforms
+crowd workers for text-annotation tasks. Proceedings of the National
+Academy of Sciences, 120(30), e2305016120.
+
+Goffman, E. (1963). Stigma: Notes on the management of spoiled identity.
+Prentice-Hall.
+
+Gross, S. R., Jacoby, K., Matheson, D. J., Montgomery, N., \& Patil, S.
+(2005). Exonerations in the United States 1989 through 2003. Journal of
+Criminal Law and Criminology, 95(2), 523-560.
+
+Grounds, A. (2004). Psychological consequences of wrongful conviction
+and imprisonment. Canadian Journal of Criminology and Criminal Justice,
+46(2), 165-182.
+
+Hust, S. J. T., et al.~(2015). Law \& Order, CSI, and NCIS: The
+association between exposure to crime drama franchises, rape myth
+acceptance, and sexual consent negotiation among college students.
+Journal of Health Communication, 20(12), 1369-1381.
+
+Kappeler, V. E., \& Potter, G. W. (2018). The mythology of crime and
+criminal justice (5th ed.). Waveland Press.
+
+Karakatsanis, A. (2025). Copaganda: How police and the media manipulate
+our news. The New Press.
+
+Kort-Butler, L. A., \& Sittner Hartshorn, K. J. (2011). Watching the
+detectives: Crime programming, fear of crime, and attitudes about the
+criminal justice system. The Sociological Quarterly, 52(1), 36-55.
+
+Krippendorff, K. (2019). Content analysis: An introduction to its
+methodology (4th ed.). Sage.
+
+Lisak, D., Gardinier, L., Nicksa, S. C., \& Cote, A. M. (2010). False
+allegations of sexual assault: An analysis of ten years of reported
+cases. Violence Against Women, 16(12), 1318-1334.
+
+Loeffler, C. E., Hyatt, J., \& Ridgeway, G. (2019). Measuring
+self-reported wrongful convictions among prisoners. Journal of
+Quantitative Criminology, 35(2), 259-286.
+
+National Registry of Exonerations. (2026). The National Registry of
+Exonerations {[}Database{]}. University of California Irvine; University
+of Michigan; Michigan State University. https://exonerationregistry.org
+
+Neuendorf, K. A. (2017). The content analysis guidebook (2nd ed.). Sage.
+
+Orden, T. (in preparation). Fewer accusations, worse outcomes: The
+retreat of the false accusation plot in Law \& Order: SVU, 1999-2026.
+Manuscript.
+
+Podlas, K. (2006). ``The CSI effect'': Exposing the media myth. Fordham
+Intellectual Property, Media and Entertainment Law Journal, 16(2),
+429-465.
+
+Projansky, S. (2001). Watching rape: Film and television in postfeminist
+culture. NYU Press.
+
+Rapping, E. (2003). Law and justice as seen on TV. New York University
+Press.
+
+Surette, R. (2015). Media, crime, and criminal justice: Images,
+realities, and policies (5th ed.). Cengage Learning.
+
+Törnberg, P. (2023). ChatGPT-4 outperforms experts and crowd workers in
+annotating political Twitter messages with zero-shot learning.
+arXiv:2304.06588.
+
+Tyler, T. R. (2006). Why people obey the law. Princeton University
+Press.
+
+Westervelt, S. D., \& Cook, K. J. (2012). Life after death row:
+Exonerees' search for community and identity. Rutgers University Press.
+
+Ziems, C., Held, W., Shaikh, O., Chen, J., Zhang, Z., \& Yang, D.
+(2024). Can large language models transform computational social
+science? Computational Linguistics, 50(1), 237-291.
+
+\end{document}
