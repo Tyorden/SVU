@@ -40,4 +40,11 @@ An outside AI review scored the papers 7/10 and 6.5/10 as-submitted; its claims 
 3. On go-ahead: corpus repair + re-run (~$20, kills the truncation limitation), metadata-stripped recode (~$5), air-date join (free).
 4. OSF deposit + ORCID; then the social kit fires.
 
+## 2026-07-13 — central audit archive
+All-projects sweep completed: 224 subagent final reports (this project's 17 among
+them) extracted to ~/Desktop/AuditArchive/ with a task-prompt manifest, so the
+audit/revision record survives sessions across the whole research program, not
+just this repo. Standing rule adopted: archive each session's subagent transcripts
+before it ends.
+
 <!-- APPEND NEW ENTRIES BELOW THIS LINE -->
