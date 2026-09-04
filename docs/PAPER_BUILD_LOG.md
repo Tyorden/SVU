@@ -48,3 +48,10 @@ just this repo. Standing rule adopted: archive each session's subagent transcrip
 before it ends.
 
 <!-- APPEND NEW ENTRIES BELOW THIS LINE -->
+
+
+## 2026-08-15 (backfilled 2026-09-03)
+Launch kit built: 5 Reddit-ready charts (graphics/), 5 TikTok/Shorts scripts (docs/social/), React dashboard dist build; VERIFICATION_INDEX.md written. All gated on the OSF deposit.
+
+## 2026-09-03
+Repo hygiene: CLAUDE.md + docs/VERIFICATION_INDEX.md now tracked; papers/*.pdf and *.docx gitignored (double-anon rule). The program doc audit found the ~90-episode validation study named above as non-negotiable has been neither run nor waived; it is now an explicit decision item on the unified dashboard.

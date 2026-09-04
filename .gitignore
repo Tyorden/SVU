@@ -18,6 +18,7 @@ lerna-debug.log*
 logs
 node_modules
 npm-debug.log*
+papers/*.docx
 papers/*.pdf
 pnpm-debug.log*
 yarn-debug.log*
