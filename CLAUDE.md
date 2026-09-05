@@ -7,3 +7,5 @@ papers/ (two pre-rewrite manuscripts — Tyler's rewrite REQUIRED before submiss
 double-anon: never push papers/ PDFs to the public repo) · graphics/ + docs/social/
 (launch kit, gated on the OSF deposit steps — see the unified dashboard's SVU card).
 House rules: AI-disclosure standard; measurement framing on track_j-adjacent work.
+
+LOCATOR: Cross-folder locator (where resumes, LinkedIn, blog, site, papers, records live and how they are organized): /Users/tylerorden/Desktop/WHERE_EVERYTHING_IS.md (read first in any session; append-only).
