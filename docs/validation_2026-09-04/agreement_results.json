@@ -1,0 +1,2800 @@
+{
+ "design": {
+  "bootstrap_B": 2000,
+  "excluded_from_primary": [
+   "svu_s07_e15"
+  ],
+  "lo_episodes": 30,
+  "normalizations": "victim_misID->victim_ID; third_party (origin)->witness_misID; kidnap variants->kidnapping; original actually_guilty rows dropped (stats_v2 analysis set)",
+  "original_rows_dropped_actually_guilty": 1,
+  "replacements": [
+   {
+    "reason": "source workbook carries the S10E07 'Wildlife' transcript under S07E15 (duplicate; wrong transcript), discovered during blind coding on 2026-09-04; the S07E15 judgment stays in recoded.jsonl flagged and is excluded from primary scoring",
+    "replaced": "svu_s07_e15",
+    "replacement": "svu_s05_e17",
+    "stratum": "svu_pre_S1-18"
+   }
+  ],
+  "scored_episodes": 90,
+  "seed": 20260904,
+  "svu_episodes": 60
+ },
+ "episode_level": {
+  "lo_only": {
+   "has_false_suspect": {
+    "band": "moderate",
+    "categories_original": {
+     "N": 10,
+     "Y": 20
+    },
+    "categories_recoded": {
+     "Maybe": 5,
+     "N": 6,
+     "Y": 19
+    },
+    "kappa": 0.4783,
+    "kappa_ci95": [
+     0.2045,
+     0.7368
+    ],
+    "kappa_ci_replicates_defined": 2000,
+    "n_pairs": 30,
+    "percent_agreement": 0.7333,
+    "percent_ci95": [
+     0.5667,
+     0.8667
+    ]
+   },
+   "has_public_exposure": {
+    "band": "moderate",
+    "categories_original": {
+     "N": 9,
+     "N/A": 1,
+     "Y": 20
+    },
+    "categories_recoded": {
+     "Maybe": 2,
+     "N": 10,
+     "Y": 18
+    },
+    "kappa": 0.5333,
+    "kappa_ci95": [
+     0.2557,
+     0.7982
+    ],
+    "kappa_ci_replicates_defined": 2000,
+    "n_pairs": 30,
+    "percent_agreement": 0.7667,
+    "percent_ci95": [
+     0.6,
+     0.9
+    ]
+   },
+   "needs_deep_review": {
+    "band": "slight_or_none",
+    "categories_original": {
+     "N": 23,
+     "Y": 7
+    },
+    "categories_recoded": {
+     "N": 27,
+     "Y": 3
+    },
+    "kappa": -0.1628,
+    "kappa_ci95": [
+     -0.2963,
+     0.0
+    ],
+    "kappa_ci_replicates_defined": 2000,
+    "n_pairs": 30,
+    "percent_agreement": 0.6667,
+    "percent_ci95": [
+     0.5,
+     0.8333
+    ]
+   }
+  },
+  "pooled": {
+   "has_false_suspect": {
+    "band": "moderate",
+    "categories_original": {
+     "N": 34,
+     "Y": 56
+    },
+    "categories_recoded": {
+     "Maybe": 10,
+     "N": 21,
+     "Y": 59
+    },
+    "kappa": 0.4708,
+    "kappa_ci95": [
+     0.3115,
+     0.6267
+    ],
+    "kappa_ci_replicates_defined": 2000,
+    "n_pairs": 90,
+    "percent_agreement": 0.7333,
+    "percent_ci95": [
+     0.6444,
+     0.8222
+    ]
+   },
+   "has_public_exposure": {
+    "band": "moderate",
+    "categories_original": {
+     "N": 37,
+     "N/A": 1,
+     "Y": 52
+    },
+    "categories_recoded": {
+     "Maybe": 3,
+     "N": 35,
+     "Y": 52
+    },
+    "kappa": 0.4952,
+    "kappa_ci95": [
+     0.3208,
+     0.6642
+    ],
+    "kappa_ci_replicates_defined": 2000,
+    "n_pairs": 90,
+    "percent_agreement": 0.7444,
+    "percent_ci95": [
+     0.6556,
+     0.8333
+    ]
+   },
+   "needs_deep_review": {
+    "band": "slight_or_none",
+    "categories_original": {
+     "N": 83,
+     "Y": 7
+    },
+    "categories_recoded": {
+     "N": 82,
+     "Y": 8
+    },
+    "kappa": -0.0905,
+    "kappa_ci95": [
+     -0.134,
+     -0.0377
+    ],
+    "kappa_ci_replicates_defined": 2000,
+    "n_pairs": 90,
+    "percent_agreement": 0.8333,
+    "percent_ci95": [
+     0.7556,
+     0.9111
+    ]
+   }
+  },
+  "svu_only": {
+   "has_false_suspect": {
+    "band": "moderate",
+    "categories_original": {
+     "N": 24,
+     "Y": 36
+    },
+    "categories_recoded": {
+     "Maybe": 5,
+     "N": 15,
+     "Y": 40
+    },
+    "kappa": 0.4667,
+    "kappa_ci95": [
+     0.2674,
+     0.6622
+    ],
+    "kappa_ci_replicates_defined": 2000,
+    "n_pairs": 60,
+    "percent_agreement": 0.7333,
+    "percent_ci95": [
+     0.6167,
+     0.85
+    ]
+   },
+   "has_public_exposure": {
+    "band": "moderate",
+    "categories_original": {
+     "N": 28,
+     "Y": 32
+    },
+    "categories_recoded": {
+     "Maybe": 1,
+     "N": 25,
+     "Y": 34
+    },
+    "kappa": 0.4702,
+    "kappa_ci95": [
+     0.2414,
+     0.6941
+    ],
+    "kappa_ci_replicates_defined": 2000,
+    "n_pairs": 60,
+    "percent_agreement": 0.7333,
+    "percent_ci95": [
+     0.6167,
+     0.85
+    ]
+   },
+   "needs_deep_review": {
+    "band": "slight_or_none",
+    "categories_original": {
+     "N": 60
+    },
+    "categories_recoded": {
+     "N": 55,
+     "Y": 5
+    },
+    "kappa": 0.0,
+    "kappa_ci95": [
+     0.0,
+     0.0
+    ],
+    "kappa_ci_replicates_defined": 1988,
+    "n_pairs": 60,
+    "percent_agreement": 0.9167,
+    "percent_ci95": [
+     0.85,
+     0.9833
+    ]
+   }
+  }
+ },
+ "excluded_duplicate_transcript_episode": {
+  "svu_s07_e15": {
+   "has_false_suspect": [
+    "N",
+    "Y"
+   ],
+   "has_public_exposure": [
+    "N",
+    "N"
+   ],
+   "needs_deep_review": [
+    "N",
+    "Y"
+   ],
+   "note": "WRONG TRANSCRIPT IN SOURCE: S07E15 carries the S10E07 script (a tenth corrupted episode, not in the stats_v2 list of nine). needs_deep_review Y because the codes cannot describe 'Manipulated'. Replaced in the scored sample per the pre-registered rule; see replacements.json.",
+   "original_person_rows": 0,
+   "recoded_person_rows": 1
+  }
+ },
+ "fields_below_0_61": [
+  {
+   "field": "innocence_status",
+   "kappa": 0.1343,
+   "set": "svu_only"
+  },
+  {
+   "field": "role_in_plot",
+   "kappa": 0.1971,
+   "set": "svu_only"
+  },
+  {
+   "field": "accused_of",
+   "kappa": 0.1781,
+   "set": "svu_only"
+  },
+  {
+   "field": "accusation_origin",
+   "kappa": 0.4463,
+   "set": "svu_only"
+  },
+  {
+   "field": "exposure_channel",
+   "kappa": 0.4771,
+   "set": "svu_only"
+  },
+  {
+   "field": "exposure_who_told",
+   "kappa": 0.0962,
+   "set": "svu_only"
+  },
+  {
+   "field": "consequence_category",
+   "kappa": 0.4554,
+   "set": "svu_only"
+  },
+  {
+   "field": "consequence_severity",
+   "kappa": 0.3805,
+   "set": "svu_only"
+  },
+  {
+   "field": "police_conduct_threat",
+   "kappa": 0.2708,
+   "set": "svu_only"
+  },
+  {
+   "field": "police_apology",
+   "kappa": 0.3269,
+   "set": "svu_only"
+  },
+  {
+   "field": "screen_evidence",
+   "kappa": 0.2784,
+   "set": "svu_only"
+  },
+  {
+   "field": "confidence",
+   "kappa": 0.0,
+   "set": "svu_only"
+  },
+  {
+   "field": "any_threat",
+   "kappa": 0.3699,
+   "set": "svu_only"
+  },
+  {
+   "field": "severe",
+   "kappa": 0.4688,
+   "set": "svu_only"
+  },
+  {
+   "field": "beyond_police_only",
+   "kappa": 0.1463,
+   "set": "svu_only"
+  },
+  {
+   "field": "has_false_suspect",
+   "kappa": 0.4667,
+   "set": "svu_only"
+  },
+  {
+   "field": "has_public_exposure",
+   "kappa": 0.4702,
+   "set": "svu_only"
+  },
+  {
+   "field": "needs_deep_review",
+   "kappa": 0.0,
+   "set": "svu_only"
+  },
+  {
+   "field": "innocence_status",
+   "kappa": 0.0996,
+   "set": "pooled"
+  },
+  {
+   "field": "role_in_plot",
+   "kappa": 0.2267,
+   "set": "pooled"
+  },
+  {
+   "field": "accused_of",
+   "kappa": 0.3676,
+   "set": "pooled"
+  },
+  {
+   "field": "accusation_origin",
+   "kappa": 0.4114,
+   "set": "pooled"
+  },
+  {
+   "field": "exposure_channel",
+   "kappa": 0.3675,
+   "set": "pooled"
+  },
+  {
+   "field": "exposure_who_told",
+   "kappa": 0.1867,
+   "set": "pooled"
+  },
+  {
+   "field": "consequence_category",
+   "kappa": 0.3629,
+   "set": "pooled"
+  },
+  {
+   "field": "consequence_severity",
+   "kappa": 0.3531,
+   "set": "pooled"
+  },
+  {
+   "field": "police_conduct_threat",
+   "kappa": 0.2042,
+   "set": "pooled"
+  },
+  {
+   "field": "police_apology",
+   "kappa": 0.2973,
+   "set": "pooled"
+  },
+  {
+   "field": "screen_evidence",
+   "kappa": 0.3473,
+   "set": "pooled"
+  },
+  {
+   "field": "confidence",
+   "kappa": 0.0,
+   "set": "pooled"
+  },
+  {
+   "field": "any_threat",
+   "kappa": 0.2799,
+   "set": "pooled"
+  },
+  {
+   "field": "severe",
+   "kappa": 0.4513,
+   "set": "pooled"
+  },
+  {
+   "field": "media_or_online",
+   "kappa": 0.4368,
+   "set": "pooled"
+  },
+  {
+   "field": "beyond_police_only",
+   "kappa": 0.1269,
+   "set": "pooled"
+  },
+  {
+   "field": "prosecutorial_conduct",
+   "kappa": 0.4223,
+   "set": "pooled"
+  },
+  {
+   "field": "prosecutorial_apology",
+   "kappa": 0.0,
+   "set": "pooled"
+  },
+  {
+   "field": "has_false_suspect",
+   "kappa": 0.4708,
+   "set": "pooled"
+  },
+  {
+   "field": "has_public_exposure",
+   "kappa": 0.4952,
+   "set": "pooled"
+  },
+  {
+   "field": "needs_deep_review",
+   "kappa": -0.0905,
+   "set": "pooled"
+  }
+ ],
+ "match_log": [
+  {
+   "episode": "lo_s02_e10",
+   "original": "Guillermo Ruiz",
+   "recoded": "Guillermo Ruiz",
+   "rule": "token:guillermo+ruiz"
+  },
+  {
+   "episode": "lo_s05_e16",
+   "original": "Tom Harrigan (father)",
+   "recoded": "Tom Harrigan",
+   "rule": "token:harrigan+tom"
+  },
+  {
+   "episode": "lo_s03_e22",
+   "original": "Paul Crandall",
+   "recoded": "Paul Crandall",
+   "rule": "token:crandall+paul"
+  },
+  {
+   "episode": "lo_s09_e01",
+   "original": "Nicholas Waring (7-year-old boy)",
+   "recoded": "Nicholas Waring",
+   "rule": "token:nicholas+waring"
+  },
+  {
+   "episode": "lo_s09_e01",
+   "original": "Elizabeth and Phillip Waring (Nicholas's adoptive parents)",
+   "recoded": "Phillip Waring",
+   "rule": "token:phillip+waring"
+  },
+  {
+   "episode": "lo_s01_e04",
+   "original": "Steve Feinstein",
+   "recoded": "Steve Feinstein",
+   "rule": "token:feinstein+steve"
+  },
+  {
+   "episode": "lo_s03_e15",
+   "original": "Jonas Stark (aka 'Skate')",
+   "recoded": "Jonas Stark ('Skate')",
+   "rule": "token:jonas+skate+stark"
+  },
+  {
+   "episode": "lo_s07_e05",
+   "original": "Detective Lennie Briscoe",
+   "recoded": "Det. Lennie Briscoe",
+   "rule": "token:briscoe+lennie"
+  },
+  {
+   "episode": "lo_s16_e15",
+   "original": "John Ashburn (stepfather)",
+   "recoded": "John Ashburn",
+   "rule": "token:ashburn+john"
+  },
+  {
+   "episode": "lo_s19_e15",
+   "original": "Carlos (youth at Fresh Horizons)",
+   "recoded": "Carlos",
+   "rule": "token:carlos"
+  },
+  {
+   "episode": "lo_s11_e07",
+   "original": "Fred Jenks (plumber)",
+   "recoded": "Fred Jenks",
+   "rule": "token:fred+jenks"
+  },
+  {
+   "episode": "lo_s16_e01",
+   "original": "Jimmy Clark (father)",
+   "recoded": "Jimmy Clark",
+   "rule": "token:clark+jimmy"
+  },
+  {
+   "episode": "lo_s20_e19",
+   "original": "Dustin Henry",
+   "recoded": "Dustin Henry",
+   "rule": "token:dustin+henry"
+  },
+  {
+   "episode": "lo_s19_e05",
+   "original": "Dianne Cary",
+   "recoded": "Dianne Cary",
+   "rule": "token:cary+dianne"
+  },
+  {
+   "episode": "lo_s11_e04",
+   "original": "Hector Diaz (Detective, undercover)",
+   "recoded": "Hector Diaz (undercover Det. Diaz)",
+   "rule": "token:diaz+hector+undercover"
+  },
+  {
+   "episode": "lo_s22_e09",
+   "original": "Troy Booker",
+   "recoded": "Troy Booker",
+   "rule": "token:booker+troy"
+  },
+  {
+   "episode": "lo_s21_e07",
+   "original": "Cooper Young",
+   "recoded": "Cooper Young",
+   "rule": "token:cooper+young"
+  },
+  {
+   "episode": "svu_s20_e22",
+   "original": "Justin Anderson (Snake)",
+   "recoded": "Justin Anderson ('Snake')",
+   "rule": "token:anderson+justin+snake"
+  },
+  {
+   "episode": "svu_s20_e22",
+   "original": "RB Banks",
+   "recoded": "RB Banks",
+   "rule": "token:banks"
+  },
+  {
+   "episode": "svu_s24_e20",
+   "original": "Todd Edmondson (star debater)",
+   "recoded": "Todd Edmondson",
+   "rule": "token:edmondson+todd"
+  },
+  {
+   "episode": "svu_s24_e20",
+   "original": "Sean Richards",
+   "recoded": "Sean Richards",
+   "rule": "token:richards+sean"
+  },
+  {
+   "episode": "svu_s24_e20",
+   "original": "Booker",
+   "recoded": "Booker",
+   "rule": "token:booker"
+  },
+  {
+   "episode": "svu_s25_e01",
+   "original": "Sam",
+   "recoded": "Sam (sex-doll buyer, married)",
+   "rule": "token:sam"
+  },
+  {
+   "episode": "svu_s25_e12",
+   "original": "Cal Markham (cousin of victim Gwen Markham)",
+   "recoded": "Cal Markham",
+   "rule": "token:cal+markham"
+  },
+  {
+   "episode": "svu_s10_e07",
+   "original": "Gots Money (rapper)",
+   "recoded": "Gots Money",
+   "rule": "token:gots+money"
+  },
+  {
+   "episode": "svu_s10_e15",
+   "original": "Kevin Sammers (math teacher)",
+   "recoded": "Kevin Sammers",
+   "rule": "token:kevin+sammers"
+  },
+  {
+   "episode": "svu_s10_e15",
+   "original": "Clive Lynwood (Jeffrey's father)",
+   "recoded": "Clive Lynwood",
+   "rule": "token:clive+lynwood"
+  },
+  {
+   "episode": "svu_s06_e11",
+   "original": "Mark Dobbins",
+   "recoded": "Mark Dobbins",
+   "rule": "token:dobbins+mark"
+  },
+  {
+   "episode": "svu_s08_e17",
+   "original": "Reverend Jeb Curtis",
+   "recoded": "Reverend Jeb Curtis",
+   "rule": "token:curtis+jeb"
+  },
+  {
+   "episode": "svu_s11_e21",
+   "original": "Michael Parisi (Pizza Face)",
+   "recoded": "Michael Parisi ('Pizza Face')",
+   "rule": "token:face+michael+parisi+pizza"
+  },
+  {
+   "episode": "svu_s11_e21",
+   "original": "Frank Sullivan",
+   "recoded": "Frank Sullivan",
+   "rule": "token:frank+sullivan"
+  },
+  {
+   "episode": "svu_s16_e09",
+   "original": "Dr. Joseph Conklin",
+   "recoded": "Dr. Joseph Conklin",
+   "rule": "token:conklin+joseph"
+  },
+  {
+   "episode": "svu_s04_e19",
+   "original": "Kevin Roumel (15-year-old student)",
+   "recoded": "Kevin Roumel",
+   "rule": "token:kevin+roumel"
+  },
+  {
+   "episode": "svu_s11_e11",
+   "original": "Peter Butler (initially suspected of murder)",
+   "recoded": "Peter Butler",
+   "rule": "token:butler+peter"
+  },
+  {
+   "episode": "svu_s13_e03",
+   "original": "Diego Ramirez (using alias Luis Cordova)",
+   "recoded": "Luis Cordova (Diego Ramirez)",
+   "rule": "token:cordova+diego+luis+ramirez"
+  },
+  {
+   "episode": "svu_s06_e22",
+   "original": "Leon Shragewitz",
+   "recoded": "Leon Shragewitz",
+   "rule": "token:leon+shragewitz"
+  },
+  {
+   "episode": "svu_s18_e15",
+   "original": "ADA Rafael Barba",
+   "recoded": "ADA Rafael Barba",
+   "rule": "token:barba+rafael"
+  },
+  {
+   "episode": "svu_s14_e10",
+   "original": "Sam Randall",
+   "recoded": "Sam Randall",
+   "rule": "token:randall+sam"
+  },
+  {
+   "episode": "svu_s14_e10",
+   "original": "Father Chris Shea",
+   "recoded": "Father Chris Shea",
+   "rule": "token:chris+shea"
+  },
+  {
+   "episode": "svu_s17_e07",
+   "original": "Pete Matthews (cameraman)",
+   "recoded": "Pete Matthews",
+   "rule": "token:matthews+pete"
+  },
+  {
+   "episode": "svu_s17_e07",
+   "original": "Graham Baker (older brother)",
+   "recoded": "Graham Baker",
+   "rule": "token:baker+graham"
+  },
+  {
+   "episode": "svu_s04_e25",
+   "original": "Zane Stark (Oklahoma oil businessman)",
+   "recoded": "Zane Stark",
+   "rule": "token:stark+zane"
+  },
+  {
+   "episode": "svu_s05_e21",
+   "original": "Prof. Javier Vega",
+   "recoded": "Prof. Javier Vega",
+   "rule": "token:javier+vega"
+  },
+  {
+   "episode": "svu_s05_e21",
+   "original": "Rudy Lemcke",
+   "recoded": "Rudy Lemcke",
+   "rule": "token:lemcke+rudy"
+  },
+  {
+   "episode": "svu_s13_e14",
+   "original": "Carmen Vasquez (former housekeeper)",
+   "recoded": "Carmen Vasquez",
+   "rule": "token:carmen+vasquez"
+  },
+  {
+   "episode": "svu_s12_e21",
+   "original": "Kevin Wright",
+   "recoded": "Kevin Wright",
+   "rule": "token:kevin+wright"
+  },
+  {
+   "episode": "svu_s12_e21",
+   "original": "Dwight Talcott",
+   "recoded": "Dwight Talcott",
+   "rule": "token:dwight+talcott"
+  },
+  {
+   "episode": "svu_s14_e05",
+   "original": "Hector Rodriguez's father",
+   "recoded": "Hector Rodriguez's father",
+   "rule": "token:hector+rodriguez"
+  },
+  {
+   "episode": "svu_s14_e05",
+   "original": "Stephen Lomatin (auxiliary officer)",
+   "recoded": "Stephen Lomatin",
+   "rule": "token:lomatin+stephen"
+  },
+  {
+   "episode": "svu_s03_e13",
+   "original": "Harry Baker (teenage boy, age 15-16)",
+   "recoded": "Harry Baker",
+   "rule": "token:baker+harry"
+  },
+  {
+   "episode": "svu_s05_e17",
+   "original": "Lukas Ian Croft",
+   "recoded": "Lukas Ian Croft",
+   "rule": "token:croft+ian+lukas"
+  },
+  {
+   "episode": "svu_s05_e17",
+   "original": "Agnes Linsky",
+   "recoded": "Agnes Linsky",
+   "rule": "token:agnes+linsky"
+  }
+ ],
+ "n_adjudications_pending": 0,
+ "person_inclusion": {
+  "lo_only": {
+   "episodes_both_zero_persons": 7,
+   "jaccard": 0.4359,
+   "jaccard_ci95": [
+    0.2766,
+    0.6098
+   ],
+   "matched_persons": 17,
+   "original_only": 16,
+   "original_persons": 33,
+   "per_episode_count_ci95": [
+    0.3667,
+    0.7333
+   ],
+   "per_episode_count_exact_agreement": 0.5667,
+   "per_episode_count_within_1": 0.8333,
+   "recoded_only": 6,
+   "recoded_persons": 23
+  },
+  "pooled": {
+   "episodes_both_zero_persons": 25,
+   "jaccard": 0.4561,
+   "jaccard_ci95": [
+    0.3636,
+    0.5612
+   ],
+   "matched_persons": 52,
+   "original_only": 40,
+   "original_persons": 92,
+   "per_episode_count_ci95": [
+    0.4778,
+    0.6889
+   ],
+   "per_episode_count_exact_agreement": 0.5889,
+   "per_episode_count_within_1": 0.8667,
+   "recoded_only": 22,
+   "recoded_persons": 74
+  },
+  "svu_only": {
+   "episodes_both_zero_persons": 18,
+   "jaccard": 0.4667,
+   "jaccard_ci95": [
+    0.3372,
+    0.6
+   ],
+   "matched_persons": 35,
+   "original_only": 24,
+   "original_persons": 59,
+   "per_episode_count_ci95": [
+    0.4833,
+    0.7167
+   ],
+   "per_episode_count_exact_agreement": 0.6,
+   "per_episode_count_within_1": 0.8833,
+   "recoded_only": 16,
+   "recoded_persons": 51
+  }
+ },
+ "person_level": {
+  "lo_only": {
+   "accusation_origin": {
+    "band": "fair",
+    "categories_original": {
+     "coerced_interview": 1,
+     "fabrication": 2,
+     "squad_inference": 12,
+     "witness_misID": 2
+    },
+    "categories_recoded": {
+     "fabrication": 1,
+     "squad_inference": 12,
+     "witness_misID": 4
+    },
+    "kappa": 0.2444,
+    "kappa_ci95": [
+     -0.1958,
+     0.6923
+    ],
+    "kappa_ci_replicates_defined": 2000,
+    "n_pairs": 17,
+    "percent_agreement": 0.6471,
+    "percent_ci95": [
+     0.4,
+     0.8696
+    ]
+   },
+   "accused_of": {
+    "band": "substantial",
+    "categories_original": {
+     "kidnapping": 2,
+     "murder": 14,
+     "theft": 1
+    },
+    "categories_recoded": {
+     "arson": 1,
+     "corruption": 1,
+     "kidnapping": 2,
+     "murder": 13
+    },
+    "kappa": 0.6699,
+    "kappa_ci95": [
+     0.0,
+     1.0
+    ],
+    "kappa_ci_replicates_defined": 1984,
+    "n_pairs": 17,
+    "percent_agreement": 0.8824,
+    "percent_ci95": [
+     0.7059,
+     1.0
+    ]
+   },
+   "any_apology": {
+    "band": "undefined",
+    "categories_original": {
+     "N": 17
+    },
+    "categories_recoded": {
+     "N": 17
+    },
+    "kappa": null,
+    "kappa_ci95": [
+     null,
+     null
+    ],
+    "kappa_ci_replicates_defined": 0,
+    "n_pairs": 17,
+    "percent_agreement": 1.0,
+    "percent_ci95": [
+     1.0,
+     1.0
+    ]
+   },
+   "any_threat": {
+    "band": "fair",
+    "categories_original": {
+     "N": 4,
+     "Y": 13
+    },
+    "categories_recoded": {
+     "N": 12,
+     "Y": 5
+    },
+    "kappa": 0.2273,
+    "kappa_ci95": [
+     0.0299,
+     0.5143
+    ],
+    "kappa_ci_replicates_defined": 2000,
+    "n_pairs": 17,
+    "percent_agreement": 0.5294,
+    "percent_ci95": [
+     0.2941,
+     0.75
+    ]
+   },
+   "beyond_police_only": {
+    "band": "slight_or_none",
+    "categories_original": {
+     "N": 2,
+     "Y": 15
+    },
+    "categories_recoded": {
+     "Y": 17
+    },
+    "kappa": 0.0,
+    "kappa_ci95": [
+     0.0,
+     0.0
+    ],
+    "kappa_ci_replicates_defined": 1759,
+    "n_pairs": 17,
+    "percent_agreement": 0.8824,
+    "percent_ci95": [
+     0.7059,
+     1.0
+    ]
+   },
+   "confidence": {
+    "band": "slight_or_none",
+    "categories_original": {
+     "high": 17
+    },
+    "categories_recoded": {
+     "high": 12,
+     "medium": 5
+    },
+    "kappa": 0.0,
+    "kappa_ci95": [
+     0.0,
+     0.0
+    ],
+    "kappa_ci_replicates_defined": 1992,
+    "n_pairs": 17,
+    "percent_agreement": 0.7059,
+    "percent_ci95": [
+     0.4667,
+     0.9167
+    ]
+   },
+   "consequence_category": {
+    "band": "slight_or_none",
+    "categories_original": {
+     "legal": 5,
+     "multiple": 9,
+     "social": 1,
+     "work": 2
+    },
+    "categories_recoded": {
+     "family": 1,
+     "legal": 10,
+     "social": 4,
+     "work": 2
+    },
+    "kappa": 0.1905,
+    "kappa_ci95": [
+     -0.0078,
+     0.4362
+    ],
+    "kappa_ci_replicates_defined": 2000,
+    "n_pairs": 17,
+    "percent_agreement": 0.3529,
+    "percent_ci95": [
+     0.1333,
+     0.6111
+    ]
+   },
+   "consequence_severity": {
+    "band": "fair",
+    "categories_original": {
+     "1": 1,
+     "2": 2,
+     "3": 10,
+     "4": 4
+    },
+    "categories_recoded": {
+     "2": 5,
+     "3": 11,
+     "4": 1
+    },
+    "kappa": 0.2788,
+    "kappa_ci95": [
+     -0.1136,
+     0.6182
+    ],
+    "kappa_ci_replicates_defined": 2000,
+    "n_pairs": 17,
+    "percent_agreement": 0.5882,
+    "percent_ci95": [
+     0.375,
+     0.8
+    ],
+    "weighted_band": "fair",
+    "weighted_kappa_ci95": [
+     -0.0474,
+     0.6422
+    ],
+    "weighted_kappa_linear": 0.32
+   },
+   "exposure_channel": {
+    "band": "slight_or_none",
+    "categories_original": {
+     "courtroom": 4,
+     "family": 1,
+     "legal": 1,
+     "media": 1,
+     "multiple": 2,
+     "police_only": 2,
+     "workplace": 6
+    },
+    "categories_recoded": {
+     "community": 4,
+     "courtroom": 3,
+     "family": 1,
+     "media": 2,
+     "school": 1,
+     "workplace": 6
+    },
+    "kappa": 0.0714,
+    "kappa_ci95": [
+     -0.1012,
+     0.2653
+    ],
+    "kappa_ci_replicates_defined": 2000,
+    "n_pairs": 17,
+    "percent_agreement": 0.2353,
+    "percent_ci95": [
+     0.0556,
+     0.4545
+    ]
+   },
+   "exposure_who_told": {
+    "band": "fair",
+    "categories_original": {
+     "prosecution": 3,
+     "squad": 13,
+     "third_party": 1
+    },
+    "categories_recoded": {
+     "media": 1,
+     "prosecution": 3,
+     "squad": 12,
+     "third_party": 1
+    },
+    "kappa": 0.3089,
+    "kappa_ci95": [
+     -0.0435,
+     0.6552
+    ],
+    "kappa_ci_replicates_defined": 1999,
+    "n_pairs": 17,
+    "percent_agreement": 0.7059,
+    "percent_ci95": [
+     0.5,
+     0.8947
+    ]
+   },
+   "innocence_status": {
+    "band": "slight_or_none",
+    "categories_original": {
+     "proven_innocent": 17
+    },
+    "categories_recoded": {
+     "partially_involved": 2,
+     "proven_innocent": 11,
+     "strongly_implied_innocent": 4
+    },
+    "kappa": 0.0,
+    "kappa_ci95": [
+     0.0,
+     0.0
+    ],
+    "kappa_ci_replicates_defined": 1999,
+    "n_pairs": 17,
+    "percent_agreement": 0.6471,
+    "percent_ci95": [
+     0.4286,
+     0.8636
+    ]
+   },
+   "media_or_online": {
+    "band": "slight_or_none",
+    "categories_original": {
+     "N": 16,
+     "Y": 1
+    },
+    "categories_recoded": {
+     "N": 15,
+     "Y": 2
+    },
+    "kappa": -0.0851,
+    "kappa_ci95": [
+     -0.202,
+     0.0
+    ],
+    "kappa_ci_replicates_defined": 1910,
+    "n_pairs": 17,
+    "percent_agreement": 0.8235,
+    "percent_ci95": [
+     0.6111,
+     1.0
+    ]
+   },
+   "police_apology": {
+    "band": "slight_or_none",
+    "categories_original": {
+     "none": 16,
+     "unknown": 1
+    },
+    "categories_recoded": {
+     "none": 17
+    },
+    "kappa": 0.0,
+    "kappa_ci95": [
+     0.0,
+     0.0
+    ],
+    "kappa_ci_replicates_defined": 1274,
+    "n_pairs": 17,
+    "percent_agreement": 0.9412,
+    "percent_ci95": [
+     0.8333,
+     1.0
+    ]
+   },
+   "police_conduct_threat": {
+    "band": "slight_or_none",
+    "categories_original": {
+     "coercive_tactic": 8,
+     "insult_degradation": 1,
+     "multiple": 1,
+     "none": 4,
+     "verbal_threat": 3
+    },
+    "categories_recoded": {
+     "coercive_tactic": 3,
+     "insult_degradation": 2,
+     "none": 12
+    },
+    "kappa": 0.1302,
+    "kappa_ci95": [
+     -0.0341,
+     0.3306
+    ],
+    "kappa_ci_replicates_defined": 2000,
+    "n_pairs": 17,
+    "percent_agreement": 0.3529,
+    "percent_ci95": [
+     0.1333,
+     0.5714
+    ]
+   },
+   "prosecutorial_apology": {
+    "band": "slight_or_none",
+    "categories_original": {
+     "none": 13,
+     "partial": 3,
+     "unknown": 1
+    },
+    "categories_recoded": {
+     "none": 17
+    },
+    "kappa": 0.0,
+    "kappa_ci95": [
+     0.0,
+     0.0
+    ],
+    "kappa_ci_replicates_defined": 1903,
+    "n_pairs": 17,
+    "percent_agreement": 0.7647,
+    "percent_ci95": [
+     0.5263,
+     1.0
+    ]
+   },
+   "prosecutorial_conduct": {
+    "band": "moderate",
+    "categories_original": {
+     "dropped_appropriately": 4,
+     "none": 6,
+     "overreach": 5,
+     "zealous_but_fair": 2
+    },
+    "categories_recoded": {
+     "dropped_appropriately": 8,
+     "none": 6,
+     "overreach": 3
+    },
+    "kappa": 0.4223,
+    "kappa_ci95": [
+     0.1705,
+     0.6832
+    ],
+    "kappa_ci_replicates_defined": 2000,
+    "n_pairs": 17,
+    "percent_agreement": 0.5882,
+    "percent_ci95": [
+     0.3684,
+     0.8125
+    ]
+   },
+   "role_in_plot": {
+    "band": "fair",
+    "categories_original": {
+     "colleague": 1,
+     "defendant": 1,
+     "family_member": 4,
+     "initial_suspect": 9,
+     "red_herring": 2
+    },
+    "categories_recoded": {
+     "family_member": 3,
+     "initial_suspect": 12,
+     "other": 1,
+     "red_herring": 1
+    },
+    "kappa": 0.2874,
+    "kappa_ci95": [
+     -0.0714,
+     0.6591
+    ],
+    "kappa_ci_replicates_defined": 2000,
+    "n_pairs": 17,
+    "percent_agreement": 0.5882,
+    "percent_ci95": [
+     0.3333,
+     0.8462
+    ]
+   },
+   "screen_evidence": {
+    "band": "moderate",
+    "categories_original": {
+     "on_screen": 14,
+     "stated": 3
+    },
+    "categories_recoded": {
+     "on_screen": 16,
+     "stated": 1
+    },
+    "kappa": 0.4516,
+    "kappa_ci95": [
+     0.0,
+     1.0
+    ],
+    "kappa_ci_replicates_defined": 1912,
+    "n_pairs": 17,
+    "percent_agreement": 0.8824,
+    "percent_ci95": [
+     0.7,
+     1.0
+    ]
+   },
+   "severe": {
+    "band": "fair",
+    "categories_original": {
+     "N": 3,
+     "Y": 14
+    },
+    "categories_recoded": {
+     "N": 5,
+     "Y": 12
+    },
+    "kappa": 0.3585,
+    "kappa_ci95": [
+     -0.1429,
+     0.8235
+    ],
+    "kappa_ci_replicates_defined": 1998,
+    "n_pairs": 17,
+    "percent_agreement": 0.7647,
+    "percent_ci95": [
+     0.5455,
+     0.9444
+    ]
+   }
+  },
+  "pooled": {
+   "accusation_origin": {
+    "band": "moderate",
+    "categories_original": {
+     "coerced_interview": 2,
+     "fabrication": 5,
+     "squad_inference": 31,
+     "tech_db_error": 1,
+     "victim_ID": 8,
+     "witness_misID": 5
+    },
+    "categories_recoded": {
+     "fabrication": 11,
+     "squad_inference": 26,
+     "tech_db_error": 2,
+     "victim_ID": 3,
+     "witness_misID": 10
+    },
+    "kappa": 0.4114,
+    "kappa_ci95": [
+     0.2017,
+     0.6188
+    ],
+    "kappa_ci_replicates_defined": 2000,
+    "n_pairs": 52,
+    "percent_agreement": 0.6154,
+    "percent_ci95": [
+     0.4643,
+     0.7708
+    ]
+   },
+   "accused_of": {
+    "band": "fair",
+    "categories_original": {
+     "arson": 2,
+     "assault": 3,
+     "csa": 5,
+     "kidnapping": 2,
+     "murder": 14,
+     "other": 4,
+     "rape": 21,
+     "theft": 1
+    },
+    "categories_recoded": {
+     "arson": 1,
+     "assault/carjacking": 1,
+     "child_abuse": 3,
+     "corruption": 1,
+     "csa": 2,
+     "dv": 2,
+     "kidnapping": 5,
+     "murder": 25,
+     "other": 1,
+     "rape": 9,
+     "solicitation/corruption": 1,
+     "theft": 1
+    },
+    "kappa": 0.3676,
+    "kappa_ci95": [
+     0.2037,
+     0.5309
+    ],
+    "kappa_ci_replicates_defined": 2000,
+    "n_pairs": 52,
+    "percent_agreement": 0.5,
+    "percent_ci95": [
+     0.3333,
+     0.6613
+    ]
+   },
+   "any_apology": {
+    "band": "substantial",
+    "categories_original": {
+     "N": 48,
+     "Y": 4
+    },
+    "categories_recoded": {
+     "N": 48,
+     "Y": 4
+    },
+    "kappa": 0.7292,
+    "kappa_ci95": [
+     0.0,
+     1.0
+    ],
+    "kappa_ci_replicates_defined": 1988,
+    "n_pairs": 52,
+    "percent_agreement": 0.9615,
+    "percent_ci95": [
+     0.9024,
+     1.0
+    ]
+   },
+   "any_threat": {
+    "band": "fair",
+    "categories_original": {
+     "N": 21,
+     "Y": 31
+    },
+    "categories_recoded": {
+     "N": 28,
+     "Y": 24
+    },
+    "kappa": 0.2799,
+    "kappa_ci95": [
+     0.05,
+     0.511
+    ],
+    "kappa_ci_replicates_defined": 2000,
+    "n_pairs": 52,
+    "percent_agreement": 0.6346,
+    "percent_ci95": [
+     0.5106,
+     0.7586
+    ]
+   },
+   "beyond_police_only": {
+    "band": "slight_or_none",
+    "categories_original": {
+     "N": 9,
+     "Y": 43
+    },
+    "categories_recoded": {
+     "N": 2,
+     "Y": 50
+    },
+    "kappa": 0.1269,
+    "kappa_ci95": [
+     -0.0825,
+     0.4455
+    ],
+    "kappa_ci_replicates_defined": 2000,
+    "n_pairs": 52,
+    "percent_agreement": 0.8269,
+    "percent_ci95": [
+     0.7258,
+     0.9184
+    ]
+   },
+   "confidence": {
+    "band": "slight_or_none",
+    "categories_original": {
+     "high": 52
+    },
+    "categories_recoded": {
+     "high": 24,
+     "low": 1,
+     "medium": 27
+    },
+    "kappa": 0.0,
+    "kappa_ci95": [
+     0.0,
+     0.0
+    ],
+    "kappa_ci_replicates_defined": 2000,
+    "n_pairs": 52,
+    "percent_agreement": 0.4615,
+    "percent_ci95": [
+     0.3137,
+     0.6047
+    ]
+   },
+   "consequence_category": {
+    "band": "fair",
+    "categories_original": {
+     "family": 3,
+     "legal": 17,
+     "multiple": 22,
+     "social": 4,
+     "work": 6
+    },
+    "categories_recoded": {
+     "family": 6,
+     "legal": 22,
+     "multiple": 5,
+     "physical": 2,
+     "social": 11,
+     "work": 6
+    },
+    "kappa": 0.3629,
+    "kappa_ci95": [
+     0.1743,
+     0.529
+    ],
+    "kappa_ci_replicates_defined": 2000,
+    "n_pairs": 52,
+    "percent_agreement": 0.5,
+    "percent_ci95": [
+     0.35,
+     0.64
+    ]
+   },
+   "consequence_severity": {
+    "band": "fair",
+    "categories_original": {
+     "1": 1,
+     "2": 13,
+     "3": 29,
+     "4": 9
+    },
+    "categories_recoded": {
+     "1": 3,
+     "2": 18,
+     "3": 25,
+     "4": 6
+    },
+    "kappa": 0.3531,
+    "kappa_ci95": [
+     0.1274,
+     0.5557
+    ],
+    "kappa_ci_replicates_defined": 2000,
+    "n_pairs": 52,
+    "percent_agreement": 0.5962,
+    "percent_ci95": [
+     0.451,
+     0.7333
+    ],
+    "weighted_band": "moderate",
+    "weighted_kappa_ci95": [
+     0.2506,
+     0.6232
+    ],
+    "weighted_kappa_linear": 0.4568
+   },
+   "exposure_channel": {
+    "band": "fair",
+    "categories_original": {
+     "church": 1,
+     "courtroom": 4,
+     "family": 13,
+     "legal": 2,
+     "media": 7,
+     "multiple": 2,
+     "police_only": 9,
+     "school": 1,
+     "workplace": 13
+    },
+    "categories_recoded": {
+     "community": 11,
+     "courtroom": 5,
+     "family": 13,
+     "media": 5,
+     "police_only": 2,
+     "school": 4,
+     "workplace": 12
+    },
+    "kappa": 0.3675,
+    "kappa_ci95": [
+     0.2187,
+     0.5202
+    ],
+    "kappa_ci_replicates_defined": 2000,
+    "n_pairs": 52,
+    "percent_agreement": 0.4615,
+    "percent_ci95": [
+     0.3137,
+     0.6111
+    ]
+   },
+   "exposure_who_told": {
+    "band": "slight_or_none",
+    "categories_original": {
+     "media": 1,
+     "prosecution": 3,
+     "squad": 46,
+     "third_party": 2
+    },
+    "categories_recoded": {
+     "media": 2,
+     "prosecution": 3,
+     "squad": 36,
+     "third_party": 7,
+     "unknown": 2,
+     "victim": 2
+    },
+    "kappa": 0.1867,
+    "kappa_ci95": [
+     -0.02,
+     0.4254
+    ],
+    "kappa_ci_replicates_defined": 2000,
+    "n_pairs": 52,
+    "percent_agreement": 0.6923,
+    "percent_ci95": [
+     0.54,
+     0.8305
+    ]
+   },
+   "innocence_status": {
+    "band": "slight_or_none",
+    "categories_original": {
+     "partially_involved": 2,
+     "proven_innocent": 47,
+     "strongly_implied_innocent": 3
+    },
+    "categories_recoded": {
+     "partially_involved": 15,
+     "proven_innocent": 32,
+     "strongly_implied_innocent": 5
+    },
+    "kappa": 0.0996,
+    "kappa_ci95": [
+     -0.0542,
+     0.2548
+    ],
+    "kappa_ci_replicates_defined": 2000,
+    "n_pairs": 52,
+    "percent_agreement": 0.6154,
+    "percent_ci95": [
+     0.4776,
+     0.7333
+    ]
+   },
+   "media_or_online": {
+    "band": "moderate",
+    "categories_original": {
+     "N": 45,
+     "Y": 7
+    },
+    "categories_recoded": {
+     "N": 47,
+     "Y": 5
+    },
+    "kappa": 0.4368,
+    "kappa_ci95": [
+     -0.0736,
+     0.8092
+    ],
+    "kappa_ci_replicates_defined": 2000,
+    "n_pairs": 52,
+    "percent_agreement": 0.8846,
+    "percent_ci95": [
+     0.7963,
+     0.9623
+    ]
+   },
+   "police_apology": {
+    "band": "fair",
+    "categories_original": {
+     "formal": 1,
+     "none": 47,
+     "partial": 3,
+     "unknown": 1
+    },
+    "categories_recoded": {
+     "formal": 4,
+     "none": 48
+    },
+    "kappa": 0.2973,
+    "kappa_ci95": [
+     -0.0108,
+     0.4842
+    ],
+    "kappa_ci_replicates_defined": 1997,
+    "n_pairs": 52,
+    "percent_agreement": 0.8846,
+    "percent_ci95": [
+     0.8033,
+     0.9592
+    ]
+   },
+   "police_conduct_threat": {
+    "band": "slight_or_none",
+    "categories_original": {
+     "coercive_tactic": 13,
+     "insult_degradation": 6,
+     "multiple": 7,
+     "none": 21,
+     "verbal_threat": 5
+    },
+    "categories_recoded": {
+     "coercive_tactic": 11,
+     "insult_degradation": 7,
+     "multiple": 3,
+     "none": 28,
+     "verbal_threat": 3
+    },
+    "kappa": 0.2042,
+    "kappa_ci95": [
+     0.0379,
+     0.3714
+    ],
+    "kappa_ci_replicates_defined": 2000,
+    "n_pairs": 52,
+    "percent_agreement": 0.4423,
+    "percent_ci95": [
+     0.3056,
+     0.5769
+    ]
+   },
+   "prosecutorial_apology": {
+    "band": "slight_or_none",
+    "categories_original": {
+     "none": 13,
+     "partial": 3,
+     "unknown": 1
+    },
+    "categories_recoded": {
+     "none": 17
+    },
+    "kappa": 0.0,
+    "kappa_ci95": [
+     0.0,
+     0.0
+    ],
+    "kappa_ci_replicates_defined": 1894,
+    "n_pairs": 17,
+    "percent_agreement": 0.7647,
+    "percent_ci95": [
+     0.5263,
+     1.0
+    ]
+   },
+   "prosecutorial_conduct": {
+    "band": "moderate",
+    "categories_original": {
+     "dropped_appropriately": 4,
+     "none": 6,
+     "overreach": 5,
+     "zealous_but_fair": 2
+    },
+    "categories_recoded": {
+     "dropped_appropriately": 8,
+     "none": 6,
+     "overreach": 3
+    },
+    "kappa": 0.4223,
+    "kappa_ci95": [
+     0.1429,
+     0.6832
+    ],
+    "kappa_ci_replicates_defined": 2000,
+    "n_pairs": 17,
+    "percent_agreement": 0.5882,
+    "percent_ci95": [
+     0.35,
+     0.8182
+    ]
+   },
+   "role_in_plot": {
+    "band": "fair",
+    "categories_original": {
+     "colleague": 4,
+     "community_member": 2,
+     "defendant": 1,
+     "family_member": 7,
+     "initial_suspect": 20,
+     "other": 1,
+     "red_herring": 17
+    },
+    "categories_recoded": {
+     "colleague": 2,
+     "community_member": 2,
+     "defendant": 1,
+     "family_member": 9,
+     "initial_suspect": 32,
+     "other": 4,
+     "red_herring": 2
+    },
+    "kappa": 0.2267,
+    "kappa_ci95": [
+     0.0671,
+     0.3966
+    ],
+    "kappa_ci_replicates_defined": 2000,
+    "n_pairs": 52,
+    "percent_agreement": 0.4423,
+    "percent_ci95": [
+     0.3019,
+     0.5882
+    ]
+   },
+   "screen_evidence": {
+    "band": "fair",
+    "categories_original": {
+     "on_screen": 45,
+     "stated": 7
+    },
+    "categories_recoded": {
+     "on_screen": 49,
+     "stated": 3
+    },
+    "kappa": 0.3473,
+    "kappa_ci95": [
+     -0.0556,
+     0.7267
+    ],
+    "kappa_ci_replicates_defined": 1998,
+    "n_pairs": 52,
+    "percent_agreement": 0.8846,
+    "percent_ci95": [
+     0.8,
+     0.96
+    ]
+   },
+   "severe": {
+    "band": "moderate",
+    "categories_original": {
+     "N": 14,
+     "Y": 38
+    },
+    "categories_recoded": {
+     "N": 21,
+     "Y": 31
+    },
+    "kappa": 0.4513,
+    "kappa_ci95": [
+     0.1429,
+     0.6983
+    ],
+    "kappa_ci_replicates_defined": 2000,
+    "n_pairs": 52,
+    "percent_agreement": 0.75,
+    "percent_ci95": [
+     0.614,
+     0.8696
+    ]
+   }
+  },
+  "svu_only": {
+   "accusation_origin": {
+    "band": "moderate",
+    "categories_original": {
+     "coerced_interview": 1,
+     "fabrication": 3,
+     "squad_inference": 19,
+     "tech_db_error": 1,
+     "victim_ID": 8,
+     "witness_misID": 3
+    },
+    "categories_recoded": {
+     "fabrication": 10,
+     "squad_inference": 14,
+     "tech_db_error": 2,
+     "victim_ID": 3,
+     "witness_misID": 6
+    },
+    "kappa": 0.4463,
+    "kappa_ci95": [
+     0.2295,
+     0.6779
+    ],
+    "kappa_ci_replicates_defined": 2000,
+    "n_pairs": 35,
+    "percent_agreement": 0.6,
+    "percent_ci95": [
+     0.4138,
+     0.8
+    ]
+   },
+   "accused_of": {
+    "band": "slight_or_none",
+    "categories_original": {
+     "arson": 2,
+     "assault": 3,
+     "csa": 5,
+     "other": 4,
+     "rape": 21
+    },
+    "categories_recoded": {
+     "assault/carjacking": 1,
+     "child_abuse": 3,
+     "csa": 2,
+     "dv": 2,
+     "kidnapping": 3,
+     "murder": 12,
+     "other": 1,
+     "rape": 9,
+     "solicitation/corruption": 1,
+     "theft": 1
+    },
+    "kappa": 0.1781,
+    "kappa_ci95": [
+     0.058,
+     0.3023
+    ],
+    "kappa_ci_replicates_defined": 2000,
+    "n_pairs": 35,
+    "percent_agreement": 0.3143,
+    "percent_ci95": [
+     0.1176,
+     0.5217
+    ]
+   },
+   "any_apology": {
+    "band": "substantial",
+    "categories_original": {
+     "N": 31,
+     "Y": 4
+    },
+    "categories_recoded": {
+     "N": 31,
+     "Y": 4
+    },
+    "kappa": 0.7177,
+    "kappa_ci95": [
+     0.0,
+     1.0
+    ],
+    "kappa_ci_replicates_defined": 1992,
+    "n_pairs": 35,
+    "percent_agreement": 0.9429,
+    "percent_ci95": [
+     0.8485,
+     1.0
+    ]
+   },
+   "any_threat": {
+    "band": "fair",
+    "categories_original": {
+     "N": 17,
+     "Y": 18
+    },
+    "categories_recoded": {
+     "N": 16,
+     "Y": 19
+    },
+    "kappa": 0.3699,
+    "kappa_ci95": [
+     0.0884,
+     0.6525
+    ],
+    "kappa_ci_replicates_defined": 2000,
+    "n_pairs": 35,
+    "percent_agreement": 0.6857,
+    "percent_ci95": [
+     0.5484,
+     0.8333
+    ]
+   },
+   "beyond_police_only": {
+    "band": "slight_or_none",
+    "categories_original": {
+     "N": 7,
+     "Y": 28
+    },
+    "categories_recoded": {
+     "N": 2,
+     "Y": 33
+    },
+    "kappa": 0.1463,
+    "kappa_ci95": [
+     -0.1157,
+     0.5227
+    ],
+    "kappa_ci_replicates_defined": 2000,
+    "n_pairs": 35,
+    "percent_agreement": 0.8,
+    "percent_ci95": [
+     0.6667,
+     0.9167
+    ]
+   },
+   "confidence": {
+    "band": "slight_or_none",
+    "categories_original": {
+     "high": 35
+    },
+    "categories_recoded": {
+     "high": 12,
+     "low": 1,
+     "medium": 22
+    },
+    "kappa": 0.0,
+    "kappa_ci95": [
+     0.0,
+     0.0
+    ],
+    "kappa_ci_replicates_defined": 2000,
+    "n_pairs": 35,
+    "percent_agreement": 0.3429,
+    "percent_ci95": [
+     0.1667,
+     0.5122
+    ]
+   },
+   "consequence_category": {
+    "band": "moderate",
+    "categories_original": {
+     "family": 3,
+     "legal": 12,
+     "multiple": 13,
+     "social": 3,
+     "work": 4
+    },
+    "categories_recoded": {
+     "family": 5,
+     "legal": 12,
+     "multiple": 5,
+     "physical": 2,
+     "social": 7,
+     "work": 4
+    },
+    "kappa": 0.4554,
+    "kappa_ci95": [
+     0.2321,
+     0.6776
+    ],
+    "kappa_ci_replicates_defined": 2000,
+    "n_pairs": 35,
+    "percent_agreement": 0.5714,
+    "percent_ci95": [
+     0.4,
+     0.75
+    ]
+   },
+   "consequence_severity": {
+    "band": "fair",
+    "categories_original": {
+     "2": 11,
+     "3": 19,
+     "4": 5
+    },
+    "categories_recoded": {
+     "1": 3,
+     "2": 13,
+     "3": 14,
+     "4": 5
+    },
+    "kappa": 0.3805,
+    "kappa_ci95": [
+     0.1043,
+     0.623
+    ],
+    "kappa_ci_replicates_defined": 2000,
+    "n_pairs": 35,
+    "percent_agreement": 0.6,
+    "percent_ci95": [
+     0.4118,
+     0.7714
+    ],
+    "weighted_band": "moderate",
+    "weighted_kappa_ci95": [
+     0.2645,
+     0.7052
+    ],
+    "weighted_kappa_linear": 0.509
+   },
+   "exposure_channel": {
+    "band": "moderate",
+    "categories_original": {
+     "church": 1,
+     "family": 12,
+     "legal": 1,
+     "media": 6,
+     "police_only": 7,
+     "school": 1,
+     "workplace": 7
+    },
+    "categories_recoded": {
+     "community": 7,
+     "courtroom": 2,
+     "family": 12,
+     "media": 3,
+     "police_only": 2,
+     "school": 3,
+     "workplace": 6
+    },
+    "kappa": 0.4771,
+    "kappa_ci95": [
+     0.2904,
+     0.6604
+    ],
+    "kappa_ci_replicates_defined": 2000,
+    "n_pairs": 35,
+    "percent_agreement": 0.5714,
+    "percent_ci95": [
+     0.3947,
+     0.7419
+    ]
+   },
+   "exposure_who_told": {
+    "band": "slight_or_none",
+    "categories_original": {
+     "media": 1,
+     "squad": 33,
+     "third_party": 1
+    },
+    "categories_recoded": {
+     "media": 1,
+     "squad": 24,
+     "third_party": 6,
+     "unknown": 2,
+     "victim": 2
+    },
+    "kappa": 0.0962,
+    "kappa_ci95": [
+     -0.0769,
+     0.4043
+    ],
+    "kappa_ci_replicates_defined": 2000,
+    "n_pairs": 35,
+    "percent_agreement": 0.6857,
+    "percent_ci95": [
+     0.5,
+     0.8611
+    ]
+   },
+   "innocence_status": {
+    "band": "slight_or_none",
+    "categories_original": {
+     "partially_involved": 2,
+     "proven_innocent": 30,
+     "strongly_implied_innocent": 3
+    },
+    "categories_recoded": {
+     "partially_involved": 13,
+     "proven_innocent": 21,
+     "strongly_implied_innocent": 1
+    },
+    "kappa": 0.1343,
+    "kappa_ci95": [
+     -0.0645,
+     0.3341
+    ],
+    "kappa_ci_replicates_defined": 2000,
+    "n_pairs": 35,
+    "percent_agreement": 0.6,
+    "percent_ci95": [
+     0.4333,
+     0.7586
+    ]
+   },
+   "media_or_online": {
+    "band": "substantial",
+    "categories_original": {
+     "N": 29,
+     "Y": 6
+    },
+    "categories_recoded": {
+     "N": 32,
+     "Y": 3
+    },
+    "kappa": 0.6237,
+    "kappa_ci95": [
+     0.0,
+     1.0
+    ],
+    "kappa_ci_replicates_defined": 1984,
+    "n_pairs": 35,
+    "percent_agreement": 0.9143,
+    "percent_ci95": [
+     0.8235,
+     1.0
+    ]
+   },
+   "police_apology": {
+    "band": "fair",
+    "categories_original": {
+     "formal": 1,
+     "none": 31,
+     "partial": 3
+    },
+    "categories_recoded": {
+     "formal": 4,
+     "none": 31
+    },
+    "kappa": 0.3269,
+    "kappa_ci95": [
+     0.0,
+     0.4844
+    ],
+    "kappa_ci_replicates_defined": 1992,
+    "n_pairs": 35,
+    "percent_agreement": 0.8571,
+    "percent_ci95": [
+     0.7429,
+     0.9615
+    ]
+   },
+   "police_conduct_threat": {
+    "band": "fair",
+    "categories_original": {
+     "coercive_tactic": 5,
+     "insult_degradation": 5,
+     "multiple": 6,
+     "none": 17,
+     "verbal_threat": 2
+    },
+    "categories_recoded": {
+     "coercive_tactic": 8,
+     "insult_degradation": 5,
+     "multiple": 3,
+     "none": 16,
+     "verbal_threat": 3
+    },
+    "kappa": 0.2708,
+    "kappa_ci95": [
+     0.0683,
+     0.4762
+    ],
+    "kappa_ci_replicates_defined": 2000,
+    "n_pairs": 35,
+    "percent_agreement": 0.4857,
+    "percent_ci95": [
+     0.3125,
+     0.6538
+    ]
+   },
+   "role_in_plot": {
+    "band": "slight_or_none",
+    "categories_original": {
+     "colleague": 3,
+     "community_member": 2,
+     "family_member": 3,
+     "initial_suspect": 11,
+     "other": 1,
+     "red_herring": 15
+    },
+    "categories_recoded": {
+     "colleague": 2,
+     "community_member": 2,
+     "defendant": 1,
+     "family_member": 6,
+     "initial_suspect": 20,
+     "other": 3,
+     "red_herring": 1
+    },
+    "kappa": 0.1971,
+    "kappa_ci95": [
+     0.0129,
+     0.385
+    ],
+    "kappa_ci_replicates_defined": 2000,
+    "n_pairs": 35,
+    "percent_agreement": 0.3714,
+    "percent_ci95": [
+     0.2143,
+     0.5385
+    ]
+   },
+   "screen_evidence": {
+    "band": "fair",
+    "categories_original": {
+     "on_screen": 31,
+     "stated": 4
+    },
+    "categories_recoded": {
+     "on_screen": 33,
+     "stated": 2
+    },
+    "kappa": 0.2784,
+    "kappa_ci95": [
+     -0.0882,
+     0.7848
+    ],
+    "kappa_ci_replicates_defined": 1990,
+    "n_pairs": 35,
+    "percent_agreement": 0.8857,
+    "percent_ci95": [
+     0.7879,
+     0.9737
+    ]
+   },
+   "severe": {
+    "band": "moderate",
+    "categories_original": {
+     "N": 11,
+     "Y": 24
+    },
+    "categories_recoded": {
+     "N": 16,
+     "Y": 19
+    },
+    "kappa": 0.4688,
+    "kappa_ci95": [
+     0.1082,
+     0.7534
+    ],
+    "kappa_ci_replicates_defined": 2000,
+    "n_pairs": 35,
+    "percent_agreement": 0.7429,
+    "percent_ci95": [
+     0.575,
+     0.8889
+    ]
+   }
+  }
+ },
+ "unmatched_persons": {
+  "original_actually_guilty_dropped": [
+   {
+    "episode": "lo_s05_e16",
+    "label": "Colin Harrigan (minor)"
+   }
+  ],
+  "original_only": [
+   {
+    "adjudication": "Cleared of the shooting by alibi but disposed of the weapon; re-coder excluded under a harm-outweighs rule stricter than the codebook's literal partially_involved. Lean original.",
+    "channel": "police_only",
+    "episode": "lo_s05_e16",
+    "innocence_status": "proven_innocent",
+    "label": "Jimmy Rose",
+    "severity": 2
+   },
+   {
+    "adjudication": "Questioned privately about the murder; re-coder applied an exposure/harm threshold the codebook does not impose. Lean original on inclusion, original's 'workplace' channel unverified.",
+    "channel": "workplace",
+    "episode": "lo_s06_e20",
+    "innocence_status": "strongly_implied_innocent",
+    "label": "Jack Miniver (student)",
+    "severity": 2
+   },
+   {
+    "adjudication": "A john questioned privately; same threshold issue. Split.",
+    "channel": "family",
+    "episode": "lo_s06_e20",
+    "innocence_status": "strongly_implied_innocent",
+    "label": "Jonathan Freeman (shoe buyer)",
+    "severity": 3
+   },
+   {
+    "adjudication": "Whether he or Shelly is the killer is unresolved in the truncated text; original assigned strongly_implied_innocent anyway. Split, truncation-driven.",
+    "channel": "courtroom",
+    "episode": "lo_s06_e20",
+    "innocence_status": "strongly_implied_innocent",
+    "label": "Barry Taggert (shoe importer, Shelly's father)",
+    "severity": 4
+   },
+   {
+    "adjudication": "Cleared by alibi in private questioning; threshold issue. Lean original per codebook.",
+    "channel": "police_only",
+    "episode": "lo_s06_e17",
+    "innocence_status": "proven_innocent",
+    "label": "Larry Philbert (environmental activist)",
+    "severity": 1
+   },
+   {
+    "adjudication": "Used as an informant more than accused; questioned privately. Split.",
+    "channel": "police_only",
+    "episode": "lo_s06_e17",
+    "innocence_status": "proven_innocent",
+    "label": "Tony Conneca (drag queen/female impersonator, aka 'Liza')",
+    "severity": 2
+   },
+   {
+    "adjudication": "Arrested twice in public, outed, suicidal; would be a severity-3/4 row if cleared, but the truncated text never names the shooter. Split, truncation-driven.",
+    "channel": "multiple",
+    "episode": "lo_s06_e17",
+    "innocence_status": "strongly_implied_innocent",
+    "label": "Jerold 'Jerry' Dixon (senior partner at Wells' law firm)",
+    "severity": 4
+   },
+   {
+    "adjudication": "Cleared of the stalking but held on his own voyeurism; literal partially_involved supports a row. Lean original.",
+    "channel": "workplace",
+    "episode": "lo_s08_e18",
+    "innocence_status": "proven_innocent",
+    "label": "Louis Dutton",
+    "severity": 3
+   },
+   {
+    "adjudication": "Cleared of rape, moved the body; literal partially_involved supports a row. Lean original.",
+    "channel": "police_only",
+    "episode": "lo_s05_e08",
+    "innocence_status": "proven_innocent",
+    "label": "Todd Locke (Talbert's chief aide)",
+    "severity": 3
+   },
+   {
+    "adjudication": "Attacked in the press as a political accuser, never accused of a crime. Lean re-coder (not a codebook row).",
+    "channel": "media",
+    "episode": "lo_s05_e08",
+    "innocence_status": "proven_innocent",
+    "label": "Sarah Maslin (attorney, former Talbert associate)",
+    "severity": 3
+   },
+   {
+    "adjudication": "The dead dealer whose killing Flynn dressed as self-defense; original coded him as partially_involved. A posthumous edge case the codebook does not address. Split.",
+    "channel": "police_only",
+    "episode": "lo_s07_e05",
+    "innocence_status": "partially_involved",
+    "label": "Ruben Morales",
+    "severity": 4
+   },
+   {
+    "adjudication": "Cleared of the murder by ballistics but fired on a detective and is held for it; literal partially_involved supports a row. Lean original.",
+    "channel": "police_only",
+    "episode": "lo_s16_e15",
+    "innocence_status": "proven_innocent",
+    "label": "Shawn (tunnel resident)",
+    "severity": 3
+   },
+   {
+    "adjudication": "Cleared of the poisoning by five witnesses; guilty of data falsification; literal partially_involved supports a row. Lean original.",
+    "channel": "workplace",
+    "episode": "lo_s20_e18",
+    "innocence_status": "proven_innocent",
+    "label": "Dr. Everett Brown",
+    "severity": 2
+   },
+   {
+    "adjudication": "Original coded her proven_innocent with media exposure; the re-coder's reading is that Wheaton planted the evidence, so she is not innocent. Lean re-coder.",
+    "channel": "media",
+    "episode": "lo_s20_e19",
+    "innocence_status": "proven_innocent",
+    "label": "Andrea Wheaton",
+    "severity": 3
+   },
+   {
+    "adjudication": "Questioned privately; threshold issue. Lean original per codebook (police_only rows are in the corpus), channel 'political' unverified.",
+    "channel": "political",
+    "episode": "lo_s20_e19",
+    "innocence_status": "proven_innocent",
+    "label": "Senator Bryce Peterson",
+    "severity": 2
+   },
+   {
+    "adjudication": "Framed posthumously by the sheriff after lying himself; edge case. Lean original that a row exists, status partially_involved rather than proven_innocent.",
+    "channel": "family",
+    "episode": "lo_s19_e05",
+    "innocence_status": "proven_innocent",
+    "label": "Deputy Robbie Linz",
+    "severity": 4
+   },
+   {
+    "adjudication": "Questioned and cleared; original coded workplace exposure, re-coder saw private questioning. Split.",
+    "channel": "workplace",
+    "episode": "svu_s20_e01",
+    "innocence_status": "proven_innocent",
+    "label": "Gus Haverford",
+    "severity": 2
+   },
+   {
+    "adjudication": "Arrested for rape, cleared of rape, pled to the photo offense; codebook partially_involved. Lean original.",
+    "channel": "school",
+    "episode": "svu_s19_e04",
+    "innocence_status": "proven_innocent",
+    "label": "Daniel Ross",
+    "severity": 3
+   },
+   {
+    "adjudication": "Same as Ross. Lean original.",
+    "channel": "school",
+    "episode": "svu_s19_e04",
+    "innocence_status": "proven_innocent",
+    "label": "Max Rivera",
+    "severity": 4
+   },
+   {
+    "adjudication": "Police-only clearance, severity 1; the codebook includes such rows (148 police_only rows in the corpus). Lean original; re-coder's omission is systematic.",
+    "channel": "police_only",
+    "episode": "svu_s24_e16",
+    "innocence_status": "proven_innocent",
+    "label": "Cooper Davis (nephew, sperm donor)",
+    "severity": 1
+   },
+   {
+    "adjudication": "Police-only clearance; same systematic omission. Lean original.",
+    "channel": "police_only",
+    "episode": "svu_s23_e19",
+    "innocence_status": "proven_innocent",
+    "label": "Red/Mr. Washington (X-ray technician, Cora's ex-boyfriend)",
+    "severity": 1
+   },
+   {
+    "adjudication": "She committed the larceny (charges dropped on privacy grounds); not a false accusation. Lean re-coder.",
+    "channel": "family",
+    "episode": "svu_s23_e19",
+    "innocence_status": "proven_innocent",
+    "label": "Libby Blandon (rape victim, NYU student who dropped out)",
+    "severity": 3
+   },
+   {
+    "adjudication": "Home searched with dogs, cleared, no third party shown; police-only row the codebook includes. Lean original.",
+    "channel": "police_only",
+    "episode": "svu_s25_e01",
+    "innocence_status": "proven_innocent",
+    "label": "Gordon Franks",
+    "severity": 3
+   },
+   {
+    "adjudication": "Admitted paying for the abduction; the original's partially_involved understates it. Lean re-coder (not innocent).",
+    "channel": "police_only",
+    "episode": "svu_s25_e01",
+    "innocence_status": "partially_involved",
+    "label": "Hal",
+    "severity": 3
+   },
+   {
+    "adjudication": "He ordered the hit; original coded him proven_innocent of some accusation. Lean re-coder (not innocent).",
+    "channel": "police_only",
+    "episode": "svu_s12_e14",
+    "innocence_status": "proven_innocent",
+    "label": "Angel Rivera",
+    "severity": 1
+   },
+   {
+    "adjudication": "Interrogated privately as abuser and murder suspect, cleared; police-only row the codebook includes. Lean original.",
+    "channel": "police_only",
+    "episode": "svu_s12_e14",
+    "innocence_status": "proven_innocent",
+    "label": "Detective Sean Riggs",
+    "severity": 1
+   },
+   {
+    "adjudication": "Publicly questioned, alibied; culpable of his own conduct at most partially_involved. Lean original.",
+    "channel": "workplace",
+    "episode": "svu_s12_e18",
+    "innocence_status": "proven_innocent",
+    "label": "Andreas (gallery owner/artist)",
+    "severity": 2
+   },
+   {
+    "adjudication": "Accused of rape in open court by the defendant Yates; vocabulary has who_told 'defense'. Lean original.",
+    "channel": "media",
+    "episode": "svu_s16_e20",
+    "innocence_status": "proven_innocent",
+    "label": "Sergeant Hank Voight (Chicago PD)",
+    "severity": 2
+   },
+   {
+    "adjudication": "Named by Yates in court as the real killer; same reasoning. Lean original.",
+    "channel": "media",
+    "episode": "svu_s16_e20",
+    "innocence_status": "proven_innocent",
+    "label": "Dr. Will Halstead",
+    "severity": 2
+   },
+   {
+    "adjudication": "Accused by Dao of ordering the rape; committed the robbery; literal partially_involved supports a row. Lean original.",
+    "channel": "workplace",
+    "episode": "svu_s03_e08",
+    "innocence_status": "proven_innocent",
+    "label": "Johnny Chen",
+    "severity": 3
+   },
+   {
+    "adjudication": "Accused by Johnny, roughed up at the restaurant in front of his crew; original coded workplace exposure. Lean original.",
+    "channel": "workplace",
+    "episode": "svu_s03_e08",
+    "innocence_status": "proven_innocent",
+    "label": "Dao Tran",
+    "severity": 2
+   },
+   {
+    "adjudication": "DNA requested and cleared, police-only; codebook includes such rows. Lean original.",
+    "channel": "police_only",
+    "episode": "svu_s04_e19",
+    "innocence_status": "proven_innocent",
+    "label": "Mr. Lathan (Cherie's father)",
+    "severity": 1
+   },
+   {
+    "adjudication": "Cleared on the spot, police-only; codebook includes such rows. Lean original.",
+    "channel": "police_only",
+    "episode": "svu_s04_e19",
+    "innocence_status": "proven_innocent",
+    "label": "Rob Canotti (prior sex offender)",
+    "severity": 2
+   },
+   {
+    "adjudication": "Blackmailed over a real past act into altering evidence; never falsely accused of a crime. Lean re-coder (not a codebook row).",
+    "channel": "police_only",
+    "episode": "svu_s18_e15",
+    "innocence_status": "proven_innocent",
+    "label": "Dr. Colin Bennett",
+    "severity": 4
+   },
+   {
+    "adjudication": "Suspected within the squad only; police-only row the codebook includes. Lean original.",
+    "channel": "police_only",
+    "episode": "svu_s13_e14",
+    "innocence_status": "proven_innocent",
+    "label": "Rob Fisher (Emmy's boyfriend)",
+    "severity": 1
+   },
+   {
+    "adjudication": "A real bookie suspected of the murders and raided at his club; partially_involved at most. Lean original on inclusion.",
+    "channel": "workplace",
+    "episode": "svu_s13_e14",
+    "innocence_status": "proven_innocent",
+    "label": "Murphy (bookie)",
+    "severity": 3
+   },
+   {
+    "adjudication": "Same as Murphy. Lean original on inclusion.",
+    "channel": "workplace",
+    "episode": "svu_s13_e14",
+    "innocence_status": "proven_innocent",
+    "label": "McCourt (Murphy's boss/crime boss)",
+    "severity": 3
+   },
+   {
+    "adjudication": "Questioned at his shop and watched all day; police-only or workplace depending on threshold. Lean original on inclusion.",
+    "channel": "workplace",
+    "episode": "svu_s06_e04",
+    "innocence_status": "proven_innocent",
+    "label": "Rupert Kilmore (clockmaker)",
+    "severity": 2
+   },
+   {
+    "adjudication": "Accused of the murders at the scene, cleared, arrested for his burglary; literal partially_involved supports a row. Lean original.",
+    "channel": "police_only",
+    "episode": "svu_s03_e13",
+    "innocence_status": "proven_innocent",
+    "label": "Scotty (deaf man)",
+    "severity": 2
+   },
+   {
+    "adjudication": "Alibied privately (bartending); original coded family exposure. Split.",
+    "channel": "family",
+    "episode": "svu_s05_e17",
+    "innocence_status": "proven_innocent",
+    "label": "Pat Linsky (Agnes's father)",
+    "severity": 2
+   }
+  ],
+  "recoded_only": [
+   {
+    "adjudication": "Original merged both adoptive parents into one row; re-coder split them. A counting convention, not a substantive miss (Phillip matched).",
+    "channel": "community",
+    "episode": "lo_s09_e01",
+    "innocence_status": "proven_innocent",
+    "label": "Elizabeth Waring",
+    "severity": 3
+   },
+   {
+    "adjudication": "Boyfriend questioned and cleared; original missed him. Lean re-coder.",
+    "channel": "community",
+    "episode": "lo_s04_e06",
+    "innocence_status": "strongly_implied_innocent",
+    "label": "Mitchell 'Mitch' Lewis",
+    "severity": 2
+   },
+   {
+    "adjudication": "Dead victim smeared by the defense as an abuser; edge case outside the codebook's living-suspect frame. Lean original (no row).",
+    "channel": "media",
+    "episode": "lo_s04_e06",
+    "innocence_status": "proven_innocent",
+    "label": "Frank McKinnon (deceased father)",
+    "severity": 2
+   },
+   {
+    "adjudication": "The victim accused of fabricating her attack; edge case. Split.",
+    "channel": "workplace",
+    "episode": "lo_s08_e18",
+    "innocence_status": "proven_innocent",
+    "label": "Andrea Blake",
+    "severity": 2
+   },
+   {
+    "adjudication": "Arrested and released; original omitted. Lean re-coder if the arrest is on the page (re-coder's notes say it is, setting not shown).",
+    "channel": "unknown",
+    "episode": "lo_s16_e01",
+    "innocence_status": "strongly_implied_innocent",
+    "label": "Charles Graham (defense attorney)",
+    "severity": 3
+   },
+   {
+    "adjudication": "Dog bite during a brief mistaken seizure; physical-harm branch, innocence implied. Split.",
+    "channel": "police_only",
+    "episode": "lo_s22_e22",
+    "innocence_status": "strongly_implied_innocent",
+    "label": "Jim Bronson (homeless man in the park)",
+    "severity": 3
+   },
+   {
+    "adjudication": "Cleared of rape (complainant recanted), guilty of paying for sex and striking her; literal partially_involved. Lean re-coder (original missed a cleared suspect).",
+    "channel": "workplace",
+    "episode": "svu_s20_e06",
+    "innocence_status": "partially_involved",
+    "label": "Silas Perry",
+    "severity": 3
+   },
+   {
+    "adjudication": "See episode note; no series-regular exemption in the codebook. Lean re-coder on definition.",
+    "channel": "school",
+    "episode": "svu_s19_e01",
+    "innocence_status": "proven_innocent",
+    "label": "Lt. Olivia Benson",
+    "severity": 2
+   },
+   {
+    "adjudication": "Pinned for the rape, innocent of it, guilty of the beating; literal partially_involved. Lean re-coder.",
+    "channel": "school",
+    "episode": "svu_s20_e01",
+    "innocence_status": "partially_involved",
+    "label": "Brian Conway",
+    "severity": 3
+   },
+   {
+    "adjudication": "Falsely accused of DV by his abuser wife; original's own summary says so. Lean re-coder.",
+    "channel": "family",
+    "episode": "svu_s22_e15",
+    "innocence_status": "proven_innocent",
+    "label": "Andy Richards",
+    "severity": 3
+   },
+   {
+    "adjudication": "Mother accused at work and cleared per re-coder; original none. Unresolved, needs a third read.",
+    "channel": "workplace",
+    "episode": "svu_s05_e25",
+    "innocence_status": "proven_innocent",
+    "label": "Jackie Madden",
+    "severity": 2
+   },
+   {
+    "adjudication": "Posthumous accusation of a dead victim; edge case. Lean original (no row).",
+    "channel": "media",
+    "episode": "svu_s12_e14",
+    "innocence_status": "proven_innocent",
+    "label": "Page Ferguson (deceased)",
+    "severity": 2
+   },
+   {
+    "adjudication": "Confronted at work as the dead infant's mother through an ID mix-up. Lean re-coder.",
+    "channel": "workplace",
+    "episode": "svu_s04_e14",
+    "innocence_status": "proven_innocent",
+    "label": "Ellen Swanson",
+    "severity": 2
+   },
+   {
+    "adjudication": "Confronted in front of family; cleared. Lean re-coder.",
+    "channel": "family",
+    "episode": "svu_s04_e14",
+    "innocence_status": "proven_innocent",
+    "label": "Patty Swanson",
+    "severity": 2
+   },
+   {
+    "adjudication": "Accused as a suspected rapist in front of his mother, alibied; minimal consequence. Lean re-coder (row exists), severity 1.",
+    "channel": "family",
+    "episode": "svu_s03_e08",
+    "innocence_status": "proven_innocent",
+    "label": "Michael Tatum",
+    "severity": 1
+   },
+   {
+    "adjudication": "Asked in front of his wife why he sent roses to a pregnant 13-year-old; his son had. Lean re-coder, severity 1.",
+    "channel": "family",
+    "episode": "svu_s13_e03",
+    "innocence_status": "proven_innocent",
+    "label": "Ambassador Andrew Raines",
+    "severity": 1
+   },
+   {
+    "adjudication": "Borderline (pled to murder one). Lean original (no row).",
+    "channel": "media",
+    "episode": "svu_s18_e01",
+    "innocence_status": "partially_involved",
+    "label": "Ana Kapic",
+    "severity": 4
+   },
+   {
+    "adjudication": "See episode note. Lean re-coder on definition, original on scoping.",
+    "channel": "courtroom",
+    "episode": "svu_s15_e21",
+    "innocence_status": "partially_involved",
+    "label": "Sgt. Olivia Benson",
+    "severity": 3
+   },
+   {
+    "adjudication": "Guilty of the rape, framed for the murder by planted evidence; literal partially_involved; truncated before resolution. Lean re-coder.",
+    "channel": "media",
+    "episode": "svu_s04_e25",
+    "innocence_status": "partially_involved",
+    "label": "Seth Wolfford III",
+    "severity": 3
+   },
+   {
+    "adjudication": "Accomplice cast as lone killer; borderline. Lean original (no row).",
+    "channel": "community",
+    "episode": "svu_s04_e20",
+    "innocence_status": "partially_involved",
+    "label": "Billy Baker",
+    "severity": 3
+   },
+   {
+    "adjudication": "Self-staged accusation; borderline. Lean original (no row).",
+    "channel": "media",
+    "episode": "svu_s09_e01",
+    "innocence_status": "partially_involved",
+    "label": "Janis Donovan",
+    "severity": 3
+   },
+   {
+    "adjudication": "Arrested in his store for the murder on a phone GPS hit, cleared by a ticket stub; original missed him. Lean re-coder.",
+    "channel": "workplace",
+    "episode": "svu_s05_e17",
+    "innocence_status": "proven_innocent",
+    "label": "Comic book shop clerk",
+    "severity": 3
+   }
+  ]
+ }
+}

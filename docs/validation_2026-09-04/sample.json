@@ -1,0 +1,687 @@
+{
+ "allocation": {
+  "lo_1990s_S1-9": 18,
+  "lo_2000s_S11-20": 9,
+  "lo_revival_S21-23": 3,
+  "svu_metoo_S19-21": 7,
+  "svu_post_S22-27": 11,
+  "svu_pre_S1-18": 42
+ },
+ "frame_sizes": {
+  "lo_1990s_S1-9": 185,
+  "lo_2000s_S11-20": 93,
+  "lo_revival_S21-23": 35,
+  "svu_metoo_S19-21": 61,
+  "svu_post_S22-27": 94,
+  "svu_pre_S1-18": 350
+ },
+ "lo_frame_exclusions": [
+  "lo_s01_e01"
+ ],
+ "replacements": {
+  "lo_1990s_S1-9": [
+   "lo_s04_e07",
+   "lo_s01_e16",
+   "lo_s02_e14",
+   "lo_s02_e02",
+   "lo_s05_e07"
+  ],
+  "lo_2000s_S11-20": [
+   "lo_s11_e23",
+   "lo_s20_e04",
+   "lo_s20_e13",
+   "lo_s16_e08",
+   "lo_s20_e05"
+  ],
+  "lo_revival_S21-23": [
+   "lo_s21_e09",
+   "lo_s22_e16",
+   "lo_s22_e21",
+   "lo_s22_e04",
+   "lo_s23_e07"
+  ],
+  "svu_metoo_S19-21": [
+   "svu_s20_e05",
+   "svu_s20_e14",
+   "svu_s20_e11",
+   "svu_s20_e12",
+   "svu_s19_e13"
+  ],
+  "svu_post_S22-27": [
+   "svu_s24_e06",
+   "svu_s25_e02",
+   "svu_s25_e11",
+   "svu_s25_e07",
+   "svu_s22_e09"
+  ],
+  "svu_pre_S1-18": [
+   "svu_s05_e17",
+   "svu_s16_e15",
+   "svu_s03_e12",
+   "svu_s02_e14",
+   "svu_s12_e05"
+  ]
+ },
+ "sample": [
+  {
+   "custom_id": "lo_s02_e10",
+   "near_excel_cap": false,
+   "stratum": "lo_1990s_S1-9",
+   "transcript_chars": 28335
+  },
+  {
+   "custom_id": "lo_s03_e08",
+   "near_excel_cap": true,
+   "stratum": "lo_1990s_S1-9",
+   "transcript_chars": 32767
+  },
+  {
+   "custom_id": "lo_s05_e16",
+   "near_excel_cap": true,
+   "stratum": "lo_1990s_S1-9",
+   "transcript_chars": 32767
+  },
+  {
+   "custom_id": "lo_s04_e08",
+   "near_excel_cap": true,
+   "stratum": "lo_1990s_S1-9",
+   "transcript_chars": 32767
+  },
+  {
+   "custom_id": "lo_s06_e20",
+   "near_excel_cap": true,
+   "stratum": "lo_1990s_S1-9",
+   "transcript_chars": 32766
+  },
+  {
+   "custom_id": "lo_s03_e22",
+   "near_excel_cap": true,
+   "stratum": "lo_1990s_S1-9",
+   "transcript_chars": 32767
+  },
+  {
+   "custom_id": "lo_s09_e01",
+   "near_excel_cap": true,
+   "stratum": "lo_1990s_S1-9",
+   "transcript_chars": 32767
+  },
+  {
+   "custom_id": "lo_s06_e17",
+   "near_excel_cap": true,
+   "stratum": "lo_1990s_S1-9",
+   "transcript_chars": 32767
+  },
+  {
+   "custom_id": "lo_s02_e13",
+   "near_excel_cap": true,
+   "stratum": "lo_1990s_S1-9",
+   "transcript_chars": 32767
+  },
+  {
+   "custom_id": "lo_s01_e04",
+   "near_excel_cap": false,
+   "stratum": "lo_1990s_S1-9",
+   "transcript_chars": 29454
+  },
+  {
+   "custom_id": "lo_s04_e06",
+   "near_excel_cap": true,
+   "stratum": "lo_1990s_S1-9",
+   "transcript_chars": 32767
+  },
+  {
+   "custom_id": "lo_s08_e18",
+   "near_excel_cap": true,
+   "stratum": "lo_1990s_S1-9",
+   "transcript_chars": 32767
+  },
+  {
+   "custom_id": "lo_s05_e08",
+   "near_excel_cap": true,
+   "stratum": "lo_1990s_S1-9",
+   "transcript_chars": 32767
+  },
+  {
+   "custom_id": "lo_s06_e13",
+   "near_excel_cap": true,
+   "stratum": "lo_1990s_S1-9",
+   "transcript_chars": 32766
+  },
+  {
+   "custom_id": "lo_s07_e01",
+   "near_excel_cap": true,
+   "stratum": "lo_1990s_S1-9",
+   "transcript_chars": 32767
+  },
+  {
+   "custom_id": "lo_s04_e05",
+   "near_excel_cap": true,
+   "stratum": "lo_1990s_S1-9",
+   "transcript_chars": 32767
+  },
+  {
+   "custom_id": "lo_s03_e15",
+   "near_excel_cap": false,
+   "stratum": "lo_1990s_S1-9",
+   "transcript_chars": 31716
+  },
+  {
+   "custom_id": "lo_s07_e05",
+   "near_excel_cap": true,
+   "stratum": "lo_1990s_S1-9",
+   "transcript_chars": 32767
+  },
+  {
+   "custom_id": "lo_s16_e15",
+   "near_excel_cap": false,
+   "stratum": "lo_2000s_S11-20",
+   "transcript_chars": 31908
+  },
+  {
+   "custom_id": "lo_s19_e15",
+   "near_excel_cap": true,
+   "stratum": "lo_2000s_S11-20",
+   "transcript_chars": 32767
+  },
+  {
+   "custom_id": "lo_s20_e18",
+   "near_excel_cap": true,
+   "stratum": "lo_2000s_S11-20",
+   "transcript_chars": 32767
+  },
+  {
+   "custom_id": "lo_s11_e07",
+   "near_excel_cap": true,
+   "stratum": "lo_2000s_S11-20",
+   "transcript_chars": 32767
+  },
+  {
+   "custom_id": "lo_s16_e01",
+   "near_excel_cap": true,
+   "stratum": "lo_2000s_S11-20",
+   "transcript_chars": 32766
+  },
+  {
+   "custom_id": "lo_s20_e19",
+   "near_excel_cap": false,
+   "stratum": "lo_2000s_S11-20",
+   "transcript_chars": 31293
+  },
+  {
+   "custom_id": "lo_s19_e05",
+   "near_excel_cap": true,
+   "stratum": "lo_2000s_S11-20",
+   "transcript_chars": 32767
+  },
+  {
+   "custom_id": "lo_s16_e10",
+   "near_excel_cap": false,
+   "stratum": "lo_2000s_S11-20",
+   "transcript_chars": 27858
+  },
+  {
+   "custom_id": "lo_s11_e04",
+   "near_excel_cap": true,
+   "stratum": "lo_2000s_S11-20",
+   "transcript_chars": 32767
+  },
+  {
+   "custom_id": "lo_s22_e22",
+   "near_excel_cap": false,
+   "stratum": "lo_revival_S21-23",
+   "transcript_chars": 24940
+  },
+  {
+   "custom_id": "lo_s22_e09",
+   "near_excel_cap": false,
+   "stratum": "lo_revival_S21-23",
+   "transcript_chars": 26668
+  },
+  {
+   "custom_id": "lo_s21_e07",
+   "near_excel_cap": false,
+   "stratum": "lo_revival_S21-23",
+   "transcript_chars": 29638
+  },
+  {
+   "custom_id": "svu_s21_e11",
+   "near_excel_cap": false,
+   "stratum": "svu_metoo_S19-21",
+   "transcript_chars": 28846
+  },
+  {
+   "custom_id": "svu_s20_e06",
+   "near_excel_cap": false,
+   "stratum": "svu_metoo_S19-21",
+   "transcript_chars": 28340
+  },
+  {
+   "custom_id": "svu_s19_e01",
+   "near_excel_cap": false,
+   "stratum": "svu_metoo_S19-21",
+   "transcript_chars": 28419
+  },
+  {
+   "custom_id": "svu_s20_e22",
+   "near_excel_cap": false,
+   "stratum": "svu_metoo_S19-21",
+   "transcript_chars": 25307
+  },
+  {
+   "custom_id": "svu_s21_e20",
+   "near_excel_cap": false,
+   "stratum": "svu_metoo_S19-21",
+   "transcript_chars": 30181
+  },
+  {
+   "custom_id": "svu_s20_e01",
+   "near_excel_cap": false,
+   "stratum": "svu_metoo_S19-21",
+   "transcript_chars": 27370
+  },
+  {
+   "custom_id": "svu_s19_e04",
+   "near_excel_cap": false,
+   "stratum": "svu_metoo_S19-21",
+   "transcript_chars": 29986
+  },
+  {
+   "custom_id": "svu_s26_e11",
+   "near_excel_cap": true,
+   "stratum": "svu_post_S22-27",
+   "transcript_chars": 32767
+  },
+  {
+   "custom_id": "svu_s23_e03",
+   "near_excel_cap": false,
+   "stratum": "svu_post_S22-27",
+   "transcript_chars": 28375
+  },
+  {
+   "custom_id": "svu_s24_e20",
+   "near_excel_cap": false,
+   "stratum": "svu_post_S22-27",
+   "transcript_chars": 29045
+  },
+  {
+   "custom_id": "svu_s24_e16",
+   "near_excel_cap": false,
+   "stratum": "svu_post_S22-27",
+   "transcript_chars": 30602
+  },
+  {
+   "custom_id": "svu_s23_e19",
+   "near_excel_cap": false,
+   "stratum": "svu_post_S22-27",
+   "transcript_chars": 31816
+  },
+  {
+   "custom_id": "svu_s22_e04",
+   "near_excel_cap": true,
+   "stratum": "svu_post_S22-27",
+   "transcript_chars": 32767
+  },
+  {
+   "custom_id": "svu_s23_e22",
+   "near_excel_cap": false,
+   "stratum": "svu_post_S22-27",
+   "transcript_chars": 29878
+  },
+  {
+   "custom_id": "svu_s22_e15",
+   "near_excel_cap": false,
+   "stratum": "svu_post_S22-27",
+   "transcript_chars": 31070
+  },
+  {
+   "custom_id": "svu_s25_e01",
+   "near_excel_cap": false,
+   "stratum": "svu_post_S22-27",
+   "transcript_chars": 28982
+  },
+  {
+   "custom_id": "svu_s25_e12",
+   "near_excel_cap": false,
+   "stratum": "svu_post_S22-27",
+   "transcript_chars": 29284
+  },
+  {
+   "custom_id": "svu_s24_e08",
+   "near_excel_cap": false,
+   "stratum": "svu_post_S22-27",
+   "transcript_chars": 28775
+  },
+  {
+   "custom_id": "svu_s10_e07",
+   "near_excel_cap": false,
+   "stratum": "svu_pre_S1-18",
+   "transcript_chars": 26513
+  },
+  {
+   "custom_id": "svu_s05_e25",
+   "near_excel_cap": true,
+   "stratum": "svu_pre_S1-18",
+   "transcript_chars": 32767
+  },
+  {
+   "custom_id": "svu_s07_e01",
+   "near_excel_cap": false,
+   "stratum": "svu_pre_S1-18",
+   "transcript_chars": 23276
+  },
+  {
+   "custom_id": "svu_s12_e14",
+   "near_excel_cap": false,
+   "stratum": "svu_pre_S1-18",
+   "transcript_chars": 29690
+  },
+  {
+   "custom_id": "svu_s12_e18",
+   "near_excel_cap": true,
+   "stratum": "svu_pre_S1-18",
+   "transcript_chars": 32767
+  },
+  {
+   "custom_id": "svu_s10_e15",
+   "near_excel_cap": true,
+   "stratum": "svu_pre_S1-18",
+   "transcript_chars": 32767
+  },
+  {
+   "custom_id": "svu_s16_e20",
+   "near_excel_cap": false,
+   "stratum": "svu_pre_S1-18",
+   "transcript_chars": 26273
+  },
+  {
+   "custom_id": "svu_s06_e11",
+   "near_excel_cap": true,
+   "stratum": "svu_pre_S1-18",
+   "transcript_chars": 32767
+  },
+  {
+   "custom_id": "svu_s08_e17",
+   "near_excel_cap": false,
+   "stratum": "svu_pre_S1-18",
+   "transcript_chars": 30905
+  },
+  {
+   "custom_id": "svu_s15_e18",
+   "near_excel_cap": true,
+   "stratum": "svu_pre_S1-18",
+   "transcript_chars": 32767
+  },
+  {
+   "custom_id": "svu_s07_e15",
+   "near_excel_cap": false,
+   "stratum": "svu_pre_S1-18",
+   "transcript_chars": 26426
+  },
+  {
+   "custom_id": "svu_s11_e21",
+   "near_excel_cap": false,
+   "stratum": "svu_pre_S1-18",
+   "transcript_chars": 29691
+  },
+  {
+   "custom_id": "svu_s04_e14",
+   "near_excel_cap": true,
+   "stratum": "svu_pre_S1-18",
+   "transcript_chars": 32767
+  },
+  {
+   "custom_id": "svu_s16_e09",
+   "near_excel_cap": true,
+   "stratum": "svu_pre_S1-18",
+   "transcript_chars": 32767
+  },
+  {
+   "custom_id": "svu_s03_e08",
+   "near_excel_cap": true,
+   "stratum": "svu_pre_S1-18",
+   "transcript_chars": 32767
+  },
+  {
+   "custom_id": "svu_s04_e19",
+   "near_excel_cap": true,
+   "stratum": "svu_pre_S1-18",
+   "transcript_chars": 32767
+  },
+  {
+   "custom_id": "svu_s08_e18",
+   "near_excel_cap": true,
+   "stratum": "svu_pre_S1-18",
+   "transcript_chars": 32767
+  },
+  {
+   "custom_id": "svu_s11_e11",
+   "near_excel_cap": false,
+   "stratum": "svu_pre_S1-18",
+   "transcript_chars": 30661
+  },
+  {
+   "custom_id": "svu_s13_e03",
+   "near_excel_cap": false,
+   "stratum": "svu_pre_S1-18",
+   "transcript_chars": 28183
+  },
+  {
+   "custom_id": "svu_s01_e21",
+   "near_excel_cap": false,
+   "stratum": "svu_pre_S1-18",
+   "transcript_chars": 26434
+  },
+  {
+   "custom_id": "svu_s06_e22",
+   "near_excel_cap": false,
+   "stratum": "svu_pre_S1-18",
+   "transcript_chars": 31703
+  },
+  {
+   "custom_id": "svu_s18_e01",
+   "near_excel_cap": false,
+   "stratum": "svu_pre_S1-18",
+   "transcript_chars": 31083
+  },
+  {
+   "custom_id": "svu_s18_e15",
+   "near_excel_cap": true,
+   "stratum": "svu_pre_S1-18",
+   "transcript_chars": 32767
+  },
+  {
+   "custom_id": "svu_s14_e12",
+   "near_excel_cap": false,
+   "stratum": "svu_pre_S1-18",
+   "transcript_chars": 31280
+  },
+  {
+   "custom_id": "svu_s15_e21",
+   "near_excel_cap": false,
+   "stratum": "svu_pre_S1-18",
+   "transcript_chars": 31117
+  },
+  {
+   "custom_id": "svu_s14_e10",
+   "near_excel_cap": false,
+   "stratum": "svu_pre_S1-18",
+   "transcript_chars": 28225
+  },
+  {
+   "custom_id": "svu_s17_e07",
+   "near_excel_cap": true,
+   "stratum": "svu_pre_S1-18",
+   "transcript_chars": 32767
+  },
+  {
+   "custom_id": "svu_s04_e24",
+   "near_excel_cap": true,
+   "stratum": "svu_pre_S1-18",
+   "transcript_chars": 32767
+  },
+  {
+   "custom_id": "svu_s04_e25",
+   "near_excel_cap": true,
+   "stratum": "svu_pre_S1-18",
+   "transcript_chars": 32767
+  },
+  {
+   "custom_id": "svu_s05_e21",
+   "near_excel_cap": true,
+   "stratum": "svu_pre_S1-18",
+   "transcript_chars": 32767
+  },
+  {
+   "custom_id": "svu_s04_e20",
+   "near_excel_cap": true,
+   "stratum": "svu_pre_S1-18",
+   "transcript_chars": 32767
+  },
+  {
+   "custom_id": "svu_s13_e14",
+   "near_excel_cap": false,
+   "stratum": "svu_pre_S1-18",
+   "transcript_chars": 25524
+  },
+  {
+   "custom_id": "svu_s12_e21",
+   "near_excel_cap": false,
+   "stratum": "svu_pre_S1-18",
+   "transcript_chars": 30380
+  },
+  {
+   "custom_id": "svu_s18_e05",
+   "near_excel_cap": false,
+   "stratum": "svu_pre_S1-18",
+   "transcript_chars": 29735
+  },
+  {
+   "custom_id": "svu_s02_e01",
+   "near_excel_cap": false,
+   "stratum": "svu_pre_S1-18",
+   "transcript_chars": 30579
+  },
+  {
+   "custom_id": "svu_s09_e01",
+   "near_excel_cap": false,
+   "stratum": "svu_pre_S1-18",
+   "transcript_chars": 30237
+  },
+  {
+   "custom_id": "svu_s14_e05",
+   "near_excel_cap": false,
+   "stratum": "svu_pre_S1-18",
+   "transcript_chars": 30019
+  },
+  {
+   "custom_id": "svu_s06_e04",
+   "near_excel_cap": false,
+   "stratum": "svu_pre_S1-18",
+   "transcript_chars": 32631
+  },
+  {
+   "custom_id": "svu_s09_e14",
+   "near_excel_cap": true,
+   "stratum": "svu_pre_S1-18",
+   "transcript_chars": 32767
+  },
+  {
+   "custom_id": "svu_s03_e13",
+   "near_excel_cap": true,
+   "stratum": "svu_pre_S1-18",
+   "transcript_chars": 32767
+  },
+  {
+   "custom_id": "svu_s13_e07",
+   "near_excel_cap": false,
+   "stratum": "svu_pre_S1-18",
+   "transcript_chars": 25088
+  },
+  {
+   "custom_id": "svu_s16_e23",
+   "near_excel_cap": false,
+   "stratum": "svu_pre_S1-18",
+   "transcript_chars": 30292
+  }
+ ],
+ "seed": 20260904,
+ "svu_frame_exclusions": {
+  "contaminated": [
+   "s01e01",
+   "s01e04",
+   "s01e08",
+   "s01e12",
+   "s01e15",
+   "s02e08",
+   "s02e10",
+   "s02e19",
+   "s03e01",
+   "s03e04",
+   "s03e19",
+   "s04e05",
+   "s04e13",
+   "s04e21",
+   "s04e23",
+   "s05e05",
+   "s05e11",
+   "s05e23",
+   "s06e14",
+   "s06e15",
+   "s06e19",
+   "s06e20",
+   "s09e08",
+   "s10e02",
+   "s10e06",
+   "s10e20",
+   "s11e13",
+   "s12e03",
+   "s12e10",
+   "s12e12",
+   "s12e15",
+   "s12e19",
+   "s13e09",
+   "s13e17",
+   "s15e03",
+   "s15e09",
+   "s15e11",
+   "s15e13",
+   "s15e17",
+   "s16e13",
+   "s17e05",
+   "s17e17",
+   "s18e02",
+   "s18e08",
+   "s18e10",
+   "s18e17",
+   "s19e07",
+   "s20e09",
+   "s20e13",
+   "s20e20",
+   "s20e21",
+   "s21e05",
+   "s21e06",
+   "s22e07",
+   "s22e10",
+   "s26e08",
+   "s26e19"
+  ],
+  "corrupted": [
+   "s01e13",
+   "s02e11",
+   "s02e18",
+   "s04e10",
+   "s05e04",
+   "s05e14",
+   "s08e11",
+   "s09e19",
+   "s11e09"
+  ],
+  "no_source": [
+   "s06e09",
+   "s14e01",
+   "s14e02",
+   "s15e01",
+   "s17e01"
+  ]
+ }
+}

@@ -1,0 +1,8 @@
+[
+ {
+  "replaced": "svu_s07_e15",
+  "replacement": "svu_s05_e17",
+  "stratum": "svu_pre_S1-18",
+  "reason": "source workbook carries the S10E07 'Wildlife' transcript under S07E15 (duplicate; wrong transcript), discovered during blind coding on 2026-09-04; the S07E15 judgment stays in recoded.jsonl flagged and is excluded from primary scoring"
+ }
+]
