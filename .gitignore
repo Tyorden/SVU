@@ -23,3 +23,5 @@ papers/*.pdf
 pnpm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+SVU_False_Accusation_Academic_Paper.docx
+*.docx
