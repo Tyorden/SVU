@@ -2,6 +2,10 @@
 
 An interactive React dashboard and research dataset exploring false accusation patterns across the Law & Order franchise: 576 SVU episodes (541 documented persons harmed) and 314 original Law & Order episodes (429 persons harmed) — 890 episodes and 970 persons in total, spanning 1990-2026.
 
+## Archived copy
+
+A dated snapshot of this repository (dataset, coding documentation, reliability study and dashboard source) is archived at Zenodo: https://doi.org/10.5281/zenodo.24236709
+
 ## Live Demo
 
 Deployed automatically via Vercel when changes are pushed to main.
